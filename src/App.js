@@ -8,7 +8,8 @@ import {
 } from './components';
 
 import {
-  Home
+  Home,
+  ProductListing
 } from './pages';
 
 const App = ()  => {
@@ -17,9 +18,10 @@ const App = ()  => {
       <Sidebar />
       <Header>
         <Navbar />
-        <Carousel />
+        {/* <Carousel /> */}
       </Header>
-      <Home />
+      {/* <Home /> */}
+      <ProductListing />
       <Footer />
     </div>
   );

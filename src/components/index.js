@@ -3,3 +3,4 @@ export { Navbar } from './navbar/Navbar';
 export { Sidebar } from './sidebar/Sidebar';
 export { Carousel } from './carousel/Carousel';
 export { Footer } from './footer/Footer';
+export { ProductCardVertical } from './product-card/ProductCardVertical';
