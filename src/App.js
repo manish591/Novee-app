@@ -9,7 +9,8 @@ import {
 
 import {
   Home,
-  ProductListing
+  ProductListing,
+  Cart
 } from './pages';
 
 const App = ()  => {
@@ -21,7 +22,8 @@ const App = ()  => {
         {/* <Carousel /> */}
       </Header>
       {/* <Home /> */}
-      <ProductListing />
+      {/* <ProductListing /> */}
+      <Cart />
       <Footer />
     </div>
   );
