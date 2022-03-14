@@ -11,7 +11,8 @@ import {
   Home,
   ProductListing,
   Cart,
-  Wishlist
+  Wishlist,
+  Login
 } from './pages';
 
 const App = ()  => {
@@ -25,7 +26,8 @@ const App = ()  => {
       {/* <Home /> */}
       {/* <ProductListing /> */}
       {/* <Cart /> */}
-      <Wishlist />
+      {/* <Wishlist /> */}
+      <Login />
       <Footer />
     </div>
   );
