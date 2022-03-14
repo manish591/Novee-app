@@ -7,6 +7,10 @@ import {
   Footer
 } from './components';
 
+import {
+  Home
+} from './pages';
+
 const App = ()  => {
   return (
     <div className="App">
@@ -15,6 +19,7 @@ const App = ()  => {
         <Navbar />
         <Carousel />
       </Header>
+      <Home />
       <Footer />
     </div>
   );
