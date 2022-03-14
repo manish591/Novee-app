@@ -3,7 +3,8 @@ import {
   Header, 
   Navbar,
   Sidebar,
-  Carousel
+  Carousel,
+  Footer
 } from './components';
 
 const App = ()  => {
@@ -14,6 +15,7 @@ const App = ()  => {
         <Navbar />
         <Carousel />
       </Header>
+      <Footer />
     </div>
   );
 }
