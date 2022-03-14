@@ -1,0 +1,120 @@
+/* ----------- */
+/* Hero Section*/
+/* ----------- */
+
+.hero {
+  margin-block-start: 8rem;
+}
+
+.hero__wrapper {
+  inline-size: min(90%, 1400px);
+  margin-block-end: var(--spacing-14);
+  margin-inline: auto;
+}
+
+.hero__slider {
+  inline-size: 100%;
+  margin-inline: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel {
+  inline-size: 100%;
+  block-size: calc(100vh - 10rem);
+  display: flex;
+  transform: translateX(0%);
+  transition: transform 300ms ease-in-out;
+}
+
+.carousel__item {
+  inline-size: inherit;
+  block-size: inherit;
+  background-color: var(--surface3);
+}
+
+.carousel-slide {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-slide__info {
+  max-inline-size: 30ch;
+  margin-inline: auto;
+  justify-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding-block: 0.5rem;
+}
+
+.carousel-slide__description {
+  max-inline-size: 28ch;
+}
+
+.carousel-slide__name {
+  font-size: calc(var(--fs-800) + 0.2rem);
+  line-height: 1.1;
+}
+
+.carousel-slide__label {
+  text-transform: uppercase;
+  letter-spacing: 3.5px;
+}
+
+.move-left,
+.move-right {
+  position: absolute;
+  z-index: 10;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  padding-inline: 0.2rem;
+  padding-block: 0.3rem;
+  margin-inline: 0.1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.move-left {
+  inset-inline-start: 0;
+}
+
+.move-right {
+  inset-inline-end: 0;
+}
+
+/* ------------- */
+/* Media Queries */
+/* ------------- */
+
+@media (max-width: 299px) {
+  .carousel-slide__name {
+    font-size: var(--fs-700);
+    line-height: 1.1;
+  }
+
+  .carousel-slide__btn {
+    block-size: 40px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .carousel {
+    block-size: calc(100vh - 10rem);
+  }
+
+  .carousel-slide__info {
+    max-inline-size: 35ch;
+    justify-items: start;
+    gap: 1rem;
+    text-align: left;
+  }
+
+  .carousel-slide__name {
+    font-size: var(--fs-900-small);
+  }
+
+  .carousel-slide__description {
+    max-inline-size: unset;
+  }
+}

@@ -2,7 +2,8 @@ import "./App.css";
 import { 
   Header, 
   Navbar,
-  Sidebar
+  Sidebar,
+  Carousel
 } from './components';
 
 const App = ()  => {
@@ -11,6 +12,7 @@ const App = ()  => {
       <Sidebar />
       <Header>
         <Navbar />
+        <Carousel />
       </Header>
     </div>
   );
