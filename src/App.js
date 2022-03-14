@@ -10,7 +10,8 @@ import {
 import {
   Home,
   ProductListing,
-  Cart
+  Cart,
+  Wishlist
 } from './pages';
 
 const App = ()  => {
@@ -23,7 +24,8 @@ const App = ()  => {
       </Header>
       {/* <Home /> */}
       {/* <ProductListing /> */}
-      <Cart />
+      {/* <Cart /> */}
+      <Wishlist />
       <Footer />
     </div>
   );
