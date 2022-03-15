@@ -4,7 +4,8 @@ import {
   Navbar,
   Sidebar,
   Carousel,
-  Footer
+  Footer,
+  Loader
 } from './components';
 
 import {
@@ -30,6 +31,7 @@ const App = ()  => {
       {/* <Wishlist /> */}
       {/* <Login /> */}
       <Signup />
+      {/* <Loader /> */}
       <Footer />
     </div>
   );
