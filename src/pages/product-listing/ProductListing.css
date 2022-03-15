@@ -51,22 +51,43 @@
 /* Input group styling */
 
 .filters__group + .filters__group {
-  margin-block-start: 0.8rem;
+  margin-block-start: 1rem;
 }
 
 .filters__group {
   display: flex;
   align-items: center;
-  gap: 1.5ch;
+  gap: 2ch;
 }
 
 .filters__label {
-  font-size: 0.9rem;
+  font-size: 1rem;
   inline-size: 100%;
 }
 
 .filters__checkbox {
   accent-color: var(--clr-secondary);
+  position: relative;
+  cursor: pointer;
+}
+
+.filters__checkbox::before {
+  content: "";
+  position: absolute;
+  inline-size: 2.6rem;
+  block-size: 2.6rem;
+  clip-path: circle(50%);
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  background-color: rgba(99, 99, 99, 0.096);
+  transform-origin: center;
+  transform: translateX(-50%) translateY(-50%) translateZ(-1px) scale(.1);
+  z-index: -1;
+  transition: transform 300ms linear;
+}
+
+.filters__checkbox:hover::before {
+  transform: translateX(-50%) translateY(-50%) translateZ(-1px) scale(1);
 }
 
 legend {
@@ -188,7 +209,7 @@ img {
   position: absolute;
   inset-block-end: 0;
   inset-inline-start: 0;
-  background-color: var(--surface1);
+  background-color: var(--surface2);
   inline-size: 100%;
   padding-inline: 0.3rem;
   padding-block-start: 0.6rem;

@@ -20,7 +20,7 @@
 
 .cart__summary {
   padding: 1.5rem;
-  background-color: var(--surface2);
+  background-color: var(--surface3);
   align-self: start;
 }
 
@@ -92,10 +92,6 @@
 .products-list__cards {
   grid-template-columns: 1fr;
   gap: 2rem;
-}
-
-.products-list__card-item {
-  border: 1px solid var(--surface4);
 }
 
 .card {
@@ -205,7 +201,7 @@
   padding-block-end: 1rem;
 }
 
-.card--horizontal > .card__image-container {
+.card--horizontal > .card__image-container--cart {
   padding-block-end: 1rem;
 }
 
@@ -217,7 +213,7 @@
   padding-inline: 0;
 }
 
-.card__image-container {
+.card__image-container--cart {
   padding-inline: 0.8rem;
   padding-block: 1rem;
 }
