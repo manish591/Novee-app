@@ -1,4 +1,7 @@
 import "./App.css";
+
+import { Routes, Route } from 'react-router-dom';
+
 import { 
   Header, 
   Navbar,
@@ -23,15 +26,15 @@ const App = ()  => {
       <Sidebar />
       <Header>
         <Navbar />
-        {/* <Carousel /> */}
       </Header>
-      {/* <Home /> */}
-      {/* <ProductListing /> */}
-      {/* <Cart /> */}
-      {/* <Wishlist /> */}
-      {/* <Login /> */}
-      <Signup />
-      {/* <Loader /> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductListing />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
       <Footer />
     </div>
   );
