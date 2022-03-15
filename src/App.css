@@ -1,0 +1,11 @@
+@import url('./components/header/Header.css');
+@import url('./components/sidebar/Sidebar.css');
+@import url('./components/carousel/Carousel.css');
+@import url('./components/footer/Footer.css');
+@import url('./pages/home/Home.css');
+@import url('./pages/product-listing/ProductListing.css');
+@import url('./pages/cart/Cart.css');
+@import url('./pages/wishlist/Wishlist.css');
+@import url('./pages/login/Login.css');
+@import url('./pages/signup/Signup.css');
+@import url('./components/loader/Loader.css');
