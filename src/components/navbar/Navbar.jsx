@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from 'react-router-dom';
+
 const Navbar = () => {
   return (
     <nav className="navbar">
@@ -10,13 +12,23 @@ const Navbar = () => {
               <span className="material-icons">menu</span>
             </a>
           </li>
-          <li className="navbar__items navbar__items--logo">novee</li>
+          <li className="navbar__items navbar__items--logo">
+            <Link to="/">novee</Link>
+          </li>
         </ul>
         <ul className="navbar__list flex navbar--hide navbar__list--links">
-          <li className="navbar__items">Home</li>
-          <li className="navbar__items">Laptops</li>
-          <li className="navbar__items">Tablets</li>
-          <li className="navbar__items">Phones</li>
+          <li className="navbar__items">
+            <Link to="/">Home</Link>
+          </li>
+          <li className="navbar__items">
+            <Link to="/products">Laptops</Link>
+          </li>
+          <li className="navbar__items">
+            <Link to="/products">Tablets</Link>
+          </li>
+          <li className="navbar__items">
+            <Link to="/products">Phones</Link>
+          </li>
         </ul>
         <ul className="navbar__list flex navbar__list--search">
           <li className="navbar__items navbar--hide navbar__items--search-bar">
@@ -38,14 +50,14 @@ const Navbar = () => {
             <span className="material-icons">person</span>
           </li>
           <li className="navbar__items navbar--hide navbar__items--icons navbar__items--wishlist">
-            <a href="#" className="navbar__items--icons">
+            <Link to="/wishlist" className="navbar__items--icons">
               <span className="material-icons">favorite_border</span>
-            </a>
+            </Link>
           </li>
           <li className="navbar__items navbar__items--icons">
-            <a href="#" className="navbar__items--icons">
+            <Link to="/cart" className="navbar__items--icons">
               <span className="material-icons">shopping_bag</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

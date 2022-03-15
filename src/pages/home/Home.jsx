@@ -1,8 +1,11 @@
 import React from "react";
 
+import { Carousel } from '../../components';
+
 const Home = () => {
   return (
     <main className="main">
+      <Carousel />
       <div className="main__wrapper">
         <div className="brand-list flex">
           <section className="brand-list__name">One</section>

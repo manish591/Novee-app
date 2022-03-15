@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from 'react-router-dom';
+
 const Carousel = () => {
   return (
     <section className="hero">
@@ -16,7 +18,7 @@ const Carousel = () => {
                   Deleniti, esse debitis! Quidem cumque eum illum?
                 </p>
                 <button className="carousel-slide__btn btn btn--contained-primary">
-                  <a href="#">See Product</a>
+                  <Link to="/products">See Product</Link>
                 </button>
               </div>
             </article>
