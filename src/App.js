@@ -1,6 +1,7 @@
 import "./App.css";
 
 import { Routes, Route } from 'react-router-dom';
+import Mockman from "mockman-js";
 
 import { 
   Header, 
@@ -34,6 +35,7 @@ const App = ()  => {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/mock" element={<Mockman />} />
       </Routes>
       <Footer />
     </div>
