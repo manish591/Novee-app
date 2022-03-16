@@ -28,7 +28,7 @@ const Filters = () => {
                 name="sort"
                 className="filters__checkbox"
               />
-              <label for="sort-one" className="filters__label">
+              <label htmlFor="sort-one" className="filters__label">
                 High To Low
               </label>
             </div>
@@ -39,7 +39,7 @@ const Filters = () => {
                 id="sort-two"
                 className="filters__checkbox"
               />
-              <label for="sort-two" className="filters__label">
+              <label htmlFor="sort-two" className="filters__label">
                 Low To High
               </label>
             </div>
@@ -53,7 +53,7 @@ const Filters = () => {
                 name="availability"
                 className="filters__checkbox"
               />
-              <label for="availability-one" className="filters__label">
+              <label htmlFor="availability-one" className="filters__label">
                 Include out of stock
               </label>
             </div>
@@ -64,7 +64,7 @@ const Filters = () => {
                 id="availability-two"
                 className="filters__checkbox"
               />
-              <label for="availability-two" className="filters__label">
+              <label htmlFor="availability-two" className="filters__label">
                 Fast delivery only
               </label>
             </div>
@@ -78,7 +78,7 @@ const Filters = () => {
                 name="prices"
                 className="filters__checkbox"
               />
-              <label for="prices-one" className="filters__label">
+              <label htmlFor="prices-one" className="filters__label">
                 Rs. 200 to Rs. 1000
               </label>
             </div>
@@ -89,7 +89,7 @@ const Filters = () => {
                 id="prices-two"
                 className="filters__checkbox"
               />
-              <label for="prices-two" className="filters__label">
+              <label htmlFor="prices-two" className="filters__label">
                 Rs. 1000 to Rs. 2000
               </label>
             </div>
@@ -100,7 +100,7 @@ const Filters = () => {
                 id="prices-three"
                 className="filters__checkbox"
               />
-              <label for="prices-three" className="filters__label">
+              <label htmlFor="prices-three" className="filters__label">
                 Rs. 2000 to Rs. 3000
               </label>
             </div>
@@ -111,7 +111,7 @@ const Filters = () => {
                 id="prices-four"
                 className="filters__checkbox"
               />
-              <label for="prices-four" className="filters__label">
+              <label htmlFor="prices-four" className="filters__label">
                 Rs. 3000 to Rs. 5000
               </label>
             </div>
@@ -125,7 +125,7 @@ const Filters = () => {
                 name="brand"
                 className="filters__checkbox"
               />
-              <label for="brand-one" className="filters__label">
+              <label htmlFor="brand-one" className="filters__label">
                 Asus
               </label>
             </div>
@@ -136,7 +136,7 @@ const Filters = () => {
                 id="brand-two"
                 className="filters__checkbox"
               />
-              <label for="brand-two" className="filters__label">
+              <label htmlFor="brand-two" className="filters__label">
                 Nova
               </label>
             </div>
@@ -147,7 +147,7 @@ const Filters = () => {
                 id="brand-three"
                 className="filters__checkbox"
               />
-              <label for="brand-three" className="filters__label">
+              <label htmlFor="brand-three" className="filters__label">
                 Apple
               </label>
             </div>
@@ -158,7 +158,7 @@ const Filters = () => {
                 id="brand-four"
                 className="filters__checkbox"
               />
-              <label for="brand-four" className="filters__label">
+              <label htmlFor="brand-four" className="filters__label">
                 Vivo
               </label>
             </div>
@@ -169,7 +169,7 @@ const Filters = () => {
                 id="brand-five"
                 className="filters__checkbox"
               />
-              <label for="brand-five" className="filters__label">
+              <label htmlFor="brand-five" className="filters__label">
                 Dell
               </label>
             </div>
@@ -180,7 +180,7 @@ const Filters = () => {
                 id="brand-six"
                 className="filters__checkbox"
               />
-              <label for="brand-six" className="filters__label">
+              <label htmlFor="brand-six" className="filters__label">
                 Oppo
               </label>
             </div>
@@ -191,7 +191,7 @@ const Filters = () => {
                 name="brand"
                 className="filters__checkbox"
               />
-              <label for="brand-seven" className="filters__label">
+              <label htmlFor="brand-seven" className="filters__label">
                 Acer
               </label>
             </div>
@@ -202,7 +202,7 @@ const Filters = () => {
                 id="brand-eight"
                 className="filters__checkbox"
               />
-              <label for="brand-eight" className="filters__label">
+              <label htmlFor="brand-eight" className="filters__label">
                 Sony
               </label>
             </div>
@@ -213,7 +213,7 @@ const Filters = () => {
                 id="brand-nine"
                 className="filters__checkbox"
               />
-              <label for="brand-nine" className="filters__label">
+              <label htmlFor="brand-nine" className="filters__label">
                 HP
               </label>
             </div>
@@ -224,7 +224,7 @@ const Filters = () => {
                 id="brand-ten"
                 className="filters__checkbox"
               />
-              <label for="brand-ten" className="filters__label">
+              <label htmlFor="brand-ten" className="filters__label">
                 Redmi
               </label>
             </div>
@@ -235,7 +235,7 @@ const Filters = () => {
                 id="brand-eleven"
                 className="filters__checkbox"
               />
-              <label for="brand-eleven" className="filters__label">
+              <label htmlFor="brand-eleven" className="filters__label">
                 One Plus
               </label>
             </div>
@@ -246,7 +246,7 @@ const Filters = () => {
                 id="brand-twelve"
                 className="filters__checkbox"
               />
-              <label for="brand-twelve" className="filters__label">
+              <label htmlFor="brand-twelve" className="filters__label">
                 Samsung
               </label>
             </div>
@@ -260,7 +260,7 @@ const Filters = () => {
                 name="rating"
                 className="filters__checkbox"
               />
-              <label for="rating-one">5 Star</label>
+              <label htmlFor="rating-one" className="filters__label" >5 Star</label>
             </div>
             <div className="filters__group">
               <input
@@ -269,7 +269,7 @@ const Filters = () => {
                 id="rating-two"
                 className="filters__checkbox"
               />
-              <label for="rating-two">4 Star</label>
+              <label htmlFor="rating-two" className="filters__label" >4 Star</label>
             </div>
             <div className="filters__group">
               <input
@@ -278,7 +278,7 @@ const Filters = () => {
                 id="rating-three"
                 className="filters__checkbox"
               />
-              <label for="rating-three">3 Star</label>
+              <label htmlFor="rating-three" className="filters__label" >3 Star</label>
             </div>
             <div className="filters__group">
               <input
@@ -287,7 +287,7 @@ const Filters = () => {
                 id="rating-four"
                 className="filters__checkbox"
               />
-              <label for="rating-four">2 Star</label>
+              <label htmlFor="rating-four" className="filters__label" >2 Star</label>
             </div>
             <div className="filters__group">
               <input
@@ -296,7 +296,7 @@ const Filters = () => {
                 id="rating-four"
                 className="filters__checkbox"
               />
-              <label for="rating-four">1 Star</label>
+              <label htmlFor="rating-four" className="filters__label" >1 Star</label>
             </div>
           </fieldset>
         </form>

@@ -4,7 +4,7 @@ const ProductCardHorizontal = () => {
   return (
     <section className="products-list__card-item">
       <section className="card card--horizontal products-list__card">
-        <div className="card__image-container">
+        <div className="card__image-container--cart">
           <img
             src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
             alt=""

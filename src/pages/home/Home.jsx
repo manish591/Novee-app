@@ -123,7 +123,7 @@ const Home = () => {
             <img
               src="https://images.unsplash.com/photo-1518644730709-0835105d9daa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHBlcnNvbiUyMHdpdGglMjBsYXB0b3B8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
               alt=""
-              className="responsive-img"
+              
             />
           </div>
         </div>
