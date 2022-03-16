@@ -1,0 +1,10 @@
+.not-found {
+    margin-inline: auto;
+    inline-size: min(90%, 500px);
+}
+
+.not-found__img {
+    max-inline-size: 100%;
+    object-fit: contain;
+    margin-inline: auto;
+}
