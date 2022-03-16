@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Carousel } from '../../components';
+import { brandLogoData } from '../../utilis/utilis';
 
 const Home = () => {
   return (
@@ -8,11 +9,15 @@ const Home = () => {
       <Carousel />
       <div className="main__wrapper">
         <div className="brand-list flex">
-          <section className="brand-list__name">One</section>
-          <section className="brand-list__name">Two</section>
-          <section className="brand-list__name">Three</section>
-          <section className="brand-list__name">Four</section>
-          <section className="brand-list__name">Five</section>
+          {
+            brandLogoData.map(item => {
+              return (
+                <section key={item.name} className="brand-list__name">
+                  <img src={item.img} alt="" className="brand-show-img" />
+                </section>
+              )
+            })
+          }
         </div>
         <div className="products flex">
           <section className="products__name flex">

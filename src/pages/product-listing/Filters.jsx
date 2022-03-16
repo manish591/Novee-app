@@ -1,5 +1,8 @@
 import React from "react";
 
+import { filterData, filterCategories } from '../../utilis/utilis';
+import { Checkbox } from "./Checkbox";
+
 const Filters = () => {
   return (
     <>
@@ -46,258 +49,40 @@ const Filters = () => {
           </fieldset>
           <fieldset className="listing__filter-item filters">
             <legend className="filters__title">Availability</legend>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                id="availability-one"
-                name="availability"
-                className="filters__checkbox"
-              />
-              <label htmlFor="availability-one" className="filters__label">
-                Include out of stock
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="availability"
-                id="availability-two"
-                className="filters__checkbox"
-              />
-              <label htmlFor="availability-two" className="filters__label">
-                Fast delivery only
-              </label>
-            </div>
+            <Checkbox 
+              id="availability-one" 
+              label="availability-one" 
+              name="Include out of stock" 
+            />
+            <Checkbox 
+              id="availability-two" 
+              label="availability-two" 
+              name="fast delivery only" 
+            />
           </fieldset>
           <fieldset className="listing__filter-item filters">
             <legend className="filters__title">Prices</legend>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                id="prices-one"
-                name="prices"
-                className="filters__checkbox"
-              />
-              <label htmlFor="prices-one" className="filters__label">
-                Rs. 200 to Rs. 1000
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="prices"
-                id="prices-two"
-                className="filters__checkbox"
-              />
-              <label htmlFor="prices-two" className="filters__label">
-                Rs. 1000 to Rs. 2000
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="prices"
-                id="prices-three"
-                className="filters__checkbox"
-              />
-              <label htmlFor="prices-three" className="filters__label">
-                Rs. 2000 to Rs. 3000
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="prices"
-                id="prices-four"
-                className="filters__checkbox"
-              />
-              <label htmlFor="prices-four" className="filters__label">
-                Rs. 3000 to Rs. 5000
-              </label>
-            </div>
+            {
+              filterData[filterCategories[2]].map(item => {
+                return <Checkbox {...item} key={item.id} label={filterCategories[2]} />
+              })
+            }
           </fieldset>
           <fieldset className="listing__filter-item filters">
             <legend className="filters__title">Brands</legend>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                id="brand-one"
-                name="brand"
-                className="filters__checkbox"
-              />
-              <label htmlFor="brand-one" className="filters__label">
-                Asus
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="brand"
-                id="brand-two"
-                className="filters__checkbox"
-              />
-              <label htmlFor="brand-two" className="filters__label">
-                Nova
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="brand"
-                id="brand-three"
-                className="filters__checkbox"
-              />
-              <label htmlFor="brand-three" className="filters__label">
-                Apple
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="brand"
-                id="brand-four"
-                className="filters__checkbox"
-              />
-              <label htmlFor="brand-four" className="filters__label">
-                Vivo
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="brand"
-                id="brand-five"
-                className="filters__checkbox"
-              />
-              <label htmlFor="brand-five" className="filters__label">
-                Dell
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="brand"
-                id="brand-six"
-                className="filters__checkbox"
-              />
-              <label htmlFor="brand-six" className="filters__label">
-                Oppo
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                id="brand-seven"
-                name="brand"
-                className="filters__checkbox"
-              />
-              <label htmlFor="brand-seven" className="filters__label">
-                Acer
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="brand"
-                id="brand-eight"
-                className="filters__checkbox"
-              />
-              <label htmlFor="brand-eight" className="filters__label">
-                Sony
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="brand"
-                id="brand-nine"
-                className="filters__checkbox"
-              />
-              <label htmlFor="brand-nine" className="filters__label">
-                HP
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="brand"
-                id="brand-ten"
-                className="filters__checkbox"
-              />
-              <label htmlFor="brand-ten" className="filters__label">
-                Redmi
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="brand"
-                id="brand-eleven"
-                className="filters__checkbox"
-              />
-              <label htmlFor="brand-eleven" className="filters__label">
-                One Plus
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="brand"
-                id="brand-twelve"
-                className="filters__checkbox"
-              />
-              <label htmlFor="brand-twelve" className="filters__label">
-                Samsung
-              </label>
-            </div>
+            {
+              filterData[filterCategories[0]].map(item => {
+                return <Checkbox {...item} key={item.id} label={filterCategories[0]} />
+              })
+            }
           </fieldset>
           <fieldset className="listing__filter-item filters">
             <legend className="filters__title">Ratings</legend>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                id="rating-one"
-                name="rating"
-                className="filters__checkbox"
-              />
-              <label htmlFor="rating-one" className="filters__label" >5 Star</label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="rating"
-                id="rating-two"
-                className="filters__checkbox"
-              />
-              <label htmlFor="rating-two" className="filters__label" >4 Star</label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="rating"
-                id="rating-three"
-                className="filters__checkbox"
-              />
-              <label htmlFor="rating-three" className="filters__label" >3 Star</label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="rating"
-                id="rating-four"
-                className="filters__checkbox"
-              />
-              <label htmlFor="rating-four" className="filters__label" >2 Star</label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="checkbox"
-                name="rating"
-                id="rating-four"
-                className="filters__checkbox"
-              />
-              <label htmlFor="rating-four" className="filters__label" >1 Star</label>
-            </div>
+            {
+              filterData[filterCategories[1]].map(item => {
+                return <Checkbox {...item} key={item.id} label={filterCategories[1]} />
+              })
+            }
           </fieldset>
         </form>
       </aside>

@@ -8,9 +8,7 @@ const ProductListing = () => {
       <div className="listing__wrapper grid">
         <Filters />
         <div className="listing__products layout grid-auto-fill">
-          {[...Array(5)].map((_) => {
-            return <ProductCardVertical />;
-          })}
+          <ProductCardVertical />
         </div>
       </div>
     </main>
