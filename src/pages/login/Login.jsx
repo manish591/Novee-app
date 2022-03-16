@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from 'react-router-dom';
+
 const Login = () => {
   return (
     <main className="login">
@@ -50,7 +52,7 @@ const Login = () => {
         <div className="login__footer">
           <p>Don't Have an account? </p>
           <button className="login__signup">
-            <a href="/pages/signup.html">Sign Up</a>
+            <Link to="/signup">Sign Up</Link>
           </button>
         </div>
       </div>
