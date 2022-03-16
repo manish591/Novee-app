@@ -56,6 +56,9 @@ export function makeServer({ environment = "development" } = {}) {
     },
 
     routes() {
+      // timing 
+      this.timing = 3000;
+
       this.namespace = "api";
       // auth routes (public)
       this.post("/auth/signup", signupHandler.bind(this));

@@ -5,6 +5,7 @@
 .footer__wrapper {
   inline-size: min(90%, 1400px);
   margin-inline: auto;
+  margin-top: auto;
 }
 
 .footer {
