@@ -21,7 +21,10 @@ import {
   NotFound
 } from './pages';
 
+import { useKeepAuthData } from "./hooks";
+
 const App = ()  => {
+  useKeepAuthData();
   return (
     <div className="App">
       <Sidebar />
