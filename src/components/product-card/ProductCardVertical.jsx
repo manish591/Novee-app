@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductCardVertical = () => {
+const ProductCardVertical = ({ image, title, description, price, discount }) => {
   return (
     <section className="card">
       <div className="card__image-container">
@@ -18,16 +18,13 @@ const ProductCardVertical = () => {
       </div>
       <div className="card__info">
         <div className="card__title">
-          <p className="card__name">HRX by Hrithik Roshan</p>
-          <p className="card__desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Necessitatibus, est!
-          </p>
+          <p className="card__name">{title}</p>
+          <p className="card__desc">{description}</p>
         </div>
         <div className="card__priceDetails d-flex">
-          <p className="card__discountedPrice">Rs.658</p>
-          <p className="card__realPrice">Rs.756</p>
-          <p className="card__discount">(30% OFF)</p>
+          <p className="card__discountedPrice">Rs.{(price - ((price * Number(discount)) / 100)).toFixed(0)}</p>
+          <p className="card__realPrice">Rs.{price}</p>
+          <p className="card__discount">({discount}% OFF)</p>
         </div>
       </div>
     </section>
