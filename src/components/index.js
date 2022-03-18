@@ -6,3 +6,4 @@ export { Footer } from './footer/Footer';
 export { ProductCardVertical } from './product-card/ProductCardVertical';
 export { ProductCardHorizontal } from './product-card/ProductCardHorizontal';
 export { Loader } from './loader/Loader';
+export { ProfileDropdown } from './profile-dropdown/Profile.dropdown';

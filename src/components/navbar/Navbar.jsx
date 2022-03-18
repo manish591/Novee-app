@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Link } from 'react-router-dom';
+import { ProfileDropdown } from "../profile-dropdown/Profile.dropdown";
 
 const Navbar = () => {
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
   return (
     <nav className="navbar">
       <div className="navbar__wrapper flex">
@@ -46,8 +49,13 @@ const Navbar = () => {
           </li>
         </ul>
         <ul className="navbar__list flex">
-          <li className="navbar__items navbar--hide navbar__items--icons navbar__items--profile profile">
+          <li 
+            className="navbar__items navbar--hide navbar__items--icons navbar__items--profile profile"
+            onClick={() => {
+              setIsDropdownVisible(d => !d) 
+              }}>
             <span className="material-icons">person</span>
+            <ProfileDropdown  isDropdownVisible={isDropdownVisible} />
           </li>
           <li className="navbar__items navbar--hide navbar__items--icons navbar__items--wishlist">
             <Link to="/wishlist" className="navbar__items--icons">

@@ -14,7 +14,7 @@ const Wishlist = () => {
           <p>My wishlist {state.wishlistData.length} items</p>
         </div>
         <section className="wishlist__itemsContainer layout grid-auto-fill">
-            <WishlistCard  {...item} />
+          <WishlistCard/>
         </section>
       </div>
     </main>

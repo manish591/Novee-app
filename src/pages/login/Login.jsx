@@ -1,6 +1,23 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../../hooks';
 
 const Login = () => {
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: ''
+  });
+  const { loginUser } = useAuth();
+  const location = useLocation();
+  const from = location?.state;
+
+  const handleUserLogin = async (e) => {
+    e.preventDefault();
+    loginUser(loginData.email, loginData.password, from);
+  }
+  
   return (
     <main className="login">
       <div className="wrapper">
@@ -8,25 +25,29 @@ const Login = () => {
           <h1 className="login__title">Log In</h1>
           <p className="login__greeting">Welcome! Back</p>
         </div>
-        <form className="login__form">
+        <form className="login__form" onSubmit={handleUserLogin}>
           <section className="email-container">
-            <label for="email">Email</label>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
               name="email"
               className="login__email"
-              autocomplete="email"
+              autoComplete="email"
+              value={loginData.email}
+              onChange={(e) => setLoginData(ld => ({...ld, email: e.target.value}))}
               required
             />
           </section>
           <section className="password-container">
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
               name="current-password"
               className="login__password"
+              value={loginData.password}
+              onChange={(e) => setLoginData(ld => ({...ld, password: e.target.value}))}
               required
             />
           </section>
@@ -37,7 +58,7 @@ const Login = () => {
                 id="rememberMe"
                 className="login__remember-me"
               />
-              <label for="rememberMe">Remember Me</label>
+              <label htmlFor="rememberMe">Remember Me</label>
             </section>
             <button className="login__forgotPassword">Forgot password?</button>
           </section>
@@ -50,7 +71,7 @@ const Login = () => {
         <div className="login__footer">
           <p>Don't Have an account? </p>
           <button className="login__signup">
-            <a href="/pages/signup.html">Sign Up</a>
+            <Link to="/signup">Sign Up</Link>
           </button>
         </div>
       </div>

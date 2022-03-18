@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from 'react-router-dom';
+
 const Signup = () => {
   return (
     <main class="signup">
@@ -59,7 +61,7 @@ const Signup = () => {
         <div class="signup__footer">
           <p>Already have an account?</p>
           <button class="signup__signup">
-            <a href="/pages/login.html">Log In</a>
+            <Link to="/login">Log In</Link>
           </button>
         </div>
       </div>
