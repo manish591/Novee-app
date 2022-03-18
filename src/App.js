@@ -8,7 +8,8 @@ import {
   Sidebar,
   Carousel,
   Footer,
-  Loader
+  Loader,
+  ProtectedRoute
 } from './components';
 
 import {
@@ -34,10 +35,12 @@ const App = ()  => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductListing />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+
+        <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+        <Route path="/wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
