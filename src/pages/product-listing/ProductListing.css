@@ -376,10 +376,6 @@ img {
     margin-block: 0;
   }
 
-  .listing-header__right {
-    pointer-events: none;
-  }
-
   .listing__filter-item {
     border: 1px solid var(--surface4);
   }
