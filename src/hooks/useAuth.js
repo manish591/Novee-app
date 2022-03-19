@@ -34,6 +34,7 @@ const useAuth = () => {
   const logoutUser = () => {
     setIsUserLogedIn(false);
     setCurrentUser({});
+    navigate('/');
   }
 
   return {
