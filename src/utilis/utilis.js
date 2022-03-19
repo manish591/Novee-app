@@ -82,23 +82,19 @@ const filterData = {
   rating: [
     {
         id: 1,
-        name: "1 star",
+        name: "1 Star & Above",
     },
     {
         id: 2,
-        name: "2 star",
+        name: "2 Star & Above",
     },
     {
         id: 3,
-        name: "3 star",
+        name: "3 Star & Above",
     },
     {
         id: 4,
-        name: "4 star",
-    },
-    {
-        id: 5,
-        name: "5 star",
+        name: "4 Star & Above",
     },
   ],
   price: [

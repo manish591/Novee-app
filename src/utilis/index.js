@@ -1,0 +1,1 @@
+export { updatedProductList } from './filters';

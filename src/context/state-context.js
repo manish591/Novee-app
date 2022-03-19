@@ -11,8 +11,11 @@ const StateContextProvider = ({ children }) => {
     filters: {
       sort: "",
       fastDelivery: "",
-      inStock: '',
+      includeOutOfStock: "",
+      rating: [],
+      price: [],
       category: [],
+      brand: [],
     },
   });
   return (

@@ -14,9 +14,9 @@ const Loader = () => {
         cy="78"
         r="50"
         fill="transparent"
-        stroke-width="10"
-        stroke-dasharray="105"
-        stroke-linecap="round"
+        strokeWidth="10"
+        strokeDasharray="105"
+        strokeLinecap="round"
       />
     </svg>
   );
