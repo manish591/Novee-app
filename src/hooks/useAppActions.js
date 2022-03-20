@@ -11,6 +11,15 @@ const useAppActions = () => {
     ).toFixed(0);
   };
 
+  const findTotalPrice = (arr) => {
+    return arr.reduce(
+      (total, currentValue) =>
+        (total =
+          total + Number(currentValue.price) * Number(currentValue.quantity)),
+      0
+    );
+  };
+
   const addItemToTheWishlist = async ({
     product,
     _id,
@@ -84,9 +93,8 @@ const useAppActions = () => {
           headers: { authorization: currentUser.encodedToken },
         }
       );
-      console.log(res);
-      if(res.status === 200 || res.status === 201) {
-        stateDispatch({ type: 'GET_CART_DATA', payload: res.data.cart })
+      if (res.status === 200 || res.status === 201) {
+        stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
       }
       setIsLoading(false);
     } catch (err) {
@@ -105,6 +113,7 @@ const useAppActions = () => {
     findDiscountedPrice,
     addProductsToCart,
     removeProductsFromCart,
+    findTotalPrice,
   };
 };
 

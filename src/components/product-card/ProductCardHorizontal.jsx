@@ -1,6 +1,15 @@
 import React from "react";
 
-const ProductCardHorizontal = () => {
+const ProductCardHorizontal = ({
+  _id,
+  image,
+  quantity,
+  itemInStock,
+  title,
+  description,
+  price,
+  discount,
+}) => {
   return (
     <section className="products-list__card-item">
       <section className="card card--horizontal products-list__card">
@@ -12,12 +21,12 @@ const ProductCardHorizontal = () => {
           />
         </div>
         <div className="card__content">
-          <h3 className="card__title">Asus Vivobook 14 Laptop</h3>
-          <p className="card__author">Lorem ipsum dolor sit.</p>
+          <h3 className="card__title">{title}</h3>
+          <p className="card__author">{description}</p>
           <p className="card__price">Lorem, ipsum dolor.</p>
           <div className="card__update-quantity flex">
             <span className="material-icons-round">remove</span>
-            <p className="quantity-value">0</p>
+            <p className="quantity-value">{quantity}</p>
             <span className="material-icons-round">add</span>
           </div>
         </div>

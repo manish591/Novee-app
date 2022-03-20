@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 import { Loader, ProductCardHorizontal } from "../../components";
 import { useStateContext } from "../../hooks";
 import { useAuth } from "../../hooks";
+import { useAppActions } from "../../hooks";
 
 const Cart = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { state, stateDispatch } = useStateContext();
   const { currentUser } = useAuth();
+  const { findTotalPrice, findDiscountedPrice } = useAppActions();
 
   useEffect(() => {
     (async () => {
@@ -50,7 +52,7 @@ const Cart = () => {
             <section className="cart__action-btn cart-action flex">
               <div className="cart-action__info">
                 <h3 className="fw-100">
-                  My Cart <strong>3 Items</strong>
+                  My Cart <strong>{state.cartData.length} Items</strong>
                 </h3>
               </div>
               <div className="cart-action-remove flex">
@@ -69,11 +71,11 @@ const Cart = () => {
               <Loader />
             ) : (
               <div className="product-list__card-container">
-                {
-                  state.cartData.map(cartItem => {
-                    return <ProductCardHorizontal key={cartItem._id} {...cartItem} />
-                  })
-                }
+                {state.cartData.map((cartItem) => {
+                  return (
+                    <ProductCardHorizontal key={cartItem._id} {...cartItem} />
+                  );
+                })}
               </div>
             )}
           </div>
@@ -92,18 +94,22 @@ const Cart = () => {
           </section>
           <div className="summary__title">
             <h3 className="fw-100">
-              Price Detail <strong>(3 Items)</strong>
+              Price Detail <strong>({state.cartData.length} Items)</strong>
             </h3>
           </div>
           <div className="summary__price-details price-detail">
             <ul className="price-detail__list">
               <li className="price-detail__list-item flex">
                 <p>Total MRP</p>
-                <p className="price-detail__price">$450</p>
+                <p className="price-detail__price">
+                  ${findTotalPrice(state.cartData)}
+                </p>
               </li>
               <li className="price-detail__list-item flex">
                 <p>Discount MRP</p>
-                <p className="price-detail__price">$450</p>
+                <p className="price-detail__price">
+                  ${findDiscountedPrice(findTotalPrice(state.cartData), 10)}
+                </p>
               </li>
               <li className="price-detail__list-item flex">
                 <p>Coupon Discount</p>
@@ -111,13 +117,18 @@ const Cart = () => {
               </li>
               <li className="price-detail__list-item flex">
                 <p>Delivery Charges</p>
-                <p className="price-detail__price">$450</p>
+                <p className="price-detail__price">$10</p>
               </li>
             </ul>
             <ul className="price-detail__list price-detail__grand-total">
               <li className="price-detail__list-total flex">
                 <p>Grand Total</p>
-                <p className="price-detail__price">$1450</p>
+                <p className="price-detail__price">
+                  $
+                  {Number(
+                    findDiscountedPrice(findTotalPrice(state.cartData), 10)
+                  ) + 35}
+                </p>
               </li>
             </ul>
           </div>
