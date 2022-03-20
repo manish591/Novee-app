@@ -11,6 +11,7 @@ const Cart = () => {
   const { state, stateDispatch } = useStateContext();
   const { currentUser } = useAuth();
   const { findTotalPrice, findDiscountedPrice } = useAppActions();
+  const [myCart, setMyCart] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -19,12 +20,11 @@ const Cart = () => {
           headers: { authorization: currentUser.encodedToken },
         });
         if (res.status === 200) {
-          stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
+          setMyCart(res.data.cart);
         }
         setIsLoading(false);
       } catch (err) {
         console.error(err);
-        setIsLoading(false);
       }
     })();
   }, [state.cartData]);
@@ -71,7 +71,7 @@ const Cart = () => {
               <Loader />
             ) : (
               <div className="product-list__card-container">
-                {state.cartData.map((cartItem) => {
+                {myCart.map((cartItem) => {
                   return (
                     <ProductCardHorizontal key={cartItem._id} {...cartItem} />
                   );
