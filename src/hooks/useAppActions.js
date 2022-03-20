@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useAuth } from './useAuth';
+import { useAuth } from "./useAuth";
 import { useStateContext } from "./useStateContext";
 
 const useAppActions = () => {
@@ -19,8 +19,7 @@ const useAppActions = () => {
   const findTotalPrice = (arr) => {
     return arr.reduce(
       (total, currentValue) =>
-        (total =
-          total + Number(currentValue.price) * Number(currentValue.quantity)),
+        (total = total + Number(currentValue.price) * Number(currentValue.qty)),
       0
     );
   };
@@ -122,7 +121,7 @@ const useAppActions = () => {
       });
       console.log(res);
       if (res.status === 200 || res.status === 201) {
-        stateDispatch({ type: "GET_PRODUCT_DATA", payload: res.data.cart });
+        stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
       }
       setIsLoading(false);
     } catch (err) {
@@ -136,7 +135,7 @@ const useAppActions = () => {
     setIsLoading(true);
     try {
       const res = await axios.post(
-        `api/user/cart/${_id}`,
+        `/api/user/cart/${_id}`,
         {
           action: {
             type,
@@ -146,7 +145,7 @@ const useAppActions = () => {
           headers: { authorization: currentUser.encodedToken },
         }
       );
-      console.log(res)
+      console.log(res);
       if (res.status === 200 || res.status === 201) {
         stateDispatch({ type: `GET_CART_DATA`, payload: res.data.cart });
       }

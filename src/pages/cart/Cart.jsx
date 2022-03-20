@@ -9,6 +9,7 @@ import { useAppActions } from "../../hooks";
 const Cart = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { state, stateDispatch } = useStateContext();
+  const { cartData } = state;
   const { currentUser } = useAuth();
   const { findTotalPrice, findDiscountedPrice } = useAppActions();
   const [myCart, setMyCart] = useState([]);
@@ -27,7 +28,7 @@ const Cart = () => {
         console.error(err);
       }
     })();
-  }, [state.cartData]);
+  }, [cartData]);
 
   return (
     <main className="cart">
