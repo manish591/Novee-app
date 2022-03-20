@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAppActions } from "../../hooks";
 import { useStateContext } from "../../hooks";
 import { useAuth } from "../../hooks";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const ProductCardVertical = ({ product }) => {
   const {
@@ -10,11 +11,14 @@ const ProductCardVertical = ({ product }) => {
     addItemToTheWishlist,
     removeItemFromWishlist,
     findDiscountedPrice,
+    addProductsToCart,
   } = useAppActions();
   const { state, stateDispatch } = useStateContext();
-  const { currentUser } = useAuth();
+  const { currentUser, isUserLogedIn } = useAuth();
   const { _id, image, title, description, price, discount } = product;
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const loaction = useLocation();
 
   return (
     <section className="card">
@@ -57,7 +61,32 @@ const ProductCardVertical = ({ product }) => {
           </button>
         )}
         <div className="card__add-to-cart">
-          <button className="card__add-cart-btn">Add To Cart</button>
+          {isAlreadyInDatabase(state.cartData, _id) ? (
+            <button
+              className="card__add-cart-btn card__add-cart-btn--in-cart"
+              onClick={() => navigate("/cart")}
+            >
+              Go To Cart
+            </button>
+          ) : (
+            <button
+              className="card__add-cart-btn"
+              onClick={() =>
+                isUserLogedIn
+                  ? addProductsToCart({
+                      _id,
+                      product,
+                      currentUser,
+                      stateDispatch,
+                      setIsLoading,
+                    })
+                  : navigate("/login", { state: location.pathname })
+              }
+              disabled={isLoading}
+            >
+              Add To Cart
+            </button>
+          )}
         </div>
       </div>
       <div className="card__info">

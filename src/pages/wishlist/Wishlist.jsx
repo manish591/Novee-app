@@ -7,27 +7,27 @@ import { useAuth } from "../../hooks";
 
 const Wishlist = () => {
   const { state, stateDispatch } = useStateContext();
+  const { wishlistData } = state;
   const { currentUser } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
+  const [myWishlist, setMyWishlist] = useState([]);
 
   useEffect(() => {
+    console.log('useeffect runs');
     (async () => {
       try {
         const res = await axios.get("api/user/wishlist", {
           headers: { authorization: currentUser.encodedToken },
         });
         if (res.status === 200) {
-          stateDispatch({
-            type: "GET_WISHLIST_DATA",
-            payload: res.data.wishlist,
-          });
+          setMyWishlist(res.data.wishlist);
         }
         setIsLoading(false);
       } catch (err) {
         console.error(err);
       }
     })();
-  }, [state.wishlistData]);
+  }, [wishlistData]);
 
 
   return (
@@ -41,7 +41,7 @@ const Wishlist = () => {
         ) : (
           <section className="wishlist__itemsContainer layout grid-auto-fill">
             {
-              state.wishlistData.map(item => {
+              myWishlist.map(item => {
                 return <WishlistCard {...item} key={item._id} />
               })
             }
