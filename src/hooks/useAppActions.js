@@ -104,7 +104,28 @@ const useAppActions = () => {
     }
   };
 
-  const removeProductsFromCart = () => {};
+  const removeProductsFromCart = async ({
+    _id,
+    currentUser,
+    stateDispatch,
+    setIsLoading,
+  }) => {
+    setIsLoading(true);
+    try {
+      const res = await axios.delete(`/api/user/cart/${_id}`, {
+        headers: { authorization: currentUser.encodedToken }
+      })
+      console.log(res);
+      if(res.status === 200 || res.status === 201) {
+        stateDispatch({ type: 'GET_PRODUCT_DATA', payload: res.data.cart })
+      }
+      setIsLoading(false);
+    } catch(err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return {
     isAlreadyInDatabase,

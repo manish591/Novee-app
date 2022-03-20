@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAppActions } from "../../hooks";
+import { useAuth } from "../../hooks";
+import { useStateContext } from "../../hooks";
 
 const ProductCardHorizontal = ({
   _id,
@@ -10,6 +13,11 @@ const ProductCardHorizontal = ({
   price,
   discount,
 }) => {
+  const { removeProductsFromCart } = useAppActions();
+  const { currentUser } = useAuth();
+  const { stateDispatch } = useStateContext();
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <section className="products-list__card-item">
       <section className="card card--horizontal products-list__card">
@@ -30,9 +38,20 @@ const ProductCardHorizontal = ({
             <span className="material-icons-round">add</span>
           </div>
         </div>
-        <div className="card__remove-btn">
+        <button
+          className="card__remove-btn"
+          onClick={() =>
+            removeProductsFromCart({
+              _id,
+              currentUser,
+              stateDispatch,
+              setIsLoading,
+            })
+          }
+          disabled={isLoading}
+        >
           <span className="material-icons-round">clear</span>
-        </div>
+        </button>
       </section>
     </section>
   );
