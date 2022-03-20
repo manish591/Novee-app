@@ -1,7 +1,32 @@
+import axios from "axios";
 import React from "react";
-import { ProductCardHorizontal } from "../../components";
+import { useState, useEffect } from "react";
+import { Loader, ProductCardHorizontal } from "../../components";
+import { useStateContext } from "../../hooks";
+import { useAuth } from "../../hooks";
 
 const Cart = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const { state, stateDispatch } = useStateContext();
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get("/api/user/cart", {
+          headers: { authorization: currentUser.encodedToken },
+        });
+        if (res.status === 200) {
+          stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
+        }
+        setIsLoading(false);
+      } catch (err) {
+        console.error(err);
+        setIsLoading(false);
+      }
+    })();
+  }, [state.cartData]);
+
   return (
     <main className="cart">
       <div className="cart__wrapper grid">
@@ -40,9 +65,17 @@ const Cart = () => {
                 </button>
               </div>
             </section>
-            <div className="product-list__card-container">
-              <ProductCardHorizontal />
-            </div>
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <div className="product-list__card-container">
+                {
+                  state.cartData.map(cartItem => {
+                    return <ProductCardHorizontal key={cartItem._id} {...cartItem} />
+                  })
+                }
+              </div>
+            )}
           </div>
         </section>
         <section className="cart__summary summary">
