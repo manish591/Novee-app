@@ -317,6 +317,10 @@ img {
   pointer-events: auto;
 }
 
+.card__remove-wishlist:disabled {
+  cursor: not-allowed;
+}
+
 /* ------------- */
 /* Media Queries */
 /* ------------- */

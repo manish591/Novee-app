@@ -1,18 +1,20 @@
 import React from "react";
+import { useState } from "react";
 import { useAppActions } from "../../hooks";
 import { useStateContext } from "../../hooks";
+import { useAuth } from "../../hooks";
 
-const ProductCardVertical = ({
-  _id,
-  image,
-  title,
-  description,
-  price,
-  discount,
-}) => {
-  const { isAlreadyInWishlist } = useAppActions();
-  const { state } = useStateContext();
-  console.log(isAlreadyInWishlist(state.wishlistData, _id))
+const ProductCardVertical = ({ product }) => {
+  const {
+    isAlreadyInDatabase,
+    addItemToTheWishlist,
+    removeItemFromWishlist,
+    findDiscountedPrice,
+  } = useAppActions();
+  const { state, stateDispatch } = useStateContext();
+  const { currentUser } = useAuth();
+  const { _id, image, title, description, price, discount } = product;
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <section className="card">
@@ -22,12 +24,35 @@ const ProductCardVertical = ({
           alt=""
           className="card__img"
         />
-        {isAlreadyInWishlist(state.wishlistData, _id) ? (
-          <button className="card__remove-wishlist">
+        {isAlreadyInDatabase(state.wishlistData, _id) ? (
+          <button
+            className="card__remove-wishlist"
+            onClick={() =>
+              removeItemFromWishlist({
+                _id,
+                currentUser,
+                stateDispatch,
+                setIsLoading,
+              })
+            }
+            disabled={isLoading}
+          >
             <span className="material-icons">favorite</span>
           </button>
         ) : (
-          <button className="card__remove-wishlist">
+          <button
+            className="card__remove-wishlist"
+            onClick={() =>
+              addItemToTheWishlist({
+                _id,
+                product,
+                currentUser,
+                stateDispatch,
+                setIsLoading,
+              })
+            }
+            disabled={isLoading}
+          >
             <span className="material-icons">favorite_border</span>
           </button>
         )}
@@ -42,7 +67,7 @@ const ProductCardVertical = ({
         </div>
         <div className="card__priceDetails d-flex">
           <p className="card__discountedPrice">
-            Rs.{(price - (price * Number(discount)) / 100).toFixed(0)}
+            Rs.{findDiscountedPrice(price, discount)}
           </p>
           <p className="card__realPrice">Rs.{price}</p>
           <p className="card__discount">({discount}% OFF)</p>

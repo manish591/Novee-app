@@ -27,7 +27,8 @@ const Wishlist = () => {
         console.error(err);
       }
     })();
-  }, []);
+  }, [state.wishlistData]);
+
 
   return (
     <main className="wishlist">
