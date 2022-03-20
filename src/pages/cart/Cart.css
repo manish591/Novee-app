@@ -281,6 +281,10 @@
   color: var(--light-clr);
 }
 
+.card__add-cart-btn:disabled {
+  cursor: not-allowed;
+}
+
 /* -------------- */
 /* Media queries */
 /* ------------- */
