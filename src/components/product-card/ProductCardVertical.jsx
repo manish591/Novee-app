@@ -57,7 +57,11 @@ const ProductCardVertical = ({ product }) => {
           </button>
         )}
         <div className="card__add-to-cart">
-          <button className="card__add-cart-btn">Add To Cart</button>
+          {isAlreadyInDatabase(state.cartData, _id) ? (
+            <button className="card__add-cart-btn card__add-cart-btn--in-cart">Go To Cart</button>
+          ) : (
+            <button className="card__add-cart-btn ">Add To Cart</button>
+          )}
         </div>
       </div>
       <div className="card__info">

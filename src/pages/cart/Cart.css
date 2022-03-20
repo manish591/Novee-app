@@ -276,6 +276,11 @@
   font-size: 1rem;
 }
 
+.card__add-cart-btn--in-cart {
+  background-color: var(--text2);
+  color: var(--light-clr);
+}
+
 /* -------------- */
 /* Media queries */
 /* ------------- */
