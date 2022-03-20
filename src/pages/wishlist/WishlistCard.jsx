@@ -1,6 +1,15 @@
 import React from "react";
+import { useState } from "react";
+import { useAuth } from "../../hooks";
+import { useStateContext } from "../../hooks";
+import { useAppActions } from "../../hooks";
 
-const WishlistCard = () => {
+const WishlistCard = ({ _id, image, title, price, discount }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { currentUser } = useAuth();
+  const { stateDispatch } = useStateContext();
+  const { removeItemFromWishlist, findDiscountedPrice } = useAppActions();
+
   return (
     <div className="card">
       <div className="card__image-container">
@@ -9,18 +18,31 @@ const WishlistCard = () => {
           alt="phone"
           className="card__img"
         />
-        <button className="card__remove-wishlist">
+        <button
+          className="card__remove-wishlist"
+          onClick={() =>
+            removeItemFromWishlist({
+              _id,
+              currentUser,
+              stateDispatch,
+              setIsLoading,
+            })
+          }
+          disabled={isLoading}
+        >
           <span className="material-icons">clear</span>
         </button>
       </div>
       <div className="card__info">
         <div className="card__title">
-          <p className="card__name">HRX by Hrithik Roshan This is butdd</p>
+          <p className="card__name">{title}</p>
         </div>
         <div className="card__priceDetails d-flex">
-          <p className="card__discountedPrice">Rs.658</p>
-          <p className="card__realPrice">Rs.756</p>
-          <p className="card__discount">(30% OFF)</p>
+          <p className="card__discountedPrice">
+            Rs.{findDiscountedPrice(price, discount)}
+          </p>
+          <p className="card__realPrice">Rs.{price}</p>
+          <p className="card__discount">({discount}% OFF)</p>
         </div>
       </div>
       <button className="card__moveToBagBtn">Move To Cart</button>

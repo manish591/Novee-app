@@ -1,6 +1,21 @@
 import React from "react";
+import { useState } from "react";
+import { useAppActions } from "../../hooks";
+import { useStateContext } from "../../hooks";
+import { useAuth } from "../../hooks";
 
-const ProductCardVertical = ({ image, title, description, price, discount }) => {
+const ProductCardVertical = ({ product }) => {
+  const {
+    isAlreadyInDatabase,
+    addItemToTheWishlist,
+    removeItemFromWishlist,
+    findDiscountedPrice,
+  } = useAppActions();
+  const { state, stateDispatch } = useStateContext();
+  const { currentUser } = useAuth();
+  const { _id, image, title, description, price, discount } = product;
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <section className="card">
       <div className="card__image-container">
@@ -9,9 +24,38 @@ const ProductCardVertical = ({ image, title, description, price, discount }) => 
           alt=""
           className="card__img"
         />
-        <button className="card__remove-wishlist">
-          <span className="material-icons">favorite_border</span>
-        </button>
+        {isAlreadyInDatabase(state.wishlistData, _id) ? (
+          <button
+            className="card__remove-wishlist"
+            onClick={() =>
+              removeItemFromWishlist({
+                _id,
+                currentUser,
+                stateDispatch,
+                setIsLoading,
+              })
+            }
+            disabled={isLoading}
+          >
+            <span className="material-icons">favorite</span>
+          </button>
+        ) : (
+          <button
+            className="card__remove-wishlist"
+            onClick={() =>
+              addItemToTheWishlist({
+                _id,
+                product,
+                currentUser,
+                stateDispatch,
+                setIsLoading,
+              })
+            }
+            disabled={isLoading}
+          >
+            <span className="material-icons">favorite_border</span>
+          </button>
+        )}
         <div className="card__add-to-cart">
           <button className="card__add-cart-btn">Add To Cart</button>
         </div>
@@ -22,7 +66,9 @@ const ProductCardVertical = ({ image, title, description, price, discount }) => 
           <p className="card__desc">{description}</p>
         </div>
         <div className="card__priceDetails d-flex">
-          <p className="card__discountedPrice">Rs.{(price - ((price * Number(discount)) / 100)).toFixed(0)}</p>
+          <p className="card__discountedPrice">
+            Rs.{findDiscountedPrice(price, discount)}
+          </p>
           <p className="card__realPrice">Rs.{price}</p>
           <p className="card__discount">({discount}% OFF)</p>
         </div>

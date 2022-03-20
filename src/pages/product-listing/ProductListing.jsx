@@ -46,7 +46,7 @@ const ProductListing = () => {
         {!isLoading ? (
           <div className="listing__products layout grid-auto-fill">
             {getUpdatedProductList.map((item) => {
-              return <ProductCardVertical {...item} key={item._id} />;
+              return <ProductCardVertical product={item} key={item._id} />;
             })}
           </div>
         ) : (

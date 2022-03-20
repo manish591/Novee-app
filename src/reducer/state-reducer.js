@@ -4,10 +4,10 @@ const stateReducer = (state, action) => {
       return { ...state, productData: action.payload };
 
     case "GET_WISHLIST_DATA":
-      return { ...state, productData: action.payload };
+      return { ...state, wishlistData: action.payload };
 
     case "GET_CART_DATA":
-      return { ...state, productData: action.payload };
+      return { ...state, cartData: action.payload };
 
     case "HIGH_TO_LOW":
       return { ...state, filters: { ...state.filters, sort: "HIGH_TO_LOW" } };
