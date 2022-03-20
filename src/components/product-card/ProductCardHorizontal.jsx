@@ -12,8 +12,9 @@ const ProductCardHorizontal = ({
   description,
   price,
   discount,
+  qty = 1,
 }) => {
-  const { removeProductsFromCart } = useAppActions();
+  const { removeProductsFromCart, updateCartQuantity } = useAppActions();
   const { currentUser } = useAuth();
   const { stateDispatch } = useStateContext();
   const [isLoading, setIsLoading] = useState(false);
@@ -33,9 +34,25 @@ const ProductCardHorizontal = ({
           <p className="card__author">{description}</p>
           <p className="card__price">Lorem, ipsum dolor.</p>
           <div className="card__update-quantity flex">
-            <span className="material-icons-round">remove</span>
-            <p className="quantity-value">{quantity}</p>
-            <span className="material-icons-round">add</span>
+            <button
+              className="card__update-quantity--remove"
+              onClick={() => updateCartQuantity(_id, "decrement", setIsLoading)}
+              disabled={isLoading || qty === 1}
+            >
+              <span className="material-icons-round cart-icon-quantity">
+                remove
+              </span>
+            </button>
+            <p className="quantity-value">{qty}</p>
+            <button
+              className="card__update-quantity--add"
+              onClick={() => updateCartQuantity(_id, "increment", setIsLoading)}
+              disabled={isLoading}
+            >
+              <span className="material-icons-round cart-icon-quantity">
+                add
+              </span>
+            </button>
           </div>
         </div>
         <button
