@@ -1,6 +1,11 @@
 import React from "react";
 
+import { Link } from 'react-router-dom';
+import { useAuth } from "../../hooks";
+
 const Sidebar = () => {
+  const { logoutUser } = useAuth();
+
   return (
     <aside className="sidebar grid" id="sidenav-open">
       <section className="sidebar__content">
@@ -19,24 +24,30 @@ const Sidebar = () => {
         <div className="sidebar__bottom">
           <ul className="sidebar__list flex">
             <li className="sidebar__list-item">
-              <a href="#">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li className="sidebar__list-item">
-              <a href="#">Tablets</a>
+              <Link to="/products">Tablets</Link>
             </li>
             <li className="sidebar__list-item">
-              <a href="#">Phones</a>
+              <Link to="/products">Mobiles</Link>
             </li>
             <li className="sidebar__list-item">
-              <a href="#">Laptops</a>
+              <Link to="/products">Laptops</Link>
+            </li>
+            <li className="sidebar__list-item">
+              <Link to="/wishlist">Wishlist</Link>
             </li>
           </ul>
           <ul className="sidebar__list flex">
             <li className="sidebar__list-item">
               <a href="#">Account</a>
             </li>
-            <li className="sidebar__list-item">
-              <a href="#">Logout</a>
+            <li 
+              className="sidebar__list-item"
+              onClick={logoutUser}
+              >
+              Logout
             </li>
           </ul>
         </div>

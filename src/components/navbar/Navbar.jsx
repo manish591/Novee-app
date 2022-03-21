@@ -11,7 +11,7 @@ const Navbar = () => {
       <div className="navbar__wrapper flex">
         <ul className="navbar__list flex">
           <li className="navbar__items navbar__items--menu">
-            <a href="#" className="navbar__items--icons">
+            <a href="#sidenav-open" className="navbar__items--icons">
               <span className="material-icons">menu</span>
             </a>
           </li>
