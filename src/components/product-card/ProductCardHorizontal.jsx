@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAppActions } from "../../hooks";
+import { useAuth } from "../../hooks";
+import { useStateContext } from "../../hooks";
 
-const ProductCardHorizontal = () => {
+const ProductCardHorizontal = ({
+  _id,
+  image,
+  quantity,
+  itemInStock,
+  title,
+  description,
+  price,
+  discount,
+  qty = 1,
+}) => {
+  const { removeProductsFromCart, updateCartQuantity } = useAppActions();
+  const { currentUser } = useAuth();
+  const { stateDispatch } = useStateContext();
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <section className="products-list__card-item">
       <section className="card card--horizontal products-list__card">
@@ -12,18 +30,45 @@ const ProductCardHorizontal = () => {
           />
         </div>
         <div className="card__content">
-          <h3 className="card__title">Asus Vivobook 14 Laptop</h3>
-          <p className="card__author">Lorem ipsum dolor sit.</p>
+          <h3 className="card__title">{title}</h3>
+          <p className="card__author">{description}</p>
           <p className="card__price">Lorem, ipsum dolor.</p>
           <div className="card__update-quantity flex">
-            <span className="material-icons-round">remove</span>
-            <p className="quantity-value">0</p>
-            <span className="material-icons-round">add</span>
+            <button
+              className="card__update-quantity--remove"
+              onClick={() => updateCartQuantity(_id, "decrement", setIsLoading)}
+              disabled={isLoading || qty === 1}
+            >
+              <span className="material-icons-round cart-icon-quantity">
+                remove
+              </span>
+            </button>
+            <p className="quantity-value">{qty}</p>
+            <button
+              className="card__update-quantity--add"
+              onClick={() => updateCartQuantity(_id, "increment", setIsLoading)}
+              disabled={isLoading}
+            >
+              <span className="material-icons-round cart-icon-quantity">
+                add
+              </span>
+            </button>
           </div>
         </div>
-        <div className="card__remove-btn">
+        <button
+          className="card__remove-btn"
+          onClick={() =>
+            removeProductsFromCart({
+              _id,
+              currentUser,
+              stateDispatch,
+              setIsLoading,
+            })
+          }
+          disabled={isLoading}
+        >
           <span className="material-icons-round">clear</span>
-        </div>
+        </button>
       </section>
     </section>
   );
