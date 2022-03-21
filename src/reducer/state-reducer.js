@@ -105,6 +105,24 @@ const stateReducer = (state, action) => {
         },
       };
 
+    case "CLEAR_USER_DATA":
+      return {
+        ...state,
+        cartData: [],
+        wishlistData: [],
+        productData: [],
+        filters: {
+          ...state.filters,
+          sort: "",
+          fastDelivery: "",
+          includeOutOfStock: "",
+          rating: [],
+          price: [],
+          category: [],
+          brand: [],
+        },
+      };
+
     default:
       return state;
   }

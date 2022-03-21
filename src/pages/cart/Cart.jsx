@@ -10,7 +10,7 @@ const Cart = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { state, stateDispatch } = useStateContext();
   const { cartData } = state;
-  const { currentUser } = useAuth();
+  const { currentUser, myToken } = useAuth();
   const { findTotalPrice, findDiscountedPrice } = useAppActions();
   const [myCart, setMyCart] = useState([]);
 
@@ -18,7 +18,7 @@ const Cart = () => {
     (async () => {
       try {
         const res = await axios.get("/api/user/cart", {
-          headers: { authorization: currentUser.encodedToken },
+          headers: { authorization: myToken },
         });
         if (res.status === 200) {
           setMyCart(res.data.cart);
@@ -54,7 +54,7 @@ const Cart = () => {
             <section className="cart__action-btn cart-action flex">
               <div className="cart-action__info">
                 <h3 className="fw-100">
-                  My Cart <strong>{state.cartData.length} Items</strong>
+                  My Cart <strong>{myCart.length} Items</strong>
                 </h3>
               </div>
               <div className="cart-action-remove flex">
@@ -96,7 +96,7 @@ const Cart = () => {
           </section>
           <div className="summary__title">
             <h3 className="fw-100">
-              Price Detail <strong>({state.cartData.length} Items)</strong>
+              Price Detail <strong>({myCart.length} Items)</strong>
             </h3>
           </div>
           <div className="summary__price-details price-detail">

@@ -8,7 +8,7 @@ import { useAuth } from "../../hooks";
 const Wishlist = () => {
   const { state, stateDispatch } = useStateContext();
   const { wishlistData } = state;
-  const { currentUser } = useAuth();
+  const { currentUser, myToken } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [myWishlist, setMyWishlist] = useState([]);
 
@@ -16,7 +16,7 @@ const Wishlist = () => {
     (async () => {
       try {
         const res = await axios.get("api/user/wishlist", {
-          headers: { authorization: currentUser?.encodedToken },
+          headers: { authorization: myToken },
         });
         if (res.status === 200) {
           setMyWishlist(res.data.wishlist);
