@@ -4,8 +4,8 @@ import { useState } from "react";
 const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState({});
-  const [isUserLogedIn, setIsUserLogedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('token')));
+  const [isUserLogedIn, setIsUserLogedIn] = useState(JSON.parse(localStorage.getItem('login')));
 
   return (
     <AuthContext.Provider value={{

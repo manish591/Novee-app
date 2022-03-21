@@ -13,11 +13,10 @@ const Wishlist = () => {
   const [myWishlist, setMyWishlist] = useState([]);
 
   useEffect(() => {
-    console.log('useeffect runs');
     (async () => {
       try {
         const res = await axios.get("api/user/wishlist", {
-          headers: { authorization: currentUser.encodedToken },
+          headers: { authorization: currentUser?.encodedToken },
         });
         if (res.status === 200) {
           setMyWishlist(res.data.wishlist);
@@ -25,6 +24,7 @@ const Wishlist = () => {
         setIsLoading(false);
       } catch (err) {
         console.error(err);
+        setIsLoading(false);
       }
     })();
   }, [wishlistData]);

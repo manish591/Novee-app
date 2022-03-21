@@ -26,6 +26,7 @@ const Cart = () => {
         setIsLoading(false);
       } catch (err) {
         console.error(err);
+        setIsLoading(false);
       }
     })();
   }, [cartData]);
