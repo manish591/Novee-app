@@ -3,7 +3,7 @@
 /* --------- */
 
 .main {
-  margin-block-start: 3rem;
+  margin-block-start: 7rem;
 }
 
 .main__wrapper {
@@ -94,7 +94,7 @@
 }
 
 .brand-list__name {
-  inline-size: 100px;
+  inline-size: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -176,6 +176,10 @@
   .brand-list {
     gap: 2rem;
   }
+
+  .brand-list__name {
+    inline-size: 4.5rem;
+  }
 }
 
 @media (min-width: 1000px) {
@@ -214,5 +218,9 @@
   .product-one {
     padding-block: 6rem;
     padding-inline: 1rem;
+  }
+
+  .brand-list__name {
+    inline-size: 6rem;
   }
 }
