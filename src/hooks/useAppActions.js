@@ -3,11 +3,11 @@ import { useAuth } from "./useAuth";
 import { useStateContext } from "./useStateContext";
 
 const useAppActions = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, myToken } = useAuth();
   const { stateDispatch } = useStateContext();
 
   const isAlreadyInDatabase = (arr, _id) =>
-    arr.some((item) => item._id === _id);
+    arr?.some((item) => item._id === _id);
 
   const findDiscountedPrice = (originalPrice, discountRate) => {
     return (
@@ -37,7 +37,7 @@ const useAppActions = () => {
         "/api/user/wishlist",
         { product },
         {
-          headers: { authorization: currentUser.encodedToken },
+          headers: { authorization: myToken },
         }
       );
       if (res.status === 201 || res.status === 200) {
@@ -64,7 +64,7 @@ const useAppActions = () => {
     try {
       let res = await axios.delete(`/api/user/wishlist/${_id}`, {
         headers: {
-          authorization: currentUser.encodedToken,
+          authorization: myToken,
         },
       });
       if (res.status === 201 || res.status === 200) {
@@ -94,7 +94,7 @@ const useAppActions = () => {
         "/api/user/cart",
         { product },
         {
-          headers: { authorization: currentUser.encodedToken },
+          headers: { authorization: myToken },
         }
       );
       if (res.status === 200 || res.status === 201) {
@@ -142,7 +142,7 @@ const useAppActions = () => {
           },
         },
         {
-          headers: { authorization: currentUser.encodedToken },
+          headers: { authorization: myToken },
         }
       );
       console.log(res);

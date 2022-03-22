@@ -1,48 +1,94 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./useAuthContext";
+import { useStateContext } from "./useStateContext";
 import axios from "axios";
 
 const useAuth = () => {
-  const { 
-    currentUser, 
-    setCurrentUser, 
-    isUserLogedIn, 
-    setIsUserLogedIn 
-    } = useAuthContext();
-    const navigate = useNavigate();
+  const {
+    currentUser,
+    setCurrentUser,
+    isUserLogedIn,
+    setIsUserLogedIn,
+    myToken,
+    setMyToken,
+  } = useAuthContext();
+
+  const { stateDispatch } = useStateContext();
+
+  const navigate = useNavigate();
 
   const loginUser = async (email, password, from) => {
     try {
-      const res = await axios.post('/api/auth/login', {
-        email, 
-        password
+      const res = await axios.post("/api/auth/login", {
+        email,
+        password,
       });
-      if(res.status === 200 || res.status === 201) {
-        setCurrentUser(res.data);
+      if (res.status === 200 || res.status === 201) {
+        setCurrentUser(res.data.foundUser);
+        setIsUserLogedIn(true);
+        setMyToken(res.data.encodedToken);
+        stateDispatch({
+          type: "GET_CART_DATA",
+          payload: res.data.foundUser.cart,
+        });
+        stateDispatch({
+          type: "GET_WISHLIST_DATA",
+          payload: res.data.foundUser.wishlist,
+        });
       }
-      setIsUserLogedIn(true);
-      if(from) {
+      if (from) {
         navigate(from);
       } else {
-        navigate('/')
+        navigate("/");
       }
     } catch (err) {
       console.error(err);
     }
-  }
+  };
+
+  const signupUser = async (name, email, password, from) => {
+    try {
+      const res = await axios.post("/api/auth/signup", {
+        firstName: name,
+        lastName: "some",
+        email,
+        password,
+      });
+      if (res.status === 201) {
+        setCurrentUser(res.data.createdUser);
+        setIsUserLogedIn(true);
+        setMyToken(res.data.encodedToken);
+        stateDispatch({
+          type: "GET_CART_DATA",
+          payload: res.data.createdUser.cart,
+        });
+        stateDispatch({
+          type: "GET_WISHLIST_DATA",
+          payload: res.data.createdUser.wishlist,
+        });
+      }
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const logoutUser = () => {
     setIsUserLogedIn(false);
     setCurrentUser({});
-    navigate('/');
-  }
+    setMyToken("");
+    stateDispatch({ type: "CLEAR_USER_DATA" });
+    navigate("/");
+  };
 
   return {
     loginUser,
     logoutUser,
     isUserLogedIn,
-    currentUser
-  }
+    currentUser,
+    signupUser,
+    myToken,
+  };
 };
 
 export { useAuth };
