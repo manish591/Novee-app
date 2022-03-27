@@ -4,11 +4,13 @@ import { useAuth } from "../../hooks";
 import { useStateContext } from "../../hooks";
 import { useAppActions } from "../../hooks";
 
-const WishlistCard = ({ _id, image, title, price, discount }) => {
+const WishlistCard = ({ product }) => {
+  const { _id, image, title, price, discount } = product;
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser } = useAuth();
   const { stateDispatch } = useStateContext();
-  const { removeItemFromWishlist, findDiscountedPrice } = useAppActions();
+  const { removeItemFromWishlist, findDiscountedPrice, moveItemToCart } =
+    useAppActions();
 
   return (
     <div className="card">
@@ -45,7 +47,21 @@ const WishlistCard = ({ _id, image, title, price, discount }) => {
           <p className="card__discount">({discount}% OFF)</p>
         </div>
       </div>
-      <button className="card__moveToBagBtn">Move To Cart</button>
+      <button
+        className="card__moveToBagBtn"
+        onClick={() =>
+          moveItemToCart({
+            _id,
+            product,
+            currentUser,
+            stateDispatch,
+            setIsLoading,
+          })
+        }
+        disabled={isLoading}
+      >
+        Move To Cart
+      </button>
     </div>
   );
 };
