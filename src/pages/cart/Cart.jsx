@@ -11,7 +11,7 @@ const Cart = () => {
   const { state, stateDispatch } = useStateContext();
   const { cartData } = state;
   const { currentUser, myToken } = useAuth();
-  const { findTotalPrice, findDiscountedPrice } = useAppActions();
+  const { findTotalPrice, findDiscountedPrice, removeAllItemsFromCart } = useAppActions();
   const [myCart, setMyCart] = useState([]);
   const [currentId, setCurrentId] = useState("");
 
@@ -62,8 +62,10 @@ const Cart = () => {
                 <span className="cart-action__icon material-icons-round">
                   delete
                 </span>
-                <button className="cart-action__btns btn btn--text">
-                  Remove
+                <button className="cart-action__btns btn btn--text"
+                    onClick={() => removeAllItemsFromCart({ setIsLoading })}
+                  >
+                    Remove
                 </button>
                 <button className="cart-action__btns btn btn--text">
                   Move To Wishlist

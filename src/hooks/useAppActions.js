@@ -4,7 +4,7 @@ import { useStateContext } from "./useStateContext";
 
 const useAppActions = () => {
   const { currentUser, myToken } = useAuth();
-  const { stateDispatch } = useStateContext();
+  const { state, stateDispatch } = useStateContext();
 
   const isAlreadyInDatabase = (arr, _id) =>
     arr?.some((item) => item._id === _id);
@@ -233,6 +233,30 @@ const useAppActions = () => {
     }
   };
 
+  const removeAllItemsFromCart = async ({ setIsLoading }) => {
+    setIsLoading(true)
+    let arr = [];
+    state.cartData.map((item) => {
+      arr.push(
+        axios.delete(`/api/user/cart/${item._id}`, {
+          headers: { authorization: myToken },
+        })
+      );
+    });
+    try {
+      let res = await Promise.all(arr);
+      if(res[res.length - 1].status === 200) {
+        stateDispatch({ type: "GET_CART_DATA", payload: res[res.length - 1].data.cart });
+      }
+      setIsLoading(false);
+    } catch(err) {
+      console.error(err);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
     isAlreadyInDatabase,
     addItemToTheWishlist,
@@ -244,6 +268,7 @@ const useAppActions = () => {
     updateCartQuantity,
     moveItemToCart,
     moveToWishlist,
+    removeAllItemsFromCart,
   };
 };
 
