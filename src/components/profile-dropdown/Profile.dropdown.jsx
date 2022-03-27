@@ -16,7 +16,7 @@ const ProfileDropdown = ({ isDropdownVisible }) => {
     <div className={`profile__dropdown ${isDropdownVisible ? 'profile__dropdown--show' : ''}`}>
       <ul className="profile__list grid">
         <li className="profile__greeting">
-          <h3>{isUserLogedIn ? `Hello ${currentUser?.foundUser?.firstName}` : 'Please login!'}</h3>
+          <h3>{isUserLogedIn ? `Hello ${currentUser?.firstName}` : 'Please login!'}</h3>
         </li>
         <li className="profile__greeting">
           { !isUserLogedIn ? (

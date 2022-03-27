@@ -1,66 +1,106 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Link } from 'react-router-dom';
+import { useAuth } from "../../hooks";
 
 const Signup = () => {
+  const [userDetails, setUserDetails] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  })
+  const { signupUser } = useAuth();
+
+  const handleUserSignup = (e) => {
+    e.preventDefault();
+    if(userDetails.confirmPassword !== userDetails.password) return;
+    signupUser(userDetails.name, userDetails.email, userDetails.password)
+  }
+
   return (
-    <main class="signup">
-      <div class="wrapper">
-        <div class="signup__header">
-          <h1 class="signup__title">Sign Up</h1>
-          <p class="signup__greeting">To Continue, Sign Up</p>
+    <main className="signup">
+      <div className="wrapper">
+        <div className="signup__header">
+          <h1 className="signup__title">Sign Up</h1>
+          <p className="signup__greeting">To Continue, Sign Up</p>
         </div>
-        <form class="signup__form">
-          <section class="name-container">
-            <label for="name">Name</label>
+        <form className="signup__form" onSubmit={handleUserSignup}>
+          <section className="name-container">
+            <label htmlFor="name">Name</label>
             <input
               type="text"
               id="name"
               name="name"
-              class="signup__name"
-              autocomplete="name"
+              className="signup__name"
+              autoComplete="name"
+              value={userDetails.name}
+              onChange={e => {
+                setUserDetails(ud => {
+                  return { ...ud, name: e.target.value }
+                })
+              }}
+              required
             />
           </section>
-          <section class="email-container">
-            <label for="email">Email</label>
+          <section className="email-container">
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               id="email"
               name="email"
-              class="signup__email"
-              autocomplete="email"
+              className="signup__email"
+              autoComplete="email"
+              value={userDetails.email}
+              onChange={e => {
+                setUserDetails(ud => {
+                  return { ...ud, email: e.target.value }
+                })
+              }}
               required
             />
           </section>
-          <section class="password-container">
-            <label for="password">Password</label>
+          <section className="password-container">
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
               name="new-password"
-              class="signup__password"
+              className="signup__password"
+              value={userDetails.password}
+              onChange={e => {
+                setUserDetails(ud => {
+                  return { ...ud, password: e.target.value }
+                })
+              }}
               required
             />
           </section>
-          <section class="password-container">
-            <label for="password">Confirm Password</label>
+          <section className="password-container">
+            <label htmlFor="confirm-password">Confirm Password</label>
             <input
               type="password"
-              id="password"
+              id="confirm-password"
               name="new-password"
-              class="signup__password"
+              className="signup__password"
+              value={userDetails.confirmPassword}
+              onChange={e => {
+                setUserDetails(ud => {
+                  return { ...ud, confirmPassword: e.target.value }
+                })
+              }}
               required
             />
           </section>
-          <section class="submit-btn">
-            <button type="submit" class="signup__submit">
+          <section className="submit-btn">
+            <button type="submit" className="signup__submit">
               Sign Up
             </button>
           </section>
         </form>
-        <div class="signup__footer">
+        <div className="signup__footer">
           <p>Already have an account?</p>
-          <button class="signup__signup">
+          <button className="signup__signup">
             <Link to="/login">Log In</Link>
           </button>
         </div>
