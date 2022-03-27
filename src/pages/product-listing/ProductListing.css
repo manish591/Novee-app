@@ -6,7 +6,7 @@
 
 .listing__wrapper {
   grid-template-columns: 1fr;
-  inline-size: min(90%, 1200px);
+  inline-size: min(90%, 1400px);
   margin-inline: auto;
   align-items: start;
   gap: 1rem;
