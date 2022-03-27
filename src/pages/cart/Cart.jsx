@@ -13,6 +13,7 @@ const Cart = () => {
   const { currentUser, myToken } = useAuth();
   const { findTotalPrice, findDiscountedPrice } = useAppActions();
   const [myCart, setMyCart] = useState([]);
+  const [currentId, setCurrentId] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -75,7 +76,12 @@ const Cart = () => {
               <div className="product-list__card-container">
                 {myCart.map((cartItem) => {
                   return (
-                    <ProductCardHorizontal key={cartItem._id} {...cartItem} />
+                    <ProductCardHorizontal
+                      key={cartItem._id}
+                      product={cartItem}
+                      currentId={currentId}
+                      setCurrentId={setCurrentId}
+                    />
                   );
                 })}
               </div>
