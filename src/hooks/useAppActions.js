@@ -234,22 +234,18 @@ const useAppActions = () => {
   };
 
   const removeAllItemsFromCart = async ({ setIsLoading }) => {
-    setIsLoading(true)
-    let arr = [];
-    state.cartData.map((item) => {
-      arr.push(
-        axios.delete(`/api/user/cart/${item._id}`, {
-          headers: { authorization: myToken },
-        })
-      );
-    });
+    setIsLoading(true);
     try {
-      let res = await Promise.all(arr);
-      if(res[res.length - 1].status === 200) {
-        stateDispatch({ type: "GET_CART_DATA", payload: res[res.length - 1].data.cart });
+      const res = await axios.delete("api/user/cart", {
+        headers: {
+          authorization: myToken,
+        },
+      });
+      if (res.status === 200) {
+        stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
+        setIsLoading(false);
       }
-      setIsLoading(false);
-    } catch(err) {
+    } catch (err) {
       console.error(err);
       setIsLoading(false);
     } finally {
