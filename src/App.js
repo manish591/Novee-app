@@ -19,7 +19,8 @@ import {
   Wishlist,
   Login,
   Signup,
-  NotFound
+  NotFound,
+  SingleProduct
 } from './pages';
 
 import { useKeepAuthData } from "./hooks";
@@ -35,6 +36,7 @@ const App = ()  => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductListing />} />
+        <Route path="/products/:productId" element={<SingleProduct />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 

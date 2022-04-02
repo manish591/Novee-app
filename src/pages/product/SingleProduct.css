@@ -1,0 +1,8 @@
+.single-product {
+  margin-block-start: 7rem;
+}
+
+.single-product__wrapper {
+  inline-size: min(90%, 1000px);
+  margin-inline: auto;
+}

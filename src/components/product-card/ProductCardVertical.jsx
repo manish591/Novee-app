@@ -21,7 +21,13 @@ const ProductCardVertical = ({ product }) => {
   const loaction = useLocation();
 
   return (
-    <section className="card">
+    <section
+      className="card"
+      onClick={() => {
+        navigate(`/products/${_id}`);
+        s;
+      }}
+    >
       <div className="card__image-container">
         <img
           src="https://assets.myntassets.com/f_webp,w_200,c_limit,fl_progressive,dpr_2.0/assets/images/10106341/2020/12/4/ebd42abb-c45f-4290-b8e7-073f18f3b8541607088518050-HRX-by-Hrithik-Roshan-Ultralyte-Men-Black-Solid-Running-T-sh-1.jpg"
@@ -31,8 +37,9 @@ const ProductCardVertical = ({ product }) => {
         {isAlreadyInDatabase(state.wishlistData, _id) ? (
           <button
             className="card__remove-wishlist"
-            onClick={() =>
+            onClick={(e) =>
               removeItemFromWishlist({
+                e,
                 _id,
                 currentUser,
                 stateDispatch,
@@ -46,8 +53,9 @@ const ProductCardVertical = ({ product }) => {
         ) : (
           <button
             className="card__remove-wishlist"
-            onClick={() =>
+            onClick={(e) =>
               addItemToTheWishlist({
+                e,
                 _id,
                 product,
                 currentUser,
@@ -64,16 +72,20 @@ const ProductCardVertical = ({ product }) => {
           {isAlreadyInDatabase(state.cartData, _id) ? (
             <button
               className="card__add-cart-btn card__add-cart-btn--in-cart"
-              onClick={() => navigate("/cart")}
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate("/cart")
+              }}
             >
               Go To Cart
             </button>
           ) : (
             <button
               className="card__add-cart-btn"
-              onClick={() =>
+              onClick={(e) =>
                 isUserLogedIn
                   ? addProductsToCart({
+                       e,
                       _id,
                       product,
                       currentUser,

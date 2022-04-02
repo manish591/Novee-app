@@ -21,3 +21,4 @@ body {
 @import url("./components/loader/Loader.css");
 @import url("./components/profile-dropdown/ProfileDropdown.css");
 @import url("./pages/not-found/NotFound.css");
+@import url("./pages/product/SingleProduct.css");
