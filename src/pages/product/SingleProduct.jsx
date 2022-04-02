@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { useParams } from "react-router-dom";
+import { useStateContext } from "../../hooks";
 
 const SingleProduct = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { state } = useStateContext();
+
+  const { productId } = useParams();
+
+  const singleProduct = state.productData.find(
+    (item) => item._id === productId
+  );
+
+  const { _id, title, description, brand, price, discount } = singleProduct;
+
   return (
     <div className="single-product">
       <div className="single-product__wrapper grid">
@@ -13,8 +27,8 @@ const SingleProduct = () => {
         </div>
         <div className="single-product__content sp-content">
           <section className="sp-content__header">
-            <p>Laptops</p>
-            <h1 className="sp-content__title">Asus Vivobook 14 Laptop</h1>
+            <p>{brand}</p>
+            <h1 className="sp-content__title">{title}</h1>
           </section>
           <section className="sp-content__desc">
             <p>
@@ -22,12 +36,15 @@ const SingleProduct = () => {
               animi voluptatum fugiat nulla earum doloremque, natus aperiam
               perferendis. Quo tenetur aperiam vero qui expedita nisi ipsam
               necessitatibus sequi sint ipsa!
+              {description}
             </p>
           </section>
           <section className="sp-content__pricing flex">
-            <p className="sp-content__discount-price">$250</p>
-            <p className="sp-content__discount-rate">30%</p>
-            <p className="sp-content__actual-price">$300</p>
+            <p className="sp-content__discount-price">
+              {(price - price * (discount / 100)).toFixed(0)}
+            </p>
+            <p className="sp-content__discount-rate">{discount}%</p>
+            <p className="sp-content__actual-price">{price}</p>
           </section>
           <section className="sp-content__actions flex">
             <button className="btn btn--outlined-secondary">
