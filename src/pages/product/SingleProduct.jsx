@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
 import { useParams } from "react-router-dom";
-import { useStateContext } from "../../hooks";
+import { useStateContext, useAppActions, useAuthContext } from "../../hooks";
 
 const SingleProduct = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { state } = useStateContext();
+  const { state, stateDispatch } = useStateContext();
+  const { isAlreadyInDatabase, addProductsToCart } = useAppActions();
+  const { isUserLogedIn, currentUser } = useAuthContext();
 
   const { productId } = useParams();
 
@@ -50,7 +52,36 @@ const SingleProduct = () => {
             <button className="btn btn--outlined-secondary">
               Add To Wishlist
             </button>
-            <button className="btn btn--contained-primary">Add To Cart</button>
+            {isAlreadyInDatabase(state.cartData, _id) ? (
+              <button
+                className="btn btn--contained-primary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate("/cart");
+                }}
+              >
+                Go To Cart
+              </button>
+            ) : (
+              <button
+                className="btn btn--contained-primary"
+                onClick={(e) =>
+                  isUserLogedIn
+                    ? addProductsToCart({
+                        e,
+                        _id,
+                        product: singleProduct,
+                        currentUser,
+                        stateDispatch,
+                        setIsLoading,
+                      })
+                    : navigate("/login", { state: location.pathname })
+                }
+                disabled={isLoading}
+              >
+                Add To Cart
+              </button>
+            )}
           </section>
         </div>
       </div>
