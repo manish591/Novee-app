@@ -6,7 +6,12 @@ import { useStateContext, useAppActions, useAuthContext } from "../../hooks";
 const SingleProduct = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, stateDispatch } = useStateContext();
-  const { isAlreadyInDatabase, addProductsToCart } = useAppActions();
+  const {
+    isAlreadyInDatabase,
+    addProductsToCart,
+    addItemToTheWishlist,
+    removeItemFromWishlist,
+  } = useAppActions();
   const { isUserLogedIn, currentUser } = useAuthContext();
 
   const { productId } = useParams();
@@ -49,9 +54,40 @@ const SingleProduct = () => {
             <p className="sp-content__actual-price">{price}</p>
           </section>
           <section className="sp-content__actions flex">
-            <button className="btn btn--outlined-secondary">
-              Add To Wishlist
-            </button>
+            {isAlreadyInDatabase(state.wishlistData, _id) ? (
+              <button
+                className="btn btn--outlined-secondary"
+                onClick={(e) =>
+                  removeItemFromWishlist({
+                    e,
+                    _id,
+                    currentUser,
+                    stateDispatch,
+                    setIsLoading,
+                  })
+                }
+                disabled={isLoading}
+              >
+                Remove From Wishlist
+              </button>
+            ) : (
+              <button
+                className="btn btn--outlined-secondary"
+                onClick={(e) =>
+                  addItemToTheWishlist({
+                    e,
+                    _id,
+                    product,
+                    currentUser,
+                    stateDispatch,
+                    setIsLoading,
+                  })
+                }
+                disabled={isLoading}
+              >
+                Add To Wishlist
+              </button>
+            )}
             {isAlreadyInDatabase(state.cartData, _id) ? (
               <button
                 className="btn btn--contained-primary"
