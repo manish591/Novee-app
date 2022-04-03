@@ -77,7 +77,7 @@ const SingleProduct = () => {
                   addItemToTheWishlist({
                     e,
                     _id,
-                    product,
+                    product: singleProduct,
                     currentUser,
                     stateDispatch,
                     setIsLoading,
