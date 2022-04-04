@@ -8,7 +8,7 @@ const Modal = ({
   currentUser,
   stateDispatch,
   setIsLoading,
-  product
+  product,
 }) => {
   const { moveToWishlist } = useAppActions();
   return (
@@ -44,7 +44,7 @@ const Modal = ({
                 _id,
                 stateDispatch,
                 setIsLoading,
-                product
+                product,
               });
               setCurrentId("");
             }}

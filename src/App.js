@@ -1,16 +1,16 @@
 import "./App.css";
 
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 
-import { 
-  Header, 
+import {
+  Header,
   Navbar,
   Sidebar,
   Carousel,
   Footer,
   Loader,
-  ProtectedRoute
-} from './components';
+  ProtectedRoute,
+} from "./components";
 
 import {
   Home,
@@ -20,13 +20,14 @@ import {
   Login,
   Signup,
   NotFound,
-  SingleProduct
-} from './pages';
+  SingleProduct,
+} from "./pages";
 
 import { useKeepAuthData } from "./hooks";
 
-const App = ()  => {
+const App = () => {
   useKeepAuthData();
+
   return (
     <div className="App">
       <Sidebar />
@@ -62,6 +63,6 @@ const App = ()  => {
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

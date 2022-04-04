@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { useStateContext, useAppActions, useAuthContext } from "../../hooks";
 
 const SingleProduct = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const { state, stateDispatch } = useStateContext();
   const {
     isAlreadyInDatabase,
@@ -63,10 +62,8 @@ const SingleProduct = () => {
                     _id,
                     currentUser,
                     stateDispatch,
-                    setIsLoading,
                   })
                 }
-                disabled={isLoading}
               >
                 Remove From Wishlist
               </button>
@@ -80,10 +77,8 @@ const SingleProduct = () => {
                     product: singleProduct,
                     currentUser,
                     stateDispatch,
-                    setIsLoading,
                   })
                 }
-                disabled={isLoading}
               >
                 Add To Wishlist
               </button>
@@ -109,11 +104,9 @@ const SingleProduct = () => {
                         product: singleProduct,
                         currentUser,
                         stateDispatch,
-                        setIsLoading,
                       })
                     : navigate("/login", { state: location.pathname })
                 }
-                disabled={isLoading}
               >
                 Add To Cart
               </button>

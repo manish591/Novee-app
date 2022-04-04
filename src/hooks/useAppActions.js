@@ -3,8 +3,8 @@ import { useAuth } from "./useAuth";
 import { useStateContext } from "./useStateContext";
 
 const useAppActions = () => {
-  const { currentUser, myToken } = useAuth();
-  const { state, stateDispatch } = useStateContext();
+  const { myToken } = useAuth();
+  const { stateDispatch } = useStateContext();
 
   const isAlreadyInDatabase = (arr, _id) =>
     arr?.some((item) => item._id === _id);
@@ -24,16 +24,8 @@ const useAppActions = () => {
     );
   };
 
-  const addItemToTheWishlist = async ({
-    e,
-    product,
-    _id,
-    setIsLoading,
-    currentUser,
-    stateDispatch,
-  }) => {
-     e.stopPropagation();
-    setIsLoading(true);
+  const addItemToTheWishlist = async ({ e, product, stateDispatch }) => {
+    e.stopPropagation();
     try {
       let res = await axios.post(
         "/api/user/wishlist",
@@ -48,23 +40,13 @@ const useAppActions = () => {
           payload: res.data.wishlist,
         });
       }
-      setIsLoading(false);
     } catch (err) {
       console.error(err);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const removeItemFromWishlist = async ({
-    e,
-    _id,
-    setIsLoading,
-    stateDispatch,
-    currentUser,
-  }) => {
-     e.stopPropagation();
-    setIsLoading(true);
+  const removeItemFromWishlist = async ({ e, _id, stateDispatch }) => {
+    e.stopPropagation();
     try {
       let res = await axios.delete(`/api/user/wishlist/${_id}`, {
         headers: {
@@ -77,24 +59,14 @@ const useAppActions = () => {
           payload: res.data.wishlist,
         });
       }
-      setIsLoading(false);
     } catch (err) {
       console.error(err);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const addProductsToCart = async ({
-    e,
-    _id,
-    product,
-    currentUser,
-    stateDispatch,
-    setIsLoading,
-  }) => {
-     e.stopPropagation();
-    setIsLoading(true);
+  const addProductsToCart = async ({ e, product, stateDispatch }) => {
+    e.stopPropagation();
+
     try {
       const res = await axios.post(
         "/api/user/cart",
@@ -106,20 +78,12 @@ const useAppActions = () => {
       if (res.status === 200 || res.status === 201) {
         stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
       }
-      setIsLoading(false);
     } catch (err) {
       console.error(err);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const removeProductsFromCart = async ({
-    _id,
-    stateDispatch,
-    setIsLoading,
-  }) => {
-    setIsLoading(true);
+  const removeProductsFromCart = async ({ _id, stateDispatch }) => {
     try {
       const res = await axios.delete(`/api/user/cart/${_id}`, {
         headers: { authorization: myToken },
@@ -127,16 +91,12 @@ const useAppActions = () => {
       if (res.status === 200 || res.status === 201) {
         stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
       }
-      setIsLoading(false);
     } catch (err) {
       console.log(err);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const updateCartQuantity = async (_id, type, setIsLoading) => {
-    setIsLoading(true);
+  const updateCartQuantity = async (_id, type) => {
     try {
       const res = await axios.post(
         `/api/user/cart/${_id}`,
@@ -149,25 +109,15 @@ const useAppActions = () => {
           headers: { authorization: myToken },
         }
       );
-      console.log(res);
       if (res.status === 200 || res.status === 201) {
         stateDispatch({ type: `GET_CART_DATA`, payload: res.data.cart });
       }
-      setIsLoading(false);
     } catch (err) {
       console.error(err);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const moveItemToCart = async ({
-    _id,
-    product,
-    setIsLoading,
-    stateDispatch,
-  }) => {
-    setIsLoading(true);
+  const moveItemToCart = async ({ _id, product, stateDispatch }) => {
     try {
       let res = await Promise.all([
         axios.delete(`/api/user/wishlist/${_id}`, {
@@ -192,22 +142,12 @@ const useAppActions = () => {
       if (res[1].status === 201) {
         stateDispatch({ type: "GET_CART_DATA", payload: res[1].data.cart });
       }
-      setIsLoading(false);
     } catch (err) {
       console.error(err);
-      setIsLoading(false);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const moveToWishlist = async ({
-    _id,
-    product,
-    setIsLoading,
-    stateDispatch,
-  }) => {
-    setIsLoading(true);
+  const moveToWishlist = async ({ _id, product, stateDispatch }) => {
     try {
       let res = await Promise.all([
         axios.delete(`/api/user/cart/${_id}`, {
@@ -230,17 +170,12 @@ const useAppActions = () => {
           payload: res[1].data.wishlist,
         });
       }
-      setIsLoading(false);
     } catch (err) {
       console.error(err);
-      setIsLoading(false);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const removeAllItemsFromCart = async ({ setIsLoading }) => {
-    setIsLoading(true);
+  const removeAllItemsFromCart = async () => {
     try {
       const res = await axios.delete("api/user/cart", {
         headers: {
@@ -249,13 +184,9 @@ const useAppActions = () => {
       });
       if (res.status === 200) {
         stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
-        setIsLoading(false);
       }
     } catch (err) {
       console.error(err);
-      setIsLoading(false);
-    } finally {
-      setIsLoading(false);
     }
   };
 

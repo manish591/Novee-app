@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useAppActions } from "../../hooks";
 import { useAuth } from "../../hooks";
 import { useStateContext } from "../../hooks";
@@ -19,7 +19,6 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
   const { removeProductsFromCart, updateCartQuantity } = useAppActions();
   const { currentUser } = useAuth();
   const { stateDispatch } = useStateContext();
-  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <section className="products-list__card-item">
@@ -38,8 +37,8 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
           <div className="card__update-quantity flex">
             <button
               className="card__update-quantity--remove"
-              onClick={() => updateCartQuantity(_id, "decrement", setIsLoading)}
-              disabled={isLoading || qty === 1}
+              onClick={() => updateCartQuantity(_id, "decrement")}
+              disabled={qty === 1}
             >
               <span className="material-icons-round cart-icon-quantity">
                 remove
@@ -48,8 +47,7 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
             <p className="quantity-value">{qty}</p>
             <button
               className="card__update-quantity--add"
-              onClick={() => updateCartQuantity(_id, "increment", setIsLoading)}
-              disabled={isLoading}
+              onClick={() => updateCartQuantity(_id, "increment")}
             >
               <span className="material-icons-round cart-icon-quantity">
                 add
@@ -62,7 +60,6 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
           onClick={() => {
             setCurrentId(_id);
           }}
-          disabled={isLoading}
         >
           <span className="material-icons-round">clear</span>
         </button>
@@ -73,7 +70,6 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
           removeProductsFromCart={removeProductsFromCart}
           _id={_id}
           stateDispatch={stateDispatch}
-          setIsLoading={setIsLoading}
           product={product}
         />
       ) : null}

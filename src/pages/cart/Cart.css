@@ -85,7 +85,6 @@
 
 .products-list {
   padding-inline: 1rem;
-  padding-block: 1.5rem;
   background-color: var(--surface2);
 }
 
@@ -285,18 +284,18 @@
   cursor: not-allowed;
 }
 
-.card__update-quantity--add, 
+.card__update-quantity--add,
 .card__update-quantity--remove {
   cursor: pointer;
 }
 
-.card__update-quantity--add:disabled, 
+.card__update-quantity--add:disabled,
 .card__update-quantity--remove:disabled {
   cursor: not-allowed;
 }
 
 .cart-icon-quantity {
-  font-size: .8rem !important;
+  font-size: 0.8rem !important;
 }
 
 /* -------------- */

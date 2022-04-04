@@ -16,7 +16,6 @@ const ProductCardVertical = ({ product }) => {
   const { state, stateDispatch } = useStateContext();
   const { currentUser, isUserLogedIn } = useAuth();
   const { _id, image, title, description, price, discount } = product;
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const loaction = useLocation();
 
@@ -48,10 +47,8 @@ const ProductCardVertical = ({ product }) => {
                 _id,
                 currentUser,
                 stateDispatch,
-                setIsLoading,
               })
             }
-            disabled={isLoading}
           >
             <span className="material-icons">favorite</span>
           </button>
@@ -65,10 +62,8 @@ const ProductCardVertical = ({ product }) => {
                 product,
                 currentUser,
                 stateDispatch,
-                setIsLoading,
               })
             }
-            disabled={isLoading}
           >
             <span className="material-icons">favorite_border</span>
           </button>
@@ -95,11 +90,9 @@ const ProductCardVertical = ({ product }) => {
                       product,
                       currentUser,
                       stateDispatch,
-                      setIsLoading,
                     })
                   : navigate("/login", { state: location.pathname })
               }
-              disabled={isLoading}
             >
               Add To Cart
             </button>
