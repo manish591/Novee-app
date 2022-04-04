@@ -25,12 +25,14 @@ const useAppActions = () => {
   };
 
   const addItemToTheWishlist = async ({
+    e,
     product,
     _id,
     setIsLoading,
     currentUser,
     stateDispatch,
   }) => {
+     e.stopPropagation();
     setIsLoading(true);
     try {
       let res = await axios.post(
@@ -55,11 +57,13 @@ const useAppActions = () => {
   };
 
   const removeItemFromWishlist = async ({
+    e,
     _id,
     setIsLoading,
     stateDispatch,
     currentUser,
   }) => {
+     e.stopPropagation();
     setIsLoading(true);
     try {
       let res = await axios.delete(`/api/user/wishlist/${_id}`, {
@@ -82,12 +86,14 @@ const useAppActions = () => {
   };
 
   const addProductsToCart = async ({
+    e,
     _id,
     product,
     currentUser,
     stateDispatch,
     setIsLoading,
   }) => {
+     e.stopPropagation();
     setIsLoading(true);
     try {
       const res = await axios.post(
