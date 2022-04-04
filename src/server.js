@@ -57,7 +57,7 @@ export function makeServer({ environment = "development" } = {}) {
     },
 
     routes() {
-      // timing 
+      // timing
       this.timing = 3000;
 
       this.namespace = "api";
@@ -81,10 +81,7 @@ export function makeServer({ environment = "development" } = {}) {
         "/user/cart/:productId",
         removeItemFromCartHandler.bind(this)
       );
-      this.delete(
-        "/user/cart",
-        removeAllItemsFromCartHandler.bind(this)
-    );
+      this.delete("/user/cart", removeAllItemsFromCartHandler.bind(this));
 
       // wishlist routes (private)
       this.get("/user/wishlist", getWishlistItemsHandler.bind(this));
