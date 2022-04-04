@@ -4,7 +4,7 @@ import { useStateContext } from "./useStateContext";
 
 const useAppActions = () => {
   const { currentUser, myToken } = useAuth();
-  const { stateDispatch } = useStateContext();
+  const { state, stateDispatch } = useStateContext();
 
   const isAlreadyInDatabase = (arr, _id) =>
     arr?.some((item) => item._id === _id);
@@ -110,16 +110,14 @@ const useAppActions = () => {
 
   const removeProductsFromCart = async ({
     _id,
-    currentUser,
     stateDispatch,
     setIsLoading,
   }) => {
     setIsLoading(true);
     try {
       const res = await axios.delete(`/api/user/cart/${_id}`, {
-        headers: { authorization: currentUser.encodedToken },
+        headers: { authorization: myToken },
       });
-      console.log(res);
       if (res.status === 200 || res.status === 201) {
         stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
       }
@@ -157,6 +155,104 @@ const useAppActions = () => {
     }
   };
 
+  const moveItemToCart = async ({
+    _id,
+    product,
+    setIsLoading,
+    stateDispatch,
+  }) => {
+    setIsLoading(true);
+    try {
+      let res = await Promise.all([
+        axios.delete(`/api/user/wishlist/${_id}`, {
+          headers: {
+            authorization: myToken,
+          },
+        }),
+        axios.post(
+          "/api/user/cart",
+          { product },
+          {
+            headers: { authorization: myToken },
+          }
+        ),
+      ]);
+      if (res[0].status === 200) {
+        stateDispatch({
+          type: "GET_WISHLIST_DATA",
+          payload: res[0].data.wishlist,
+        });
+      }
+      if (res[1].status === 201) {
+        stateDispatch({ type: "GET_CART_DATA", payload: res[1].data.cart });
+      }
+      setIsLoading(false);
+    } catch (err) {
+      console.error(err);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const moveToWishlist = async ({
+    _id,
+    product,
+    setIsLoading,
+    stateDispatch,
+  }) => {
+    setIsLoading(true);
+    try {
+      let res = await Promise.all([
+        axios.delete(`/api/user/cart/${_id}`, {
+          headers: { authorization: myToken },
+        }),
+        axios.post(
+          "/api/user/wishlist",
+          { product },
+          {
+            headers: { authorization: myToken },
+          }
+        ),
+      ]);
+      if (res[0].status === 200) {
+        stateDispatch({ type: "GET_CART_DATA", payload: res[0].data.cart });
+      }
+      if (res[1].status === 201) {
+        stateDispatch({
+          type: "GET_WISHLIST_DATA",
+          payload: res[1].data.wishlist,
+        });
+      }
+      setIsLoading(false);
+    } catch (err) {
+      console.error(err);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const removeAllItemsFromCart = async ({ setIsLoading }) => {
+    setIsLoading(true);
+    try {
+      const res = await axios.delete("api/user/cart", {
+        headers: {
+          authorization: myToken,
+        },
+      });
+      if (res.status === 200) {
+        stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
+        setIsLoading(false);
+      }
+    } catch (err) {
+      console.error(err);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
     isAlreadyInDatabase,
     addItemToTheWishlist,
@@ -166,6 +262,9 @@ const useAppActions = () => {
     removeProductsFromCart,
     findTotalPrice,
     updateCartQuantity,
+    moveItemToCart,
+    moveToWishlist,
+    removeAllItemsFromCart,
   };
 };
 

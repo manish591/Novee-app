@@ -2,18 +2,20 @@ import React, { useState } from "react";
 import { useAppActions } from "../../hooks";
 import { useAuth } from "../../hooks";
 import { useStateContext } from "../../hooks";
+import { Modal } from "./Modal";
 
-const ProductCardHorizontal = ({
-  _id,
-  image,
-  quantity,
-  itemInStock,
-  title,
-  description,
-  price,
-  discount,
-  qty = 1,
-}) => {
+const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
+  const {
+    _id,
+    image,
+    quantity,
+    itemInStock,
+    title,
+    description,
+    price,
+    discount,
+    qty = 1,
+  } = product;
   const { removeProductsFromCart, updateCartQuantity } = useAppActions();
   const { currentUser } = useAuth();
   const { stateDispatch } = useStateContext();
@@ -57,19 +59,24 @@ const ProductCardHorizontal = ({
         </div>
         <button
           className="card__remove-btn"
-          onClick={() =>
-            removeProductsFromCart({
-              _id,
-              currentUser,
-              stateDispatch,
-              setIsLoading,
-            })
-          }
+          onClick={() => {
+            setCurrentId(_id);
+          }}
           disabled={isLoading}
         >
           <span className="material-icons-round">clear</span>
         </button>
       </section>
+      {currentId === _id ? (
+        <Modal
+          setCurrentId={setCurrentId}
+          removeProductsFromCart={removeProductsFromCart}
+          _id={_id}
+          stateDispatch={stateDispatch}
+          setIsLoading={setIsLoading}
+          product={product}
+        />
+      ) : null}
     </section>
   );
 };

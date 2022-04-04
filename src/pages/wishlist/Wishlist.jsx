@@ -42,7 +42,7 @@ const Wishlist = () => {
           <section className="wishlist__itemsContainer layout grid-auto-fill">
             {
               myWishlist.map(item => {
-                return <WishlistCard {...item} key={item._id} />
+                return <WishlistCard product={item} key={item._id} />
               })
             }
           </section>
