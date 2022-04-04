@@ -127,6 +127,28 @@ img {
   margin-block-end: 8vh;
 }
 
+.wishlist-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  block-size: 80vh;
+  text-align: center;
+}
+
+.wishlist-empty__wrapper {
+  max-inline-size: 50ch;
+  margin-inline: auto;
+}
+
+.wishlist-empty__btn {
+  align-self: center;
+  margin-block-start: 2rem;
+}
+
+.wishlist--loading {
+  block-size: 80vh;
+}
+
 /* ------------ */
 /* Media queries */
 /* ------------- */

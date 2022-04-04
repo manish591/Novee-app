@@ -22,8 +22,9 @@ const WishlistCard = ({ product }) => {
         />
         <button
           className="card__remove-wishlist"
-          onClick={() =>
+          onClick={(e) =>
             removeItemFromWishlist({
+              e,
               _id,
               currentUser,
               stateDispatch,
