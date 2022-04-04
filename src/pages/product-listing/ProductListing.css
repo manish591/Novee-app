@@ -279,6 +279,7 @@ img {
   padding-block: 1rem;
   background-color: var(--surface2);
   border-block-start: 1px solid var(--surface4);
+  z-index: 1;
 }
 
 .filter-list__close {
@@ -291,6 +292,7 @@ img {
   padding-block: 1rem;
   justify-content: end;
   border-block-end: 1px solid var(--surface4);
+  z-index: 1;
 }
 
 .filter-list__close-btn {

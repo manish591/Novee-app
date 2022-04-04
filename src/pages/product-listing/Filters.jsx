@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { filterData, filterCategories } from "../../utilis/utilis";
 import { Checkbox } from "./Checkbox";
@@ -8,14 +8,17 @@ const Filters = () => {
   const { state, stateDispatch } = useStateContext();
   const { filters } = state;
   const { sort, rating, brand, fastDelivery, includeOutOfStock } = filters;
+  const [showFilters, setShowFilters] = useState(false);
 
   return (
     <>
       <header className="listing__header listing-header grid">
         <div className="listing-header__right flex">
-          <h3>Filters</h3>
+          <h3 onClick={() => setShowFilters(!showFilters)}>Filters</h3>
           <button
-            onClick={() => stateDispatch({ type: "CLEAR_ALL_FILTERS", payload: {} })}
+            onClick={() =>
+              stateDispatch({ type: "CLEAR_ALL_FILTERS", payload: {} })
+            }
             style={{ cursor: "pointer" }}
           >
             Clear All
@@ -23,7 +26,11 @@ const Filters = () => {
         </div>
         <div className="listing-header__left"></div>
       </header>
-      <aside className="listing__filters filter-list">
+      <aside
+        className={`listing__filters filter-list ${
+          showFilters ? `filter-list__open` : ""
+        }`}
+      >
         <div className="filter-list__close flex">
           <button className="filter-list__close-btn">Close</button>
         </div>
@@ -62,6 +69,42 @@ const Filters = () => {
               />
               <label htmlFor="sort-two" className="filters__label">
                 Low To High
+              </label>
+            </div>
+          </fieldset>
+          <fieldset className="listing__filter-item filters">
+            <legend className="filters__title">Category</legend>
+            <div className="filters__group">
+              <input
+                type="radio"
+                id="category-phone"
+                name="category"
+                className="filters__checkbox"
+              />
+              <label htmlFor="category-phone" className="filters__label">
+                Phones
+              </label>
+            </div>
+            <div className="filters__group">
+              <input
+                type="radio"
+                id="category-tablet"
+                name="category"
+                className="filters__checkbox"
+              />
+              <label htmlFor="category-tablet" className="filters__label">
+                Tablets
+              </label>
+            </div>
+            <div className="filters__group">
+              <input
+                type="radio"
+                id="category-laptop"
+                name="category"
+                className="filters__checkbox"
+              />
+              <label htmlFor="category-laptop" className="filters__label">
+                Laptops
               </label>
             </div>
           </fieldset>

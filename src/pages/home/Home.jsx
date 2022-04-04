@@ -1,7 +1,8 @@
 import React from "react";
 
-import { Carousel } from '../../components';
-import { brandLogoData } from '../../utilis/utilis';
+import { Carousel } from "../../components";
+import { brandLogoData } from "../../utilis/utilis";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -9,45 +10,40 @@ const Home = () => {
       <Carousel />
       <div className="main__wrapper">
         <div className="brand-list flex">
-          {
-            brandLogoData.map(item => {
-              return (
-                <section key={item.name} className="brand-list__name">
-                  <img src={item.img} alt="" className="brand-show-img" />
-                </section>
-              )
-            })
-          }
+          {brandLogoData.map((item) => {
+            return (
+              <section key={item.name} className="brand-list__name">
+                <img src={item.img} alt="" className="brand-show-img" />
+              </section>
+            );
+          })}
         </div>
         <div className="products flex">
-          <section className="products__name flex">
-            <div className="product__wrapper flex">
-              <div className="product__picture">
-                {/* Add Image Here */}
-              </div>
-              <h3 className="product__category">Laptops</h3>
-              <a href="#" className="product__link flex">
-                <p>Shop</p>
-                <span className="material-icons">navigate_next</span>
-              </a>
-            </div>
-          </section>
-          <section className="products__name flex">
-            <div className="product__wrapper flex">
-              <h3 className="product__category">Tablets</h3>
-              <a href="#" className="product__link flex">
-                <p>Shop</p>
-                <span className="material-icons">navigate_next</span>
-              </a>
-            </div>
-          </section>
-          <section className="products__name flex">
+          <section className="products__name flex product--phone">
             <div className="product__wrapper flex">
               <h3 className="product__category">Phones</h3>
-              <a href="#" className="product__link flex">
+              <Link to="/products" className="product__link flex">
                 <p>Shop</p>
                 <span className="material-icons">navigate_next</span>
-              </a>
+              </Link>
+            </div>
+          </section>
+          <section className="products__name flex product--tablet">
+            <div className="product__wrapper flex">
+              <h3 className="product__category">Tablets</h3>
+              <Link to="/products" className="product__link flex">
+                <p>Shop</p>
+                <span className="material-icons">navigate_next</span>
+              </Link>
+            </div>
+          </section>
+          <section className="products__name flex product--laptop">
+            <div className="product__wrapper flex">
+              <h3 className="product__category">Laptops</h3>
+              <Link to="/products" className="product__link flex">
+                <p>Shop</p>
+                <span className="material-icons">navigate_next</span>
+              </Link>
             </div>
           </section>
         </div>
@@ -128,7 +124,6 @@ const Home = () => {
             <img
               src="https://images.unsplash.com/photo-1518644730709-0835105d9daa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHBlcnNvbiUyMHdpdGglMjBsYXB0b3B8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
               alt=""
-              
             />
           </div>
         </div>
