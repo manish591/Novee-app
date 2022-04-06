@@ -16,7 +16,7 @@ const ProductCardVertical = ({ product }) => {
   } = useAppActions();
   const { state, stateDispatch } = useStateContext();
   const { currentUser, isUserLogedIn } = useAuth();
-  const { _id, img, title, description, price, discount } = product;
+  const { _id, img, title, description, price, discount, ratings } = product;
   const navigate = useNavigate();
   const loaction = useLocation();
 
@@ -59,7 +59,7 @@ const ProductCardVertical = ({ product }) => {
             <span className="material-icons">favorite_border</span>
           </button>
         )}
-        <div className="card__add-to-cart">
+        <div className="card__add-to-cart" style={{ zIndex: "1" }}>
           {isAlreadyInDatabase(state.cartData, _id) ? (
             <button
               className="card__add-cart-btn card__add-cart-btn--in-cart"
@@ -88,6 +88,10 @@ const ProductCardVertical = ({ product }) => {
               Add To Cart
             </button>
           )}
+        </div>
+        <div className="card__rating flex">
+          <p>{ratings}</p>
+          <span class="material-icons-round">star</span>
         </div>
       </div>
       <div className="card__info">

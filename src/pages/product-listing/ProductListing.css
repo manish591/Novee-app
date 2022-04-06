@@ -323,6 +323,24 @@ img {
   cursor: not-allowed;
 }
 
+.card__rating {
+  position: absolute;
+  user-select: none;
+  inset-block-end: 5px;
+  inset-inline-start: 8px;
+  background-color: var(--surface3);
+  padding: 2px;
+  padding-inline: 5px;
+  gap: 5px;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.card__rating > span {
+  font-size: 16px;
+  color: var(--clr-success);
+}
+
 /* ------------- */
 /* Media Queries */
 /* ------------- */

@@ -108,6 +108,7 @@ const stateReducer = (state, action) => {
           price: [],
           category: [],
           brand: [],
+          idealFor: "",
         },
       };
 
