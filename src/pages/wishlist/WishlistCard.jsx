@@ -4,9 +4,10 @@ import { useEffect } from "react";
 import { useAuth } from "../../hooks";
 import { useStateContext } from "../../hooks";
 import { useAppActions } from "../../hooks";
+import { Image } from "../../components/image/Image";
 
 const WishlistCard = ({ product }) => {
-  const { _id, image, title, price, discount } = product;
+  const { _id, img, title, price, discount } = product;
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser } = useAuth();
   const { stateDispatch } = useStateContext();
@@ -16,11 +17,7 @@ const WishlistCard = ({ product }) => {
   return (
     <div className="card">
       <div className="card__image-container">
-        <img
-          src="https://images.unsplash.com/photo-1505156868547-9b49f4df4e04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fG1vYmlsZSUyMHBob25lc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-          alt="phone"
-          className="card__img"
-        />
+        <Image title={title} img={img} />
         <button
           className="card__remove-wishlist"
           onClick={(e) =>

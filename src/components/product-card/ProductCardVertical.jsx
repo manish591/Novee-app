@@ -4,6 +4,7 @@ import { useAppActions } from "../../hooks";
 import { useStateContext } from "../../hooks";
 import { useAuth } from "../../hooks";
 import { useNavigate, useLocation, Link } from "react-router-dom";
+import { Image } from "../image/Image";
 
 const ProductCardVertical = ({ product }) => {
   const {
@@ -15,7 +16,7 @@ const ProductCardVertical = ({ product }) => {
   } = useAppActions();
   const { state, stateDispatch } = useStateContext();
   const { currentUser, isUserLogedIn } = useAuth();
-  const { _id, image, title, description, price, discount } = product;
+  const { _id, img, title, description, price, discount } = product;
   const navigate = useNavigate();
   const loaction = useLocation();
 
@@ -27,17 +28,7 @@ const ProductCardVertical = ({ product }) => {
       }}
     >
       <div className="card__image-container">
-        <picture>
-          <source
-            srcSet="https://res.cloudinary.com/dcugqfvvg/image/upload/c_scale,h_650,w_450/v1649012123/image_1_mdkzua.webp"
-            type="image/webp"
-          />
-          <img
-            src="https://res.cloudinary.com/dcugqfvvg/image/upload/c_fit,h_628,w_450/v1649012123/image_1_mdkzua.jpg"
-            alt="phone"
-            className="card__img"
-          />
-        </picture>
+        <Image title={title} img={img} />
         {isAlreadyInDatabase(state.wishlistData, _id) ? (
           <button
             className="card__remove-wishlist"

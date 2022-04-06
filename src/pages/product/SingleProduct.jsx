@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { useParams } from "react-router-dom";
 import { useStateContext, useAppActions, useAuthContext } from "../../hooks";
+import { Image } from "../../components/image/Image";
 
 const SingleProduct = () => {
   const { state, stateDispatch } = useStateContext();
@@ -19,17 +20,14 @@ const SingleProduct = () => {
     (item) => item._id === productId
   );
 
-  const { _id, title, description, brand, price, discount } = singleProduct;
+  const { _id, img, title, description, brand, price, discount } =
+    singleProduct;
 
   return (
     <div className="single-product">
       <div className="single-product__wrapper grid">
         <div className="single-product__img-container">
-          <img
-            className="single-product__image"
-            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGFwdG9wfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-            alt="laptop"
-          />
+          <Image title={title} img={img} />
         </div>
         <div className="single-product__content sp-content">
           <section className="sp-content__header">

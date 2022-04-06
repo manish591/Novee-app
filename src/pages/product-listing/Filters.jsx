@@ -82,7 +82,7 @@ const Filters = () => {
                 className="filters__checkbox"
               />
               <label htmlFor="category-phone" className="filters__label">
-                Phones
+                Men
               </label>
             </div>
             <div className="filters__group">
@@ -93,7 +93,7 @@ const Filters = () => {
                 className="filters__checkbox"
               />
               <label htmlFor="category-tablet" className="filters__label">
-                Tablets
+                Women
               </label>
             </div>
             <div className="filters__group">
@@ -104,7 +104,7 @@ const Filters = () => {
                 className="filters__checkbox"
               />
               <label htmlFor="category-laptop" className="filters__label">
-                Laptops
+                Kids
               </label>
             </div>
           </fieldset>
