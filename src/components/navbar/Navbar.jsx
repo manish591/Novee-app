@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ProfileDropdown } from "../profile-dropdown/Profile.dropdown";
 
 const Navbar = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="navbar">
@@ -23,11 +24,21 @@ const Navbar = () => {
           <li className="navbar__items">
             <Link to="/products">Shop</Link>
           </li>
-          <li className="navbar__items">
-            <Link to="/products">Men</Link>
+          <li
+            className="navbar__items"
+            onClick={() => {
+              navigate("/products", { state: { idealFor: "Men" } });
+            }}
+          >
+            Men
           </li>
-          <li className="navbar__items">
-            <Link to="/products">Women</Link>
+          <li
+            className="navbar__items"
+            onClick={() => {
+              navigate("/products", { state: { idealFor: "Women" } });
+            }}
+          >
+            Women
           </li>
         </ul>
         <ul className="navbar__list flex navbar__list--search">

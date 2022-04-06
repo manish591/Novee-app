@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { filterData, filterCategories } from "../../utilis/utilis";
 import { Checkbox } from "./Checkbox";
 import { useStateContext } from "../../hooks";
+import { useLocation } from "react-router-dom";
 
 const Filters = () => {
   const { state, stateDispatch } = useStateContext();
   const { filters } = state;
   const { sort, rating, brand, fastDelivery, includeOutOfStock } = filters;
   const [showFilters, setShowFilters] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    stateDispatch({
+      type: "FILTER_BY_IDEAL_FOR",
+      payload: { filter: location?.state?.idealFor },
+    });
+  }, []);
 
   return (
     <>
