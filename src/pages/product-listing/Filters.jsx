@@ -77,34 +77,37 @@ const Filters = () => {
             <div className="filters__group">
               <input
                 type="radio"
-                id="category-phone"
+                id="category-men"
                 name="category"
                 className="filters__checkbox"
+                checked={state.filters.idealFor === "Men"}
+                onChange={(e) => {
+                  stateDispatch({
+                    type: "FILTER_BY_IDEAL_FOR",
+                    payload: { filter: "Men" },
+                  });
+                }}
               />
-              <label htmlFor="category-phone" className="filters__label">
+              <label htmlFor="category-men" className="filters__label">
                 Men
               </label>
             </div>
             <div className="filters__group">
               <input
                 type="radio"
-                id="category-tablet"
+                id="category-women"
                 name="category"
                 className="filters__checkbox"
+                checked={state.filters.idealFor === "Women"}
+                onChange={(e) => {
+                  stateDispatch({
+                    type: "FILTER_BY_IDEAL_FOR",
+                    payload: { filter: "Women" },
+                  });
+                }}
               />
-              <label htmlFor="category-tablet" className="filters__label">
+              <label htmlFor="category-women" className="filters__label">
                 Women
-              </label>
-            </div>
-            <div className="filters__group">
-              <input
-                type="radio"
-                id="category-laptop"
-                name="category"
-                className="filters__checkbox"
-              />
-              <label htmlFor="category-laptop" className="filters__label">
-                Kids
               </label>
             </div>
           </fieldset>

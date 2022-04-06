@@ -10,12 +10,14 @@ import { useInitializeData } from "../../hooks";
 const ProductListing = () => {
   const { state } = useStateContext();
   const { productData, filters } = state;
-  const { sort, rating, brand, fastDelivery, includeOutOfStock } = filters;
+  const { sort, rating, brand, fastDelivery, includeOutOfStock, idealFor } =
+    filters;
   useInitializeData();
 
   const getUpdatedProductList = updatedProductList(
     productData,
     sort,
+    idealFor,
     rating,
     brand,
     fastDelivery,

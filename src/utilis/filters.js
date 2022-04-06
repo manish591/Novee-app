@@ -2,10 +2,10 @@ const findHighestLowestRating = (arr) => {
   let range = { highest: 0, lowest: 5 };
   arr.forEach((item) => {
     if (parseInt(item) > range.highest) {
-      range = { ...range, highest: parseInt(item) }
+      range = { ...range, highest: parseInt(item) };
     }
     if (parseInt(item) < range.lowest) {
-      range = { ...range, lowest: parseInt(item) }  
+      range = { ...range, lowest: parseInt(item) };
     }
   });
   return range;
@@ -60,9 +60,20 @@ const applyFilterByRatings = (arr, type) => {
   return arr;
 };
 
+const applyFilterByIdealFor = (arr, type) => {
+  if (type === "Men") {
+    return arr.filter((item) => item.idealFor === "Men");
+  }
+  if (type === "Women") {
+    return arr.filter((item) => item.idealFor === "Women");
+  }
+  return arr;
+};
+
 export const updatedProductList = (
   originalProductData,
   sort,
+  idealFor,
   ratingsList,
   brandList,
   deliveryFilter,
@@ -93,5 +104,10 @@ export const updatedProductList = (
     sort
   );
 
-  return getFiltersBySortProduct;
+  const getFiltersByIdealFor = applyFilterByIdealFor(
+    getFiltersBySortProduct,
+    idealFor
+  );
+
+  return getFiltersByIdealFor;
 };
