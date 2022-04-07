@@ -1,39 +1,19 @@
-import axios from "axios";
 import React from "react";
-import { useState, useEffect } from "react";
-import { Loader, ProductCardHorizontal } from "../../components";
-import { useStateContext } from "../../hooks";
-import { useAuth } from "../../hooks";
-import { useAppActions } from "../../hooks";
+import { useState } from "react";
+import { ProductCardHorizontal } from "../../components";
+import { useStateContext, useAppActions, useScrollToTop } from "../../hooks";
 
 const Cart = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const { state, stateDispatch } = useStateContext();
+  const { state } = useStateContext();
   const { cartData } = state;
-  const { currentUser, myToken } = useAuth();
-  const { findTotalPrice, findDiscountedPrice, removeAllItemsFromCart } = useAppActions();
-  const [myCart, setMyCart] = useState([]);
+  const { findTotalPrice, findDiscountedPrice, removeAllItemsFromCart } =
+    useAppActions();
   const [currentId, setCurrentId] = useState("");
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get("/api/user/cart", {
-          headers: { authorization: myToken },
-        });
-        if (res.status === 200) {
-          setMyCart(res.data.cart);
-        }
-        setIsLoading(false);
-      } catch (err) {
-        console.error(err);
-        setIsLoading(false);
-      }
-    })();
-  }, [cartData]);
+  useScrollToTop();
 
   return (
-    <main className="cart">
+    <main className={`cart`}>
       <div className="cart__wrapper grid">
         <section className="cart__products-list products-list">
           <div className="products-list__cards grid">
@@ -55,39 +35,36 @@ const Cart = () => {
             <section className="cart__action-btn cart-action flex">
               <div className="cart-action__info">
                 <h3 className="fw-100">
-                  My Cart <strong>{myCart.length} Items</strong>
+                  My Cart <strong>{cartData.length} Items</strong>
                 </h3>
               </div>
               <div className="cart-action-remove flex">
                 <span className="cart-action__icon material-icons-round">
                   delete
                 </span>
-                <button className="cart-action__btns btn btn--text"
-                    onClick={() => removeAllItemsFromCart({ setIsLoading })}
-                  >
-                    Remove
+                <button
+                  className="cart-action__btns btn btn--text"
+                  onClick={() => removeAllItemsFromCart()}
+                >
+                  Remove
                 </button>
                 <button className="cart-action__btns btn btn--text">
                   Move To Wishlist
                 </button>
               </div>
             </section>
-            {isLoading ? (
-              <Loader />
-            ) : (
-              <div className="product-list__card-container">
-                {myCart.map((cartItem) => {
-                  return (
-                    <ProductCardHorizontal
-                      key={cartItem._id}
-                      product={cartItem}
-                      currentId={currentId}
-                      setCurrentId={setCurrentId}
-                    />
-                  );
-                })}
-              </div>
-            )}
+            <div className="product-list__card-container">
+              {cartData.map((cartItem) => {
+                return (
+                  <ProductCardHorizontal
+                    key={cartItem._id}
+                    product={cartItem}
+                    currentId={currentId}
+                    setCurrentId={setCurrentId}
+                  />
+                );
+              })}
+            </div>
           </div>
         </section>
         <section className="cart__summary summary">
@@ -104,7 +81,7 @@ const Cart = () => {
           </section>
           <div className="summary__title">
             <h3 className="fw-100">
-              Price Detail <strong>({myCart.length} Items)</strong>
+              Price Detail <strong>({cartData.length} Items)</strong>
             </h3>
           </div>
           <div className="summary__price-details price-detail">

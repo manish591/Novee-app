@@ -3,7 +3,7 @@
 /* ----------- */
 
 .hero__wrapper {
-  inline-size: min(90%, 1400px);
+  inline-size: min(98%, 1400px);
   margin-block-end: var(--spacing-14);
   margin-inline: auto;
 }

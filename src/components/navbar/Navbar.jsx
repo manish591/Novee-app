@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import { ProfileDropdown } from "../profile-dropdown/Profile.dropdown";
 
 const Navbar = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="navbar">
@@ -20,17 +21,24 @@ const Navbar = () => {
           </li>
         </ul>
         <ul className="navbar__list flex navbar--hide navbar__list--links">
-        <li className="navbar__items">
-            <Link to="/">Home</Link>
-          </li>
           <li className="navbar__items">
-            <Link to="/products">Laptops</Link>
+            <Link to="/products">Shop</Link>
           </li>
-          <li className="navbar__items">
-            <Link to="/products">Tablets</Link>
+          <li
+            className="navbar__items"
+            onClick={() => {
+              navigate("/products", { state: { idealFor: "Men" } });
+            }}
+          >
+            Men
           </li>
-          <li className="navbar__items">
-            <Link to="/products">Phones</Link>
+          <li
+            className="navbar__items"
+            onClick={() => {
+              navigate("/products", { state: { idealFor: "Women" } });
+            }}
+          >
+            Women
           </li>
         </ul>
         <ul className="navbar__list flex navbar__list--search">
@@ -49,13 +57,14 @@ const Navbar = () => {
           </li>
         </ul>
         <ul className="navbar__list flex">
-          <li 
+          <li
             className="navbar__items navbar--hide navbar__items--icons navbar__items--profile profile"
             onClick={() => {
-              setIsDropdownVisible(d => !d) 
-              }}>
+              setIsDropdownVisible((d) => !d);
+            }}
+          >
             <span className="material-icons">person</span>
-            <ProfileDropdown  isDropdownVisible={isDropdownVisible} />
+            <ProfileDropdown isDropdownVisible={isDropdownVisible} />
           </li>
           <li className="navbar__items navbar--hide navbar__items--icons navbar__items--wishlist">
             <Link to="/wishlist" className="navbar__items--icons">

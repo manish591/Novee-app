@@ -1,9 +1,8 @@
-import imgVivo from '../assets/193-1930755_vivo-hd-png-download-removebg-preview.png';
-import imgAsus from '../assets/91059-removebg-preview.png';
-import imgDell from '../assets/dell-computers-logo-svg-gray-world-of-warcraft-transparent-png-835411-removebg-preview.png';
-import imgAcer from '../assets/482-4826066_acer-logo-digital-black-tedxsydney-com-black-adidas-removebg-preview.png';
-import imgLenevo from '../assets/Lenovo-logo-removebg-preview.png';
-
+import imgVivo from "../assets/193-1930755_vivo-hd-png-download-removebg-preview.png";
+import imgAsus from "../assets/91059-removebg-preview.png";
+import imgDell from "../assets/dell-computers-logo-svg-gray-world-of-warcraft-transparent-png-835411-removebg-preview.png";
+import imgAcer from "../assets/482-4826066_acer-logo-digital-black-tedxsydney-com-black-adidas-removebg-preview.png";
+import imgLenevo from "../assets/Lenovo-logo-removebg-preview.png";
 
 const brandLogoData = [
   {
@@ -32,91 +31,111 @@ const filterData = {
   brand: [
     {
       id: 1,
-      name: "Asus",
+      name: "Adidas",
     },
     {
       id: 2,
-      name: "Apple",
+      name: "Wrogn",
     },
     {
       id: 3,
-      name: "Vivo",
+      name: "HRX",
     },
     {
       id: 4,
-      name: "Nova",
+      name: "Rigo",
     },
     {
       id: 5,
-      name: "Dell",
+      name: "Harpa",
     },
     {
       id: 6,
-      name: "Oppo",
+      name: "Antheaa",
     },
     {
       id: 7,
-      name: "Acer",
+      name: "H&M",
     },
     {
       id: 8,
-      name: "Sony",
+      name: "Celvin Klien",
     },
     {
       id: 9,
-      name: "HP",
+      name: "Saree Mall",
     },
     {
       id: 10,
-      name: "Redmi",
+      name: "Libas",
     },
     {
       id: 11,
-      name: "One Plus",
+      name: "Biba",
     },
     {
       id: 12,
-      name: "Samsung",
+      name: "Gant",
+    },
+    {
+      id: 13,
+      name: "MONOCHROME",
+    },
+    {
+      id: 14,
+      name: "Columbia",
+    },
+    {
+      id: 15,
+      name: "New Balance",
+    },
+    {
+      id: 16,
+      name: "Mast & Harbour,",
+    },
+    {
+      id: 16,
+      name: "Roadster",
     },
   ],
   rating: [
     {
-        id: 1,
-        name: "1 Star & Above",
+      id: 1,
+      name: "1 Star & Above",
     },
     {
-        id: 2,
-        name: "2 Star & Above",
+      id: 2,
+      name: "2 Star & Above",
     },
     {
-        id: 3,
-        name: "3 Star & Above",
+      id: 3,
+      name: "3 Star & Above",
     },
     {
-        id: 4,
-        name: "4 Star & Above",
+      id: 4,
+      name: "4 Star & Above",
     },
   ],
   price: [
     {
-        id: 1,
-        name: "Rs. 200 to Rs. 1000",
+      id: 1,
+      name: "Rs. 200 to Rs. 1000",
     },
     {
-        id: 2,
-        name: "Rs. 1000 to Rs. 2000",
+      id: 2,
+      name: "Rs. 1000 to Rs. 2000",
     },
     {
-        id: 3,
-        name: "Rs. 2000 to Rs. 3500",
+      id: 3,
+      name: "Rs. 2000 to Rs. 3500",
     },
     {
-        id: 4,
-        name: "Rs. 3500 to Rs. 5000",
+      id: 4,
+      name: "Rs. 3500 to Rs. 5000",
     },
   ],
 };
 
 const filterCategories = Object.keys(filterData);
 
-export { filterData, filterCategories, brandLogoData }
+export { filterData, filterCategories, brandLogoData };

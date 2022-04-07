@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useAppActions } from "../../hooks";
 import { useAuth } from "../../hooks";
 import { useStateContext } from "../../hooks";
 import { Modal } from "./Modal";
+import { Image } from "../image/Image";
 
 const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
   const {
     _id,
-    image,
+    img,
     quantity,
     itemInStock,
     title,
@@ -19,17 +20,12 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
   const { removeProductsFromCart, updateCartQuantity } = useAppActions();
   const { currentUser } = useAuth();
   const { stateDispatch } = useStateContext();
-  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <section className="products-list__card-item">
       <section className="card card--horizontal products-list__card">
         <div className="card__image-container--cart">
-          <img
-            src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-            alt=""
-            className="card__image"
-          />
+          <Image title={title} img={img} />
         </div>
         <div className="card__content">
           <h3 className="card__title">{title}</h3>
@@ -38,8 +34,8 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
           <div className="card__update-quantity flex">
             <button
               className="card__update-quantity--remove"
-              onClick={() => updateCartQuantity(_id, "decrement", setIsLoading)}
-              disabled={isLoading || qty === 1}
+              onClick={() => updateCartQuantity(_id, "decrement")}
+              disabled={qty === 1}
             >
               <span className="material-icons-round cart-icon-quantity">
                 remove
@@ -48,8 +44,7 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
             <p className="quantity-value">{qty}</p>
             <button
               className="card__update-quantity--add"
-              onClick={() => updateCartQuantity(_id, "increment", setIsLoading)}
-              disabled={isLoading}
+              onClick={() => updateCartQuantity(_id, "increment")}
             >
               <span className="material-icons-round cart-icon-quantity">
                 add
@@ -62,7 +57,6 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
           onClick={() => {
             setCurrentId(_id);
           }}
-          disabled={isLoading}
         >
           <span className="material-icons-round">clear</span>
         </button>
@@ -73,7 +67,6 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
           removeProductsFromCart={removeProductsFromCart}
           _id={_id}
           stateDispatch={stateDispatch}
-          setIsLoading={setIsLoading}
           product={product}
         />
       ) : null}

@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 
-import { useParams } from "react-router-dom";
-import { useStateContext, useAppActions, useAuthContext } from "../../hooks";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  useStateContext,
+  useAppActions,
+  useAuthContext,
+  useScrollToTop,
+} from "../../hooks";
+import { Image } from "../../components/image/Image";
 
 const SingleProduct = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const { state, stateDispatch } = useStateContext();
   const {
     isAlreadyInDatabase,
@@ -16,26 +21,24 @@ const SingleProduct = () => {
 
   const { productId } = useParams();
 
+  const navigate = useNavigate();
+
   const singleProduct = state.productData.find(
     (item) => item._id === productId
   );
 
-  const { _id, title, description, brand, price, discount } = singleProduct;
+  useScrollToTop();
 
   return (
     <div className="single-product">
       <div className="single-product__wrapper grid">
         <div className="single-product__img-container">
-          <img
-            className="single-product__image"
-            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGFwdG9wfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-            alt="laptop"
-          />
+          <Image title={singleProduct?.title} img={singleProduct?.img} />
         </div>
         <div className="single-product__content sp-content">
           <section className="sp-content__header">
-            <p>{brand}</p>
-            <h1 className="sp-content__title">{title}</h1>
+            <p>{singleProduct?.brand}</p>
+            <h1 className="sp-content__title">{singleProduct?.title}</h1>
           </section>
           <section className="sp-content__desc">
             <p>
@@ -43,18 +46,26 @@ const SingleProduct = () => {
               animi voluptatum fugiat nulla earum doloremque, natus aperiam
               perferendis. Quo tenetur aperiam vero qui expedita nisi ipsam
               necessitatibus sequi sint ipsa!
-              {description}
+              {singleProduct?.description}
             </p>
+            {!singleProduct?.inStock && (
+              <p className="card__out-of-stock">Product Out Of Stock</p>
+            )}
           </section>
           <section className="sp-content__pricing flex">
             <p className="sp-content__discount-price">
-              {(price - price * (discount / 100)).toFixed(0)}
+              {(
+                singleProduct?.price -
+                singleProduct?.price * (singleProduct?.discount / 100)
+              ).toFixed(0)}
             </p>
-            <p className="sp-content__discount-rate">{discount}%</p>
-            <p className="sp-content__actual-price">{price}</p>
+            <p className="sp-content__discount-rate">
+              {singleProduct?.discount}%
+            </p>
+            <p className="sp-content__actual-price">{singleProduct?.price}</p>
           </section>
           <section className="sp-content__actions flex">
-            {isAlreadyInDatabase(state.wishlistData, _id) ? (
+            {isAlreadyInDatabase(state.wishlistData, singleProduct?._id) ? (
               <button
                 className="btn btn--outlined-secondary"
                 onClick={(e) =>
@@ -63,16 +74,16 @@ const SingleProduct = () => {
                     _id,
                     currentUser,
                     stateDispatch,
-                    setIsLoading,
                   })
                 }
-                disabled={isLoading}
               >
                 Remove From Wishlist
               </button>
             ) : (
               <button
-                className="btn btn--outlined-secondary"
+                className={`btn btn--outlined-secondary ${
+                  !singleProduct?.inStock && "btn--out-of-stock"
+                }`}
                 onClick={(e) =>
                   addItemToTheWishlist({
                     e,
@@ -80,15 +91,13 @@ const SingleProduct = () => {
                     product: singleProduct,
                     currentUser,
                     stateDispatch,
-                    setIsLoading,
                   })
                 }
-                disabled={isLoading}
               >
                 Add To Wishlist
               </button>
             )}
-            {isAlreadyInDatabase(state.cartData, _id) ? (
+            {isAlreadyInDatabase(state.cartData, singleProduct?._id) ? (
               <button
                 className="btn btn--contained-primary"
                 onClick={(e) => {
@@ -100,7 +109,9 @@ const SingleProduct = () => {
               </button>
             ) : (
               <button
-                className="btn btn--contained-primary"
+                className={`btn btn--contained-secondary ${
+                  !singleProduct?.inStock && "btn--out-of-stock"
+                }`}
                 onClick={(e) =>
                   isUserLogedIn
                     ? addProductsToCart({
@@ -109,11 +120,9 @@ const SingleProduct = () => {
                         product: singleProduct,
                         currentUser,
                         stateDispatch,
-                        setIsLoading,
                       })
                     : navigate("/login", { state: location.pathname })
                 }
-                disabled={isLoading}
               >
                 Add To Cart
               </button>

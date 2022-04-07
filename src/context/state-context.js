@@ -16,6 +16,7 @@ const StateContextProvider = ({ children }) => {
       price: [],
       category: [],
       brand: [],
+      idealFor: "",
     },
   });
   return (

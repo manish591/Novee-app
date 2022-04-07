@@ -90,6 +90,12 @@ const stateReducer = (state, action) => {
             },
           };
 
+    case "FILTER_BY_IDEAL_FOR":
+      return {
+        ...state,
+        filters: { ...state.filters, idealFor: action.payload.filter },
+      };
+
     case "CLEAR_ALL_FILTERS":
       return {
         ...state,
@@ -102,6 +108,7 @@ const stateReducer = (state, action) => {
           price: [],
           category: [],
           brand: [],
+          idealFor: "",
         },
       };
 
