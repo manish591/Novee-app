@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -8,17 +8,17 @@ const Footer = () => {
       <div className="footer__wrapper flow-space-2">
         <p className="footer__brand">noveee</p>
         <ul className="footer__list flex">
-        <li className="footer__items">
+          <li className="footer__items">
             <Link to="/">Home</Link>
           </li>
           <li className="footer__items">
-            <Link to="/products">Laptops</Link>
+            <Link to="/products">Men</Link>
           </li>
           <li className="footer__items">
-            <Link to="/products">Tablets</Link>
+            <Link to="/products">Women</Link>
           </li>
           <li className="footer__items">
-            <Link to="/products">Phones</Link>
+            <Link to="/products">Kids</Link>
           </li>
         </ul>
         <p className="footer__description">
@@ -28,13 +28,22 @@ const Footer = () => {
         <p className="footer__copyright">Copyright 2022. All Rights Reserved</p>
         <ul className="footer__socials flex">
           <li className="footer__items">
-            <a href="#">Github</a>
+            <a href="https://github.com/manish591" target="_blank">
+              Github
+            </a>
           </li>
           <li className="footer__items">
-            <a href="#">Twitter</a>
+            <a href="https://twitter.com/manishdevrani77" target="_blank">
+              Twitter
+            </a>
           </li>
           <li className="footer__items">
-            <a href="#">LinkedIn</a>
+            <a
+              href="https://www.linkedin.com/in/manishdevrani77/"
+              target="_blank"
+            >
+              LinkedIn
+            </a>
           </li>
         </ul>
       </div>

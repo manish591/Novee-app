@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { filterData, filterCategories } from "../../utilis/utilis";
 import { Checkbox } from "./Checkbox";
-import { useStateContext } from "../../hooks";
+import { useStateContext, useScrollToTop } from "../../hooks";
 import { useLocation } from "react-router-dom";
 
 const Filters = () => {
