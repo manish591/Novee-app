@@ -5,14 +5,13 @@ import { ProductCardVertical } from "../../components";
 import { useStateContext } from "../../hooks/useStateContext";
 import { Loader } from "../../components";
 import { updatedProductList } from "../../utilis";
-import { useInitializeData } from "../../hooks";
+import { useScrollToTop } from "../../hooks";
 
 const ProductListing = () => {
   const { state } = useStateContext();
   const { productData, filters } = state;
   const { sort, rating, brand, fastDelivery, includeOutOfStock, idealFor } =
     filters;
-  useInitializeData();
 
   const getUpdatedProductList = updatedProductList(
     productData,
@@ -23,6 +22,8 @@ const ProductListing = () => {
     fastDelivery,
     includeOutOfStock
   );
+
+  useScrollToTop();
 
   return (
     <main className="listing">

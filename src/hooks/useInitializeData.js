@@ -5,7 +5,7 @@ import axios from "axios";
 
 const useInitializeData = () => {
   const { state, stateDispatch } = useStateContext();
-  const { myToken } = useAuthContext();
+  const { myToken, isUserLogedIn } = useAuthContext();
 
   useEffect(() => {
     (async () => {
@@ -21,39 +21,43 @@ const useInitializeData = () => {
         console.error(err);
       }
     })();
-  }, []);
+  }, [isUserLogedIn]);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get("api/user/wishlist", {
-          headers: { authorization: myToken },
-        });
-        if (res.status === 200) {
-          stateDispatch({
-            type: "GET_WISHLIST_DATA",
-            payload: res.data.wishlist,
+    if (myToken) {
+      (async () => {
+        try {
+          const res = await axios.get("api/user/wishlist", {
+            headers: { authorization: myToken },
           });
+          if (res.status === 200) {
+            stateDispatch({
+              type: "GET_WISHLIST_DATA",
+              payload: res.data.wishlist,
+            });
+          }
+        } catch (err) {
+          console.error(err);
         }
-      } catch (err) {
-        console.error(err);
-      }
-    })();
+      })();
+    }
   }, []);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get("/api/user/cart", {
-          headers: { authorization: myToken },
-        });
-        if (res.status === 200) {
-          stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
+    if (myToken) {
+      (async () => {
+        try {
+          const res = await axios.get("/api/user/cart", {
+            headers: { authorization: myToken },
+          });
+          if (res.status === 200) {
+            stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
+          }
+        } catch (err) {
+          console.error(err);
         }
-      } catch (err) {
-        console.error(err);
-      }
-    })();
+      })();
+    }
   }, []);
 };
 

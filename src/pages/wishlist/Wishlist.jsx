@@ -2,10 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { WishlistCard } from "./WishlistCard";
 import { useStateContext } from "../../hooks/useStateContext";
 import { Link } from "react-router-dom";
+import { useScrollToTop } from "../../hooks";
 
 const Wishlist = () => {
   const { state } = useStateContext();
   const { wishlistData } = state;
+
+  useScrollToTop();
 
   return (
     <main className={`wishlist`}>

@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../hooks';
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth, useScrollToTop } from "../../hooks";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
   const { loginUser } = useAuth();
   const location = useLocation();
@@ -16,8 +16,10 @@ const Login = () => {
   const handleUserLogin = async (e) => {
     e.preventDefault();
     loginUser(loginData.email, loginData.password, from);
-  }
-  
+  };
+
+  useScrollToTop();
+
   return (
     <main className="login">
       <div className="wrapper">
@@ -35,7 +37,9 @@ const Login = () => {
               className="login__email"
               autoComplete="email"
               value={loginData.email}
-              onChange={(e) => setLoginData(ld => ({...ld, email: e.target.value}))}
+              onChange={(e) =>
+                setLoginData((ld) => ({ ...ld, email: e.target.value }))
+              }
               required
             />
           </section>
@@ -47,7 +51,9 @@ const Login = () => {
               name="current-password"
               className="login__password"
               value={loginData.password}
-              onChange={(e) => setLoginData(ld => ({...ld, password: e.target.value}))}
+              onChange={(e) =>
+                setLoginData((ld) => ({ ...ld, password: e.target.value }))
+              }
               required
             />
           </section>

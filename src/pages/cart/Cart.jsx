@@ -1,8 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { ProductCardHorizontal } from "../../components";
-import { useStateContext } from "../../hooks";
-import { useAppActions } from "../../hooks";
+import { useStateContext, useAppActions, useScrollToTop } from "../../hooks";
 
 const Cart = () => {
   const { state } = useStateContext();
@@ -10,6 +9,8 @@ const Cart = () => {
   const { findTotalPrice, findDiscountedPrice, removeAllItemsFromCart } =
     useAppActions();
   const [currentId, setCurrentId] = useState("");
+
+  useScrollToTop();
 
   return (
     <main className={`cart`}>
