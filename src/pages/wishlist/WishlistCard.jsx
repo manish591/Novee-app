@@ -48,8 +48,9 @@ const WishlistCard = ({ product }) => {
       </div>
       <button
         className="card__moveToBagBtn"
-        onClick={() =>
+        onClick={(e) =>
           moveItemToCart({
+            e,
             _id,
             product,
             currentUser,

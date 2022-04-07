@@ -11,6 +11,7 @@ const Cart = () => {
   const [currentId, setCurrentId] = useState("");
 
   useScrollToTop();
+  console.log(cartData);
 
   return (
     <main className={`cart`}>

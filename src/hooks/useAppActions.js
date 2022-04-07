@@ -4,7 +4,7 @@ import { useStateContext } from "./useStateContext";
 
 const useAppActions = () => {
   const { myToken } = useAuth();
-  const { stateDispatch } = useStateContext();
+  const { state, stateDispatch } = useStateContext();
 
   const isAlreadyInDatabase = (arr, _id) =>
     arr?.some((item) => item._id === _id);
@@ -110,44 +110,34 @@ const useAppActions = () => {
         }
       );
       if (res.status === 200 || res.status === 201) {
-        stateDispatch({ type: `GET_CART_DATA`, payload: res.data.cart });
+        stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
       }
     } catch (err) {
       console.error(err);
     }
   };
 
-  const moveItemToCart = async ({ _id, product, stateDispatch }) => {
-    try {
-      let res = await Promise.all([
-        axios.delete(`/api/user/wishlist/${_id}`, {
-          headers: {
-            authorization: myToken,
-          },
-        }),
-        axios.post(
-          "/api/user/cart",
-          { product },
-          {
-            headers: { authorization: myToken },
-          }
-        ),
-      ]);
-      if (res[0].status === 200) {
-        stateDispatch({
-          type: "GET_WISHLIST_DATA",
-          payload: res[0].data.wishlist,
-        });
-      }
-      if (res[1].status === 201) {
-        stateDispatch({ type: "GET_CART_DATA", payload: res[1].data.cart });
-      }
-    } catch (err) {
-      console.error(err);
+  const moveItemToCart = async ({ e, _id, product, stateDispatch }) => {
+    if (state.cartData.some((item) => item._id === product._id)) {
+      removeItemFromWishlist({ e, _id, stateDispatch });
+      const arr = state.cartData.map((item) => {
+        if (item._id === product._id) {
+          return { ...item, qty: item.qty + 1 };
+        }
+        return item;
+      });
+      stateDispatch({ type: "GET_CART_DATA", payload: arr });
+    } else {
+      removeItemFromWishlist({ e, _id, stateDispatch });
+      addProductsToCart({ e, product, stateDispatch });
     }
   };
 
   const moveToWishlist = async ({ _id, product, stateDispatch }) => {
+    if (state.wishlistData.some((item) => item._id === product._id)) {
+      removeProductsFromCart({ _id, stateDispatch });
+      return;
+    }
     try {
       let res = await Promise.all([
         axios.delete(`/api/user/cart/${_id}`, {
