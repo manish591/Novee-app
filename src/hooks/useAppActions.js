@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useAuth } from "./useAuth";
 import { useStateContext } from "./useStateContext";
+import toast from "react-hot-toast";
 
 const useAppActions = () => {
   const { myToken } = useAuth();
@@ -39,9 +40,11 @@ const useAppActions = () => {
           type: "GET_WISHLIST_DATA",
           payload: res.data.wishlist,
         });
+        toast("Product added to the wishlist");
       }
     } catch (err) {
       console.error(err);
+      toast.error("Unable to add product to the wishlist! Try again later");
     }
   };
 
@@ -58,9 +61,11 @@ const useAppActions = () => {
           type: "GET_WISHLIST_DATA",
           payload: res.data.wishlist,
         });
+        toast("Item removed from the wishlist");
       }
     } catch (err) {
       console.error(err);
+      toast.error("Unable to remove item from the wishlist! Try Again later");
     }
   };
 
@@ -77,9 +82,11 @@ const useAppActions = () => {
       );
       if (res.status === 200 || res.status === 201) {
         stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
+        toast("Item added to the cart");
       }
     } catch (err) {
       console.error(err);
+      toast.error("Unable to add item to the cart! Try again later");
     }
   };
 
@@ -90,9 +97,11 @@ const useAppActions = () => {
       });
       if (res.status === 200 || res.status === 201) {
         stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
+        toast("Item removed from the cart");
       }
     } catch (err) {
       console.log(err);
+      toast.error("Unable to remove item from the cart! Try again later");
     }
   };
 
@@ -111,9 +120,11 @@ const useAppActions = () => {
       );
       if (res.status === 200 || res.status === 201) {
         stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
+        toast("Product quantity has been updated");
       }
     } catch (err) {
       console.error(err);
+      toast.error("Unable to updated cart qunatity! Try again later");
     }
   };
 
@@ -131,6 +142,7 @@ const useAppActions = () => {
       removeItemFromWishlist({ e, _id, stateDispatch });
       addProductsToCart({ e, product, stateDispatch });
     }
+    toast("Item has been move to the cart");
   };
 
   const moveToWishlist = async ({ _id, product, stateDispatch }) => {
@@ -160,8 +172,10 @@ const useAppActions = () => {
           payload: res[1].data.wishlist,
         });
       }
+      toast("Item Has moved to the wishlist");
     } catch (err) {
       console.error(err);
+      toast.error("Unable to move item to the wishlist");
     }
   };
 
@@ -174,9 +188,11 @@ const useAppActions = () => {
       });
       if (res.status === 200) {
         stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
+        toast("Your cart is cleared");
       }
     } catch (err) {
       console.error(err);
+      toast.error("Unable to clear your cart! Try again later");
     }
   };
 

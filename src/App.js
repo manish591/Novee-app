@@ -22,6 +22,8 @@ import {
   useScrollToTop,
 } from "./hooks";
 
+import { Toaster } from "react-hot-toast";
+
 const App = () => {
   useKeepAuthData();
   useInitializeData();
@@ -29,6 +31,16 @@ const App = () => {
 
   return (
     <div className="App">
+      <Toaster
+        position="bottom-left"
+        toastOptions={{
+          duration: 5000,
+          style: {
+            background: "var(--text2)",
+            color: "var(--surface2)",
+          },
+        }}
+      />
       <Sidebar />
       <Header>
         <Navbar />

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./useAuthContext";
 import { useStateContext } from "./useStateContext";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const useAuth = () => {
   const {
@@ -35,6 +36,7 @@ const useAuth = () => {
           type: "GET_WISHLIST_DATA",
           payload: res.data.foundUser.wishlist,
         });
+        toast.success("Loged In Successfully");
       }
       if (from) {
         navigate(from);
@@ -43,6 +45,7 @@ const useAuth = () => {
       }
     } catch (err) {
       console.error(err);
+      toast.error("Unable To Login! Try Later");
     }
   };
 
@@ -66,10 +69,12 @@ const useAuth = () => {
           type: "GET_WISHLIST_DATA",
           payload: res.data.createdUser.wishlist,
         });
+        toast.success("Account Has Been Created");
       }
       navigate("/");
     } catch (err) {
       console.error(err);
+      toast.error("Unable To Create Your Account! Try Again Later");
     }
   };
 
@@ -79,6 +84,7 @@ const useAuth = () => {
     setMyToken("");
     stateDispatch({ type: "CLEAR_USER_DATA" });
     navigate("/");
+    toast("Logout Successfully");
   };
 
   return {

@@ -71,7 +71,7 @@ const SingleProduct = () => {
                 onClick={(e) =>
                   removeItemFromWishlist({
                     e,
-                    _id,
+                    _id: singleProduct?._id,
                     currentUser,
                     stateDispatch,
                   })
@@ -87,7 +87,7 @@ const SingleProduct = () => {
                 onClick={(e) =>
                   addItemToTheWishlist({
                     e,
-                    _id,
+                    _id: singleProduct?._id,
                     product: singleProduct,
                     currentUser,
                     stateDispatch,
@@ -116,7 +116,7 @@ const SingleProduct = () => {
                   isUserLogedIn
                     ? addProductsToCart({
                         e,
-                        _id,
+                        _id: singleProduct?._id,
                         product: singleProduct,
                         currentUser,
                         stateDispatch,
