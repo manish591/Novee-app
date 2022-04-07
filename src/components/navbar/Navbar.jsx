@@ -2,10 +2,12 @@ import React, { useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import { ProfileDropdown } from "../profile-dropdown/Profile.dropdown";
+import { useStateContext } from "../../hooks";
 
 const Navbar = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const navigate = useNavigate();
+  const { state } = useStateContext();
 
   return (
     <nav className="navbar">
@@ -73,7 +75,14 @@ const Navbar = () => {
           </li>
           <li className="navbar__items navbar__items--icons">
             <Link to="/cart" className="navbar__items--icons">
-              <span className="material-icons">shopping_bag</span>
+              <section class="badge" style={{ marginBlockStart: "2px" }}>
+                <span className="material-icons-outlined">shopping_bag</span>
+                {state.cartData?.length > 0 ? (
+                  <p class="badge__info badge__info--standard badge__info--primary">
+                    {state.cartData?.length}
+                  </p>
+                ) : null}
+              </section>
             </Link>
           </li>
         </ul>
