@@ -14,6 +14,12 @@ import {
   NotFound,
   SingleProduct,
   UserProfile,
+  AddressPage,
+  Settings,
+  CouponsPage,
+  OrdersPage,
+  Overview,
+  ProfilePage,
 } from "./pages";
 
 import {
@@ -76,7 +82,14 @@ const App = () => {
               <UserProfile />
             </ProtectedRoute>
           }
-        ></Route>
+        >
+          <Route index element={<Overview />} />
+          <Route path="address" element={<AddressPage />} />
+          <Route path="orders" element={<OrdersPage />} />
+          <Route path="coupons" element={<CouponsPage />} />
+          <Route path="edit" element={<ProfilePage />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
 
         <Route path="*" element={<NotFound />} />
       </Routes>

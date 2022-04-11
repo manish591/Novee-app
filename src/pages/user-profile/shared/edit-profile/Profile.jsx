@@ -1,7 +1,7 @@
 import React from "react";
 import "./Profile.css";
 
-const Profile = () => {
+const ProfilePage = () => {
   return (
     <div className="profile-page">
       <h1 className="profile-page__heading">My Profile</h1>
@@ -14,4 +14,4 @@ const Profile = () => {
   );
 };
 
-export { Profile };
+export { ProfilePage };
