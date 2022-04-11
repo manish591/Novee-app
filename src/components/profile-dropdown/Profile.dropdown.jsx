@@ -34,15 +34,23 @@ const ProfileDropdown = ({ isDropdownVisible }) => {
         </li>
       </ul>
       <ul className="profile__list grid">
-        <li className="profile__item">Orders</li>
+        <li className="profile__item">
+          <Link to="/profile/orders">Orders</Link>
+        </li>
         <li className="profile__item">
           <Link to="/wishlist">Wishlist</Link>
         </li>
-        <li className="profile__item">My Cart</li>
+        <li className="profile__item">
+          <Link to="/cart">My Cart</Link>
+        </li>
       </ul>
       <ul className="profile__list grid">
-        <li className="profile__item">Coupons</li>
-        <li className="profile__item">Saved Addresses</li>
+        <li className="profile__item">
+          <Link to="/profile/coupons">Coupons</Link>
+        </li>
+        <li className="profile__item">
+          <Link to="/profile/address">Saved Addresses</Link>
+        </li>
       </ul>
       <ul className="profile__list grid">
         <li className="profile__item">
