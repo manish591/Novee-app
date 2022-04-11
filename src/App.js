@@ -13,6 +13,7 @@ import {
   Signup,
   NotFound,
   SingleProduct,
+  UserProfile,
 } from "./pages";
 
 import {
@@ -68,6 +69,14 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          }
+        ></Route>
 
         <Route path="*" element={<NotFound />} />
       </Routes>
