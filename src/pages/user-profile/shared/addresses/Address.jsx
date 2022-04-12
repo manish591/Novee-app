@@ -9,6 +9,14 @@ const AddressPage = () => {
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false);
   const [myAddressData, setMyAddressData] = useState([]);
   const [currentId, setCurrentId] = useState("");
+  const [isEditingAddress, setIsEditingAddress] = useState(false);
+  const [addressFormData, setAddressFormData] = useState({
+    name: "",
+    address: "",
+    tel: "",
+    country: "",
+    postalCode: "",
+  });
   const { state } = useStateContext();
   const { addressData } = state;
   const { myToken } = useAuthContext();
@@ -49,12 +57,22 @@ const AddressPage = () => {
               {...item}
               setCurrentId={setCurrentId}
               currentId={currentId}
+              setIsAddressFormOpen={setIsAddressFormOpen}
+              setAddressFormData={setAddressFormData}
+              setIsEditingAddress={setIsEditingAddress}
             />
           );
         })}
       </div>
       {isAddressFormOpen ? (
-        <AddressModal setIsAddressFormOpen={setIsAddressFormOpen} />
+        <AddressModal
+          setIsAddressFormOpen={setIsAddressFormOpen}
+          isEditingAddress={isEditingAddress}
+          setIsEditingAddress={setIsEditingAddress}
+          addressFormData={addressFormData}
+          setAddressFormData={setAddressFormData}
+          currentId={currentId}
+        />
       ) : null}
     </div>
   );

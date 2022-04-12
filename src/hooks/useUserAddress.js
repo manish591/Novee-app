@@ -48,9 +48,33 @@ const useUserAddress = () => {
     }
   };
 
+  const updateAddress = async ({ address, _id }) => {
+    try {
+      const res = await axios.post(
+        `/api/user/address/${_id}`,
+        {
+          address,
+        },
+        {
+          headers: {
+            authorization: myToken,
+          },
+        }
+      );
+      if (res.status === 200) {
+        stateDispatch({ type: "GET_ADDRESS_DATA", payload: res.data.address });
+        toast("Your address updated");
+      }
+    } catch (err) {
+      console.error("Error upadating address", err);
+      toast.error("Unable to update address! Try again later");
+    }
+  };
+
   return {
     addAddress,
     deleteAddress,
+    updateAddress,
   };
 };
 

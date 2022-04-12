@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import { useUserAddress } from "../../../../hooks";
 import { countries } from "../../../../utilis";
 
-const AddressModal = ({ setIsAddressFormOpen }) => {
-  const [addressFormData, setAddressFormData] = useState({
-    name: "",
-    address: "",
-    tel: "",
-    country: "",
-    postalCode: "",
-  });
-
+const AddressModal = ({
+  setIsAddressFormOpen,
+  isEditingAddress,
+  setIsEditingAddress,
+  setAddressFormData,
+  addressFormData,
+  currentId,
+}) => {
   const [errors, setErrors] = useState({
     nameError: "",
     addressError: "",
@@ -19,7 +18,7 @@ const AddressModal = ({ setIsAddressFormOpen }) => {
     telError: "",
   });
 
-  const { addAddress } = useUserAddress();
+  const { addAddress, updateAddress } = useUserAddress();
 
   const handleFormValidation = (e) => {
     const isValid = e.target.validity.valid;
@@ -199,8 +198,23 @@ const AddressModal = ({ setIsAddressFormOpen }) => {
           </section>
 
           <section className="address-form__cta cta">
-            {2 === 3 ? (
-              <button type="button" className="cta__submit">
+            {isEditingAddress ? (
+              <button
+                type="button"
+                className="cta__submit"
+                onClick={() => {
+                  setIsEditingAddress(false);
+                  updateAddress({ address: addressFormData, _id: currentId });
+                  setIsAddressFormOpen(false);
+                  setAddressFormData({
+                    ame: "",
+                    address: "",
+                    tel: "",
+                    country: "",
+                    postalCode: "",
+                  });
+                }}
+              >
                 Update
               </button>
             ) : (
