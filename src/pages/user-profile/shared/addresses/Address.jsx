@@ -16,11 +16,10 @@ const AddressPage = () => {
           + Add New Address
         </button>
       </div>
-      <div className="address-page__container grid">
-        <AddressCard />
-        <AddressCard />
-      </div>
-      {isAddressFormOpen ? <AddressModal /> : null}
+      <div className="address-page__container grid"></div>
+      {isAddressFormOpen ? (
+        <AddressModal setIsAddressFormOpen={setIsAddressFormOpen} />
+      ) : null}
     </div>
   );
 };
