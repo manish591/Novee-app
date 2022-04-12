@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useUserAddress } from "../../../../hooks";
+import { countries } from "../../../../utilis";
 
 const AddressModal = ({ setIsAddressFormOpen }) => {
   const [addressFormData, setAddressFormData] = useState({
@@ -153,7 +154,14 @@ const AddressModal = ({ setIsAddressFormOpen }) => {
               onBlur={handleFormValidation}
               required
             >
-              <option value={"In"}>India</option>
+              <option></option>
+              {countries.map((item) => {
+                return (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                );
+              })}
             </select>
             <p
               id="country-validation"

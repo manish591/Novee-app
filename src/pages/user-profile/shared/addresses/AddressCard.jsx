@@ -1,16 +1,16 @@
 import React from "react";
 import { AddressCardButton } from "./AddressCardButton";
 
-const AddressCard = () => {
+const AddressCard = ({ _id, address, country, name, postalCode, tel }) => {
   return (
     <article className="address-card">
       <section className="address-card__wrapper">
-        <h4 className="address-card__name">Manish</h4>
+        <h4 className="address-card__name">{name}</h4>
         <p className="address-card__address">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, ab!
+          {address}, {postalCode}
         </p>
-        <p className="address-card__country">India</p>
-        <p className="address-card__telephone">Phone Number: 6396653091</p>
+        <p className="address-card__country">{country}</p>
+        <p className="address-card__telephone">Phone Number: {tel}</p>
       </section>
       <AddressCardButton />
     </article>

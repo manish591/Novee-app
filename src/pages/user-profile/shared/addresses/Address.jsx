@@ -1,10 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Address.css";
 import { AddressCard } from "./AddressCard";
 import { AddressModal } from "./AddressModal";
+import { useStateContext, useAuthContext } from "../../../../hooks";
+import axios from "axios";
 
 const AddressPage = () => {
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false);
+  const [myAddressData, setMyAddressData] = useState([]);
+  const { state } = useStateContext();
+  const { addressData } = state;
+  const { myToken } = useAuthContext();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get("/api/user/address", {
+          headers: {
+            authorization: myToken,
+          },
+        });
+        if (res.status === 200) {
+          setMyAddressData(res.data.address);
+        }
+      } catch (err) {
+        console.error("Error Getting address data", err);
+      }
+    })();
+  }, [addressData]);
+
   return (
     <div className="address-page">
       <div className="address-page__top flex">
@@ -16,7 +40,11 @@ const AddressPage = () => {
           + Add New Address
         </button>
       </div>
-      <div className="address-page__container grid"></div>
+      <div className="address-page__container grid">
+        {myAddressData.map((item) => {
+          return <AddressCard key={item._id} {...item} />;
+        })}
+      </div>
       {isAddressFormOpen ? (
         <AddressModal setIsAddressFormOpen={setIsAddressFormOpen} />
       ) : null}
