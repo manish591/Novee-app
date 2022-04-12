@@ -31,8 +31,26 @@ const useUserAddress = () => {
     }
   };
 
+  const deleteAddress = async ({ _id }) => {
+    try {
+      const res = await axios.delete(`/api/user/address/${_id}`, {
+        headers: {
+          authorization: myToken,
+        },
+      });
+      if (res.status === 200) {
+        stateDispatch({ type: "GET_ADDRESS_DATA", payload: res.data.address });
+        toast("Your address deleted!");
+      }
+    } catch (err) {
+      console.error("Error in deleting address", err);
+      toast.error("Unable to delete address! Try again later");
+    }
+  };
+
   return {
     addAddress,
+    deleteAddress,
   };
 };
 

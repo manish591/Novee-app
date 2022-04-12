@@ -26,7 +26,7 @@ const AddressCard = ({
         <p className="address-card__country">{country}</p>
         <p className="address-card__telephone">Phone Number: {tel}</p>
       </section>
-      {currentId === _id && <AddressCardButton />}
+      {currentId === _id && <AddressCardButton _id={_id} />}
     </article>
   );
 };
