@@ -8,6 +8,7 @@ import axios from "axios";
 const AddressPage = () => {
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false);
   const [myAddressData, setMyAddressData] = useState([]);
+  const [currentId, setCurrentId] = useState("");
   const { state } = useStateContext();
   const { addressData } = state;
   const { myToken } = useAuthContext();
@@ -42,7 +43,14 @@ const AddressPage = () => {
       </div>
       <div className="address-page__container grid">
         {myAddressData.map((item) => {
-          return <AddressCard key={item._id} {...item} />;
+          return (
+            <AddressCard
+              key={item._id}
+              {...item}
+              setCurrentId={setCurrentId}
+              currentId={currentId}
+            />
+          );
         })}
       </div>
       {isAddressFormOpen ? (

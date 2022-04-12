@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { AddressCardButton } from "./AddressCardButton";
 
-const AddressCard = ({ _id, address, country, name, postalCode, tel }) => {
+const AddressCard = ({
+  _id,
+  address,
+  country,
+  name,
+  postalCode,
+  tel,
+  currentId,
+  setCurrentId,
+}) => {
   return (
     <article className="address-card">
-      <section className="address-card__wrapper">
+      <section
+        className="address-card__wrapper"
+        onClick={() => {
+          setCurrentId(_id);
+        }}
+      >
         <h4 className="address-card__name">{name}</h4>
         <p className="address-card__address">
           {address}, {postalCode}
@@ -12,7 +26,7 @@ const AddressCard = ({ _id, address, country, name, postalCode, tel }) => {
         <p className="address-card__country">{country}</p>
         <p className="address-card__telephone">Phone Number: {tel}</p>
       </section>
-      <AddressCardButton />
+      {currentId === _id && <AddressCardButton />}
     </article>
   );
 };
