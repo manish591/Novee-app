@@ -20,6 +20,7 @@ import {
   OrdersPage,
   Overview,
   ProfilePage,
+  Checkout,
 } from "./pages";
 
 import {
@@ -67,6 +68,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/cart/checkout" element={<Checkout />} />
         <Route
           path="/wishlist"
           element={

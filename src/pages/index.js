@@ -13,3 +13,4 @@ export { ProfilePage } from "./user-profile/shared/edit-profile/Profile";
 export { Overview } from "./user-profile/shared/overview/Overview";
 export { OrdersPage } from "./user-profile/shared/orders/Orders";
 export { Settings } from "./user-profile/shared/settings/Settings";
+export { Checkout } from "./checkout/Checkout";
