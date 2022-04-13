@@ -70,12 +70,23 @@ const applyFilterByIdealFor = (arr, type) => {
   return arr;
 };
 
+const applyFilterBySearch = (arr, searchQuery) => {
+  if (searchQuery !== "") {
+    console.log(searchQuery);
+    return arr.filter((item) =>
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }
+  return arr;
+};
+
 export const updatedProductList = (
   originalProductData,
   sort,
   idealFor,
   ratingsList,
   brandList,
+  searchQuery,
   deliveryFilter,
   stockFilter
 ) => {
@@ -109,5 +120,10 @@ export const updatedProductList = (
     idealFor
   );
 
-  return getFiltersByIdealFor;
+  const getFilterBySearchQuery = applyFilterBySearch(
+    getFiltersByIdealFor,
+    searchQuery
+  );
+
+  return getFilterBySearchQuery;
 };

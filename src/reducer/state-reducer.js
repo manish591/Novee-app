@@ -99,6 +99,12 @@ const stateReducer = (state, action) => {
         filters: { ...state.filters, idealFor: action.payload.filter },
       };
 
+    case "FILTER_BY_SEARCH_QUERY":
+      return {
+        ...state,
+        filters: { ...state.filters, searchQuery: action.payload.searchFor },
+      };
+
     case "CLEAR_ALL_FILTERS":
       return {
         ...state,
@@ -112,6 +118,7 @@ const stateReducer = (state, action) => {
           category: [],
           brand: [],
           idealFor: "",
+          searchQuery: "",
         },
       };
 
@@ -131,6 +138,7 @@ const stateReducer = (state, action) => {
           price: [],
           category: [],
           brand: [],
+          searchQuery: "",
         },
       };
 

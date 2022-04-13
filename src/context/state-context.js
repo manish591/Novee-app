@@ -18,6 +18,7 @@ const StateContextProvider = ({ children }) => {
       category: [],
       brand: [],
       idealFor: "",
+      searchQuery: "",
     },
   });
   return (

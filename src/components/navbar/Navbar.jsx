@@ -6,8 +6,19 @@ import { useStateContext } from "../../hooks";
 
 const Navbar = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-  const { state } = useStateContext();
+  const { state, stateDispatch } = useStateContext();
+
+  const handleSearchProducts = (e) => {
+    e.preventDefault();
+    if (searchQuery === "") return;
+    stateDispatch({
+      type: "FILTER_BY_SEARCH_QUERY",
+      payload: { searchFor: searchQuery },
+    });
+    setSearchQuery("");
+  };
 
   return (
     <nav className="navbar">
@@ -45,14 +56,21 @@ const Navbar = () => {
         </ul>
         <ul className="navbar__list flex navbar__list--search">
           <li className="navbar__items navbar--hide navbar__items--search-bar">
-            <div className="search-bar">
+            <form className="search-bar" onSubmit={handleSearchProducts}>
               <span className="material-icons search-icon">search</span>
               <input
                 type="text"
                 className="input-field"
                 placeholder="search laptops, phones and tablets"
+                id="search-products"
+                name="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
-            </div>
+              <label htmlFor="search-products" className="sr-only">
+                Serach-Products
+              </label>
+            </form>
           </li>
           <li className="navbar__items navbar__items--icons navbar__items--search">
             <span className="material-icons">search</span>
