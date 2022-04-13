@@ -2,24 +2,28 @@ import React, { useState, useEffect } from "react";
 import "./Address.css";
 import { AddressCard } from "./AddressCard";
 import { AddressModal } from "./AddressModal";
-import { useStateContext, useAuthContext } from "../../../../hooks";
+import {
+  useStateContext,
+  useAuthContext,
+  useUserAddress,
+} from "../../../../hooks";
 import axios from "axios";
 
 const AddressPage = () => {
-  const [isAddressFormOpen, setIsAddressFormOpen] = useState(false);
   const [myAddressData, setMyAddressData] = useState([]);
-  const [currentId, setCurrentId] = useState("");
-  const [isEditingAddress, setIsEditingAddress] = useState(false);
-  const [addressFormData, setAddressFormData] = useState({
-    name: "",
-    address: "",
-    tel: "",
-    country: "",
-    postalCode: "",
-  });
   const { state } = useStateContext();
   const { addressData } = state;
   const { myToken } = useAuthContext();
+  const {
+    currentId,
+    addressFormData,
+    isAddressFormOpen,
+    isEditingAddress,
+    setCurrentId,
+    setAddressFormData,
+    setIsAddressFormOpen,
+    setIsEditingAddress,
+  } = useUserAddress();
 
   useEffect(() => {
     (async () => {
