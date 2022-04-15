@@ -2,20 +2,42 @@ import React, { useState } from "react";
 import "./Checkout.css";
 import { AddressCard } from "../user-profile/shared/addresses/AddressCard";
 import { AddressModal } from "../user-profile/shared/addresses/AddressModal";
-import { useStateContext, useUserAddress } from "../../hooks";
+import {
+  useStateContext,
+  useUserAddress,
+  usePaymentIntegration,
+  useAppActions,
+} from "../../hooks";
+import toast from "react-hot-toast";
 
 const Checkout = () => {
   const { state } = useStateContext();
   const {
     addressFormData,
-    setAddressFormData,
     isEditingAddress,
-    setIsEditingAddress,
     isAddressFormOpen,
-    setIsAddressFormOpen,
     currentId,
+    selectedAddress,
     setCurrentId,
+    setIsAddressFormOpen,
+    setIsEditingAddress,
+    setAddressFormData,
+    setSelectedAddress,
   } = useUserAddress();
+
+  const { loadScript, paymentSuccessful, displayRazorpay } =
+    usePaymentIntegration();
+
+  const { findTotalPrice, findTotalDiscountedPrice, getTotalCartPrice } =
+    useAppActions();
+
+  const handleUserPayment = () => {
+    if (!selectedAddress?._id) {
+      return toast.error("Please select a address to continue!");
+    }
+    displayRazorpay();
+  };
+
   return (
     <main className={`cart`}>
       <div className="cart__wrapper grid">
@@ -57,7 +79,15 @@ const Checkout = () => {
                       key={item._id}
                       className="flex checkout__address-group"
                     >
-                      <input type="radio" name="address" id={item._id} />
+                      <input
+                        type="radio"
+                        name="address"
+                        id={item._id}
+                        checked={selectedAddress?._id === item._id}
+                        onChange={() => {
+                          setSelectedAddress(item);
+                        }}
+                      />
                       <label htmlFor={item._id}>
                         <AddressCard
                           {...item}
@@ -79,18 +109,18 @@ const Checkout = () => {
         </section>
         <section className="cart__summary summary">
           <h1>Summary</h1>
-          <div class="summary__products flex">
+          <div className="summary__products flex">
             {state.cartData.map((item) => {
               return (
-                <div key={item._id} class="summary__item summary-item flex">
-                  <div class="summary-item__card grid">
-                    <div class="summary-item__picture"></div>
-                    <div class="summary-item__info">
-                      <p class="summary-item__name">{item?.title}</p>
-                      <p class="summary-item__price">${item?.price}</p>
+                <div key={item._id} className="summary__item summary-item flex">
+                  <div className="summary-item__card grid">
+                    <div className="summary-item__picture"></div>
+                    <div className="summary-item__info">
+                      <p className="summary-item__name">{item?.title}</p>
+                      <p className="summary-item__price">${item?.price}</p>
                     </div>
                   </div>
-                  <div class="summary-item__quantity">
+                  <div className="summary-item__quantity">
                     <p>{item.qty}x</p>
                   </div>
                 </div>
@@ -101,11 +131,15 @@ const Checkout = () => {
             <ul className="price-detail__list">
               <li className="price-detail__list-item flex">
                 <p>Total MRP</p>
-                <p className="price-detail__price">$240</p>
+                <p className="price-detail__price">
+                  ${findTotalPrice(state.cartData)}
+                </p>
               </li>
               <li className="price-detail__list-item flex">
                 <p>Discount MRP</p>
-                <p className="price-detail__price">$50</p>
+                <p className="price-detail__price">
+                  ${findTotalDiscountedPrice(state.cartData)}
+                </p>
               </li>
               <li className="price-detail__list-item flex">
                 <p>Coupon Discount</p>
@@ -113,18 +147,23 @@ const Checkout = () => {
               </li>
               <li className="price-detail__list-item flex">
                 <p>Delivery Charges</p>
-                <p className="price-detail__price">$10</p>
+                <p className="price-detail__price">FREE</p>
               </li>
             </ul>
             <ul className="price-detail__list price-detail__grand-total">
               <li className="price-detail__list-total flex">
                 <p>Grand Total</p>
-                <p className="price-detail__price">$ 50</p>
+                <p className="price-detail__price">
+                  ${getTotalCartPrice(state.cartData)}
+                </p>
               </li>
             </ul>
           </div>
           <div className="summary__cta">
-            <button className="cart__place-order btn btn--contained-primary">
+            <button
+              className="cart__place-order btn btn--contained-primary"
+              onClick={handleUserPayment}
+            >
               Continue And Pay
             </button>
           </div>

@@ -6,3 +6,4 @@ export { useAppActions } from "./useAppActions";
 export { useInitializeData } from "./useInitializeData";
 export { useScrollToTop } from "./useScrollToTop";
 export { useUserAddress } from "./useUserAddress";
+export { usePaymentIntegration } from "./usePaymentIntegration";
