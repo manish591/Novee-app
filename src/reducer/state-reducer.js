@@ -12,6 +12,9 @@ const stateReducer = (state, action) => {
     case "GET_ADDRESS_DATA":
       return { ...state, addressData: action.payload };
 
+    case "GET_ORDERS_DATA":
+      return { ...state, ordersData: action.payload };
+
     case "HIGH_TO_LOW":
       return { ...state, filters: { ...state.filters, sort: "HIGH_TO_LOW" } };
 
@@ -129,6 +132,7 @@ const stateReducer = (state, action) => {
         wishlistData: [],
         productData: [],
         addressData: [],
+        ordersData: [],
         filters: {
           ...state.filters,
           sort: "",
