@@ -21,6 +21,7 @@ import {
   Overview,
   ProfilePage,
   Checkout,
+  OrdersResult,
 } from "./pages";
 
 import {
@@ -77,6 +78,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/myorders/:orderID" element={<OrdersResult />} />
         <Route
           path="/profile"
           element={

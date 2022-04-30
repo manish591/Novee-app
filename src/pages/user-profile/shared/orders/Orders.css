@@ -53,6 +53,20 @@
   padding-block: 2rem;
 }
 
+/* Orders Result */
+
+.orders-result {
+  block-size: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orders-result__content {
+  flex-direction: column;
+  align-items: center;
+}
+
 @media (min-width: 600px) {
   .single-order-products__content {
     grid-template-columns: 150px minmax(0, 1fr);

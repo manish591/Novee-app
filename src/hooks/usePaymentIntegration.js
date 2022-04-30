@@ -2,11 +2,17 @@ import { useState, useEffect } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { useStateContext } from "./useStateContext";
 import { useAppActions } from "./useAppActions";
+import { useUserAddress } from "./useUserAddress";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const usePaymentIntegration = () => {
-  const { currentUser } = useAuthContext();
-  const { state } = useStateContext();
+  const { currentUser, myToken } = useAuthContext();
+  const { state, stateDispatch } = useStateContext();
   const { getTotalCartPrice } = useAppActions();
+  const { selectedAddress } = useUserAddress();
+  const navigate = useNavigate();
 
   const loadScript = async (url) => {
     return new Promise((resolve) => {
@@ -25,8 +31,40 @@ const usePaymentIntegration = () => {
     });
   };
 
-  const paymentSuccessful = (razorpayRes) => {
-    console.log(razorpayRes.razorpay_payment_id);
+  const paymentSuccessful = async (razorpayRes) => {
+    try {
+      const [resOne, resTwo] = await Promise.all([
+        axios.post(
+          "/api/user/orders",
+          {
+            order: {
+              items: state.cartData,
+              paymentID: razorpayRes.razorpay_payment_id,
+              totalPrice: getTotalCartPrice(state.cartData),
+              deliveryAddress: selectedAddress,
+            },
+          },
+          {
+            headers: {
+              authorization: myToken,
+            },
+          }
+        ),
+        axios.delete("/api/user/cart", {
+          headers: {
+            authorization: myToken,
+          },
+        }),
+      ]);
+      if (resOne.status === 201 && resTwo.status === 200) {
+        navigate(`/myorders/${razorpayRes.razorpay_payment_id}`);
+        stateDispatch({ type: "GET_CART_DATA", payload: resTwo.data.cart });
+        stateDispatch({ type: "GET_ORDERS_DATA", payload: resOne.data.orders });
+      }
+    } catch (err) {
+      console.log("Error in buying your products", err);
+      toast.error("Unable to place your order! Try again later");
+    }
   };
 
   const displayRazorpay = async () => {

@@ -190,7 +190,7 @@ const useAppActions = () => {
 
   const removeAllItemsFromCart = async () => {
     try {
-      const res = await axios.delete("api/user/cart", {
+      const res = await axios.delete("/api/user/cart", {
         headers: {
           authorization: myToken,
         },
