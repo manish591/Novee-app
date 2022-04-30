@@ -188,7 +188,7 @@
 
 .card--horizontal {
   display: grid;
-  grid-template-columns: 148px 1fr;
+  grid-template-columns: 148px minmax(0, 1fr);
 }
 
 .card__title {
