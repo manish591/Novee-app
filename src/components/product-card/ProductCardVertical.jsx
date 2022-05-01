@@ -1,10 +1,10 @@
-import React from "react";
-import { useState } from "react";
-import { useAppActions } from "../../hooks";
-import { useStateContext } from "../../hooks";
-import { useAuth } from "../../hooks";
-import { useNavigate, useLocation, Link } from "react-router-dom";
-import { Image } from "../image/Image";
+import React from 'react';
+import { useState } from 'react';
+import { useAppActions } from '../../hooks';
+import { useStateContext } from '../../hooks';
+import { useAuth } from '../../hooks';
+import { useNavigate } from 'react-router-dom';
+import { Image } from '../image/Image';
 
 const ProductCardVertical = ({ product }) => {
   const {
@@ -14,12 +14,12 @@ const ProductCardVertical = ({ product }) => {
     findDiscountedPrice,
     addProductsToCart,
   } = useAppActions();
-  const { state, stateDispatch } = useStateContext();
+  const { state, stateDispatch, disableButton, setDisableButton } =
+    useStateContext();
   const { currentUser, isUserLogedIn } = useAuth();
   const { _id, img, title, description, price, discount, ratings, inStock } =
     product;
   const navigate = useNavigate();
-  const loaction = useLocation();
 
   return (
     <section
@@ -32,23 +32,27 @@ const ProductCardVertical = ({ product }) => {
         <Image title={title} img={img} />
         {isAlreadyInDatabase(state.wishlistData, _id) ? (
           <button
-            className="card__remove-wishlist"
+            className={`card__remove-wishlist ${
+              disableButton && 'btn--disabled'
+            }`}
             onClick={(e) =>
               removeItemFromWishlist({
                 e,
                 _id,
                 currentUser,
                 stateDispatch,
+                setDisableButton,
               })
             }
+            disabled={disableButton}
           >
             <span className="material-icons">favorite</span>
           </button>
         ) : (
           <button
             className={`card__remove-wishlist ${
-              !inStock && "wishlist--out-of-stck"
-            }`}
+              !inStock ? 'wishlist--out-of-stck' : ''
+            } `}
             onClick={(e) =>
               addItemToTheWishlist({
                 e,
@@ -56,15 +60,17 @@ const ProductCardVertical = ({ product }) => {
                 product,
                 currentUser,
                 stateDispatch,
+                setDisableButton,
               })
             }
+            disabled={disableButton}
           >
             <span className="material-icons">favorite_border</span>
           </button>
         )}
         <div
           className={`card__add-to-cart ${
-            !inStock && "card__add-to-cart--out-of-stock"
+            !inStock && 'card__add-to-cart--out-of-stock'
           }`}
         >
           {isAlreadyInDatabase(state.cartData, _id) ? (
@@ -72,7 +78,7 @@ const ProductCardVertical = ({ product }) => {
               className={`card__add-cart-btn card__add-cart-btn--in-cart`}
               onClick={(e) => {
                 e.stopPropagation();
-                navigate("/cart");
+                navigate('/cart');
               }}
             >
               Go To Cart
@@ -88,9 +94,11 @@ const ProductCardVertical = ({ product }) => {
                       product,
                       currentUser,
                       stateDispatch,
+                      setDisableButton,
                     })
-                  : navigate("/login", { state: location.pathname })
+                  : navigate('/login', { state: location.pathname })
               }
+              disabled={disableButton}
             >
               Add To Cart
             </button>
