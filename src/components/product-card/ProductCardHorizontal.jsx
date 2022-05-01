@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useAppActions } from "../../hooks";
-import { useAuth } from "../../hooks";
-import { useStateContext } from "../../hooks";
-import { Modal } from "./Modal";
-import { Image } from "../image/Image";
+import React, { useState, useRef, useEffect } from 'react';
+import { useAppActions } from '../../hooks';
+import { useAuth } from '../../hooks';
+import { useStateContext } from '../../hooks';
+import { Modal } from './Modal';
+import { Image } from '../image/Image';
 
 const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
   const {
@@ -34,7 +34,7 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
           <div className="card__update-quantity flex">
             <button
               className="card__update-quantity--remove"
-              onClick={() => updateCartQuantity(_id, "decrement")}
+              onClick={() => updateCartQuantity(_id, 'decrement')}
               disabled={qty === 1}
             >
               <span className="material-icons-round cart-icon-quantity">
@@ -44,7 +44,7 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
             <p className="quantity-value">{qty}</p>
             <button
               className="card__update-quantity--add"
-              onClick={() => updateCartQuantity(_id, "increment")}
+              onClick={() => updateCartQuantity(_id, 'increment')}
             >
               <span className="material-icons-round cart-icon-quantity">
                 add

@@ -60,8 +60,18 @@
   gap: 2.5rem;
 }
 
+.brand-idea__picture {
+  min-inline-size: 50%;
+}
+
+.brand-idea__picture > img {
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+}
+
 .brand-idea__title {
   text-transform: uppercase;
+  font-size: 2rem;
 }
 
 .brand-idea__desc {
@@ -146,6 +156,27 @@
   transform: scale(0.8);
 }
 
+.best-seller {
+  margin-block-start: 8rem;
+}
+
+.best-seller__title {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.best-sellter__products {
+  display: grid;
+  gap: 2rem;
+  margin-block-start: 5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.best-sellter__products > article {
+  background-color: var(--surface3);
+  block-size: 300px;
+}
+
 /* -------------- */
 /* Media Queries */
 /* ------------- */
@@ -171,14 +202,14 @@
 @media (min-width: 1000px) {
   .brand-idea {
     inline-size: 100%;
-    margin-block-start: 5rem;
+    margin-block-start: 10rem;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
   }
 
   .brand-idea__message {
-    max-inline-size: 40ch;
+    max-inline-size: 60ch;
     text-align: left;
     margin-inline: unset;
   }
