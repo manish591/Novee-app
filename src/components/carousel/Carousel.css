@@ -24,6 +24,7 @@
   overflow-x: scroll;
   gap: 10px;
   scroll-snap-type: x mandatory;
+  padding-block-end: 1rem;
 }
 
 .carousel__item {

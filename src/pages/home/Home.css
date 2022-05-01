@@ -166,10 +166,11 @@
 }
 
 .best-sellter__products {
+  margin-inline: auto;
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
   margin-block-start: 5rem;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .best-sellter__products > article {
@@ -196,6 +197,20 @@
 
   .brand-list__name {
     inline-size: 4.5rem;
+  }
+
+  .best-sellter__products {
+    inline-size: 100%;
+  }
+}
+
+@media (min-width: 700px) {
+  .best-sellter__products {
+    margin-inline: auto;
+    display: grid;
+    gap: 1rem;
+    margin-block-start: 5rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -239,5 +254,13 @@
 
   .brand-list__name {
     inline-size: 6rem;
+  }
+
+  .best-sellter__products {
+    margin-inline: auto;
+    display: grid;
+    gap: 1rem;
+    margin-block-start: 5rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
