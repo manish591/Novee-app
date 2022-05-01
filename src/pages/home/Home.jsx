@@ -13,8 +13,6 @@ const Home = () => {
     );
   };
 
-  console.log(bestSellingProducts());
-
   useScrollToTop();
   return (
     <main className="main">
@@ -62,7 +60,7 @@ const Home = () => {
           <h1 className="best-seller__title">Best Selling Products</h1>
           <div className="best-sellter__products">
             {bestSellingProducts().map((item) => {
-              return <ProductCardVertical product={item} />;
+              return <ProductCardVertical key={item._id} product={item} />;
             })}
           </div>
         </section>
