@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ProductCardHorizontal } from "../../components";
 import { useStateContext, useAppActions, useScrollToTop } from "../../hooks";
 
@@ -120,9 +121,14 @@ const Cart = () => {
             </ul>
           </div>
           <div className="summary__cta">
-            <button className="cart__place-order btn btn--contained-primary">
+            <Link
+              to="/cart/checkout"
+              className={`cart__place-order btn btn--contained-primary ${
+                cartData?.length === 0 ? "cart__place-order--disabled" : ""
+              }`}
+            >
               Place Order
-            </button>
+            </Link>
           </div>
         </section>
       </div>

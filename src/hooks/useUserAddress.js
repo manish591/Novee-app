@@ -8,6 +8,18 @@ const useUserAddress = () => {
   const { state, stateDispatch } = useStateContext();
   const { myToken } = useAuthContext();
 
+  const [addressFormData, setAddressFormData] = useState({
+    name: "",
+    address: "",
+    tel: "",
+    country: "",
+    postalCode: "",
+  });
+
+  const [currentId, setCurrentId] = useState("");
+  const [isAddressFormOpen, setIsAddressFormOpen] = useState(false);
+  const [isEditingAddress, setIsEditingAddress] = useState(false);
+
   const addAddress = async ({ address }) => {
     try {
       const res = await axios.post(
@@ -75,6 +87,14 @@ const useUserAddress = () => {
     addAddress,
     deleteAddress,
     updateAddress,
+    addressFormData,
+    setAddressFormData,
+    currentId,
+    setCurrentId,
+    isAddressFormOpen,
+    setIsAddressFormOpen,
+    isEditingAddress,
+    setIsEditingAddress,
   };
 };
 

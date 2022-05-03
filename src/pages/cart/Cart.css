@@ -28,7 +28,6 @@
   flex-direction: column;
   gap: 1rem;
   margin-block-start: 2rem;
-  display: none;
 }
 
 .summary__item {
@@ -37,7 +36,7 @@
 }
 
 .summary-item__card {
-  align-items: center;
+  grid-template-columns: 50px minmax(0, 1fr);
 }
 
 .summary-item__picture {
@@ -55,9 +54,28 @@
   padding-block: 0.5rem 1.5rem;
 }
 
+.summary-item__name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.summary-item__quantity {
+  font-weight: bold;
+}
+
 .cart__place-order {
   inline-size: 100%;
   border-radius: 0;
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart__place-order--disabled {
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .price-detail__list-item,
