@@ -33,7 +33,26 @@ const Filters = () => {
             Clear All
           </button>
         </div>
-        <div className="listing-header__left"></div>
+        <div className="listing-header__left flex">
+          {state?.filters?.searchQuery && (
+            <>
+              {" "}
+              <h3 className="fw-100">
+                You Serached For "{state?.filters?.searchQuery}"
+              </h3>
+              <button
+                onClick={() => {
+                  stateDispatch({
+                    type: "FILTER_BY_SEARCH_QUERY",
+                    payload: { searchFor: "" },
+                  });
+                }}
+              >
+                Clear Search
+              </button>
+            </>
+          )}
+        </div>
       </header>
       <aside
         className={`listing__filters filter-list ${

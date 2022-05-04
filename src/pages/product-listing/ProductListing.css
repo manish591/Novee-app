@@ -260,7 +260,10 @@ img {
 }
 
 .listing-header__left {
+  justify-content: space-between;
+  align-items: center;
   display: none;
+  padding-inline: 1rem;
 }
 
 /* filters select */
@@ -407,7 +410,7 @@ img {
   }
 
   .listing-header__left {
-    display: block;
+    display: flex;
   }
 
   .listing-header__right {
