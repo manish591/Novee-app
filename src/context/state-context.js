@@ -9,6 +9,7 @@ const StateContextProvider = ({ children }) => {
     cartData: [],
     productData: [],
     addressData: [],
+    ordersData: [],
     filters: {
       sort: "",
       fastDelivery: "",

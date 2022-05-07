@@ -10,11 +10,12 @@ const useAppActions = () => {
   const isAlreadyInDatabase = (arr, _id) =>
     arr?.some((item) => item._id === _id);
 
-  const findDiscountedPrice = (originalPrice, discountRate) => {
-    return (
-      originalPrice -
-      (originalPrice * Number(discountRate)) / 100
-    ).toFixed(0);
+  const findTotalDiscountedPrice = (arr) => {
+    return arr.reduce(
+      (acc, curr) =>
+        acc + (curr.price - (curr.price * Number(curr.discount)) / 100),
+      0
+    );
   };
 
   const findTotalPrice = (arr) => {
@@ -23,6 +24,14 @@ const useAppActions = () => {
         (total = total + Number(currentValue.price) * Number(currentValue.qty)),
       0
     );
+  };
+
+  const findDiscountedPrice = (originalPrice, discountRate) => {
+    return originalPrice - (originalPrice * discountRate) / 100;
+  };
+
+  const getTotalCartPrice = (arr) => {
+    return findTotalDiscountedPrice(arr) - 45;
   };
 
   const addItemToTheWishlist = async ({ e, product, stateDispatch }) => {
@@ -181,7 +190,7 @@ const useAppActions = () => {
 
   const removeAllItemsFromCart = async () => {
     try {
-      const res = await axios.delete("api/user/cart", {
+      const res = await axios.delete("/api/user/cart", {
         headers: {
           authorization: myToken,
         },
@@ -200,7 +209,7 @@ const useAppActions = () => {
     isAlreadyInDatabase,
     addItemToTheWishlist,
     removeItemFromWishlist,
-    findDiscountedPrice,
+    findTotalDiscountedPrice,
     addProductsToCart,
     removeProductsFromCart,
     findTotalPrice,
@@ -208,6 +217,8 @@ const useAppActions = () => {
     moveItemToCart,
     moveToWishlist,
     removeAllItemsFromCart,
+    findDiscountedPrice,
+    getTotalCartPrice,
   };
 };
 

@@ -7,8 +7,12 @@ import { useStateContext, useAppActions, useScrollToTop } from "../../hooks";
 const Cart = () => {
   const { state } = useStateContext();
   const { cartData } = state;
-  const { findTotalPrice, findDiscountedPrice, removeAllItemsFromCart } =
-    useAppActions();
+  const {
+    findTotalPrice,
+    findTotalDiscountedPrice,
+    removeAllItemsFromCart,
+    getTotalCartPrice,
+  } = useAppActions();
   const [currentId, setCurrentId] = useState("");
 
   useScrollToTop();
@@ -96,7 +100,7 @@ const Cart = () => {
               <li className="price-detail__list-item flex">
                 <p>Discount MRP</p>
                 <p className="price-detail__price">
-                  ${findDiscountedPrice(findTotalPrice(state.cartData), 10)}
+                  ${findTotalDiscountedPrice(state.cartData)}
                 </p>
               </li>
               <li className="price-detail__list-item flex">
@@ -105,17 +109,14 @@ const Cart = () => {
               </li>
               <li className="price-detail__list-item flex">
                 <p>Delivery Charges</p>
-                <p className="price-detail__price">$10</p>
+                <p className="price-detail__price">FREE</p>
               </li>
             </ul>
             <ul className="price-detail__list price-detail__grand-total">
               <li className="price-detail__list-total flex">
                 <p>Grand Total</p>
                 <p className="price-detail__price">
-                  $
-                  {Number(
-                    findDiscountedPrice(findTotalPrice(state.cartData), 10)
-                  ) + 35}
+                  ${getTotalCartPrice(state.cartData)}
                 </p>
               </li>
             </ul>

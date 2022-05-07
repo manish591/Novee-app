@@ -19,6 +19,7 @@ const useUserAddress = () => {
   const [currentId, setCurrentId] = useState("");
   const [isAddressFormOpen, setIsAddressFormOpen] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState({});
 
   const addAddress = async ({ address }) => {
     try {
@@ -95,6 +96,8 @@ const useUserAddress = () => {
     setIsAddressFormOpen,
     isEditingAddress,
     setIsEditingAddress,
+    selectedAddress,
+    setSelectedAddress,
   };
 };
 
