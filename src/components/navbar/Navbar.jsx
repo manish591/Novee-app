@@ -1,23 +1,24 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { Link, useNavigate } from "react-router-dom";
-import { ProfileDropdown } from "../profile-dropdown/Profile.dropdown";
-import { useStateContext } from "../../hooks";
+import { Link, useNavigate } from 'react-router-dom';
+import { ProfileDropdown } from '../profile-dropdown/Profile.dropdown';
+import { useStateContext } from '../../hooks';
 
 const Navbar = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const { state, stateDispatch } = useStateContext();
 
   const handleSearchProducts = (e) => {
     e.preventDefault();
-    if (searchQuery === "") return;
+    if (searchQuery === '') return;
     stateDispatch({
-      type: "FILTER_BY_SEARCH_QUERY",
+      type: 'FILTER_BY_SEARCH_QUERY',
       payload: { searchFor: searchQuery },
     });
-    setSearchQuery("");
+    setSearchQuery('');
+    navigate('/products');
   };
 
   return (
@@ -40,7 +41,7 @@ const Navbar = () => {
           <li
             className="navbar__items"
             onClick={() => {
-              navigate("/products", { state: { idealFor: "Men" } });
+              navigate('/products', { state: { idealFor: 'Men' } });
             }}
           >
             Men
@@ -48,7 +49,7 @@ const Navbar = () => {
           <li
             className="navbar__items"
             onClick={() => {
-              navigate("/products", { state: { idealFor: "Women" } });
+              navigate('/products', { state: { idealFor: 'Women' } });
             }}
           >
             Women
@@ -93,7 +94,7 @@ const Navbar = () => {
           </li>
           <li className="navbar__items navbar__items--icons">
             <Link to="/cart" className="navbar__items--icons">
-              <section className="badge" style={{ marginBlockStart: "2px" }}>
+              <section className="badge" style={{ marginBlockStart: '2px' }}>
                 <span className="material-icons-outlined">shopping_bag</span>
                 {state.cartData?.length > 0 ? (
                   <p className="badge__info badge__info--standard badge__info--primary">

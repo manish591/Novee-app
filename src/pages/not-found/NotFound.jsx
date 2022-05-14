@@ -1,10 +1,13 @@
-import React from "react";
-import notFoundImg from "../../assets/undraw_page_not_found_re_e9o6.svg";
+import React from 'react';
 
 const NotFound = () => {
   return (
     <div className="not-found">
-      <img src={notFoundImg} alt="" className="not-found__img" />
+      <img
+        src="https://res.cloudinary.com/dcugqfvvg/image/upload/v1651402812/undraw_Page_not_found_re_e9o6_hjtw7s.png"
+        alt="page not found"
+        className="not-found__img"
+      />
     </div>
   );
 };

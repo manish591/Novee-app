@@ -1,16 +1,15 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useAuth } from "../../hooks";
-import { useStateContext } from "../../hooks";
-import { useAppActions } from "../../hooks";
-import { Image } from "../../components/image/Image";
+import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useAuth } from '../../hooks';
+import { useStateContext } from '../../hooks';
+import { useAppActions } from '../../hooks';
+import { Image } from '../../components/image/Image';
 
 const WishlistCard = ({ product }) => {
   const { _id, img, title, price, discount } = product;
-  const [isLoading, setIsLoading] = useState(false);
   const { currentUser } = useAuth();
-  const { stateDispatch } = useStateContext();
+  const { stateDispatch, disableButton, setDisableButton } = useStateContext();
   const { removeItemFromWishlist, findDiscountedPrice, moveItemToCart } =
     useAppActions();
 
@@ -26,10 +25,10 @@ const WishlistCard = ({ product }) => {
               _id,
               currentUser,
               stateDispatch,
-              setIsLoading,
+              setDisableButton,
             })
           }
-          disabled={isLoading}
+          disabled={disableButton}
         >
           <span className="material-icons">clear</span>
         </button>
@@ -55,10 +54,10 @@ const WishlistCard = ({ product }) => {
             product,
             currentUser,
             stateDispatch,
-            setIsLoading,
+            setDisableButton,
           })
         }
-        disabled={isLoading}
+        disabled={disableButton}
       >
         Move To Cart
       </button>

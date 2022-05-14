@@ -1,5 +1,5 @@
-import React from "react";
-import { useAppActions } from "../../hooks";
+import React from 'react';
+import { useAppActions } from '../../hooks';
 
 const Modal = ({
   setCurrentId,
@@ -9,14 +9,16 @@ const Modal = ({
   stateDispatch,
   setIsLoading,
   product,
+  setDisableButton,
+  disableButton,
 }) => {
   const { moveToWishlist } = useAppActions();
   return (
-    <section className="dialog dialog--alert" style={{ inlineSize: "350px" }}>
+    <section className="dialog dialog--alert" style={{ inlineSize: '350px' }}>
       <div className="dialog__content">
         <span
           className="material-icons dialog__clear"
-          onClick={() => setCurrentId("")}
+          onClick={() => setCurrentId('')}
         >
           clear
         </span>
@@ -31,9 +33,11 @@ const Modal = ({
                 _id,
                 stateDispatch,
                 setIsLoading,
+                setDisableButton,
               });
-              setCurrentId("");
+              setCurrentId('');
             }}
+            disabled={disableButton}
           >
             Remove
           </button>
@@ -45,9 +49,11 @@ const Modal = ({
                 stateDispatch,
                 setIsLoading,
                 product,
+                setDisableButton,
               });
-              setCurrentId("");
+              setCurrentId('');
             }}
+            disabled={disableButton}
           >
             Move To Wishlist
           </button>
