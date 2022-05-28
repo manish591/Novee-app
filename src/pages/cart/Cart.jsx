@@ -1,13 +1,18 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ProductCardHorizontal } from "../../components";
 import { useStateContext, useAppActions, useScrollToTop } from "../../hooks";
 
 const Cart = () => {
   const { state } = useStateContext();
   const { cartData } = state;
-  const { findTotalPrice, findDiscountedPrice, removeAllItemsFromCart } =
-    useAppActions();
+  const {
+    findTotalPrice,
+    findTotalDiscountedPrice,
+    removeAllItemsFromCart,
+    getTotalCartPrice,
+  } = useAppActions();
   const [currentId, setCurrentId] = useState("");
 
   useScrollToTop();
@@ -95,7 +100,7 @@ const Cart = () => {
               <li className="price-detail__list-item flex">
                 <p>Discount MRP</p>
                 <p className="price-detail__price">
-                  ${findDiscountedPrice(findTotalPrice(state.cartData), 10)}
+                  ${findTotalDiscountedPrice(state.cartData)}
                 </p>
               </li>
               <li className="price-detail__list-item flex">
@@ -104,25 +109,27 @@ const Cart = () => {
               </li>
               <li className="price-detail__list-item flex">
                 <p>Delivery Charges</p>
-                <p className="price-detail__price">$10</p>
+                <p className="price-detail__price">FREE</p>
               </li>
             </ul>
             <ul className="price-detail__list price-detail__grand-total">
               <li className="price-detail__list-total flex">
                 <p>Grand Total</p>
                 <p className="price-detail__price">
-                  $
-                  {Number(
-                    findDiscountedPrice(findTotalPrice(state.cartData), 10)
-                  ) + 35}
+                  ${getTotalCartPrice(state.cartData)}
                 </p>
               </li>
             </ul>
           </div>
           <div className="summary__cta">
-            <button className="cart__place-order btn btn--contained-primary">
+            <Link
+              to="/cart/checkout"
+              className={`cart__place-order btn btn--contained-primary ${
+                cartData?.length === 0 ? "cart__place-order--disabled" : ""
+              }`}
+            >
               Place Order
-            </button>
+            </Link>
           </div>
         </section>
       </div>

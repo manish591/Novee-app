@@ -1,1 +1,2 @@
-export { updatedProductList } from './filters';
+export { updatedProductList } from "./filters";
+export { countries, coupons } from "./utilis";

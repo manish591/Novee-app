@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useAppActions } from "../../hooks";
-import { useAuth } from "../../hooks";
-import { useStateContext } from "../../hooks";
-import { Modal } from "./Modal";
-import { Image } from "../image/Image";
+import React, { useState, useRef, useEffect } from 'react';
+import { useAppActions } from '../../hooks';
+import { useAuth } from '../../hooks';
+import { useStateContext } from '../../hooks';
+import { Modal } from './Modal';
+import { Image } from '../image/Image';
 
 const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
   const {
@@ -19,7 +19,7 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
   } = product;
   const { removeProductsFromCart, updateCartQuantity } = useAppActions();
   const { currentUser } = useAuth();
-  const { stateDispatch } = useStateContext();
+  const { stateDispatch, disableButton, setDisableButton } = useStateContext();
 
   return (
     <section className="products-list__card-item">
@@ -34,8 +34,10 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
           <div className="card__update-quantity flex">
             <button
               className="card__update-quantity--remove"
-              onClick={() => updateCartQuantity(_id, "decrement")}
-              disabled={qty === 1}
+              onClick={() =>
+                updateCartQuantity(_id, 'decrement', setDisableButton)
+              }
+              disabled={qty === 1 || disableButton}
             >
               <span className="material-icons-round cart-icon-quantity">
                 remove
@@ -44,7 +46,10 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
             <p className="quantity-value">{qty}</p>
             <button
               className="card__update-quantity--add"
-              onClick={() => updateCartQuantity(_id, "increment")}
+              onClick={() =>
+                updateCartQuantity(_id, 'increment', setDisableButton)
+              }
+              disabled={disableButton}
             >
               <span className="material-icons-round cart-icon-quantity">
                 add
@@ -57,6 +62,7 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
           onClick={() => {
             setCurrentId(_id);
           }}
+          disabled={disableButton}
         >
           <span className="material-icons-round">clear</span>
         </button>
@@ -68,6 +74,8 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
           _id={_id}
           stateDispatch={stateDispatch}
           product={product}
+          setDisableButton={setDisableButton}
+          disableButton={disableButton}
         />
       ) : null}
     </section>

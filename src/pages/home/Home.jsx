@@ -1,11 +1,18 @@
-import React from "react";
-
-import { Carousel } from "../../components";
-import { brandLogoData } from "../../utilis/utilis";
-import { Link } from "react-router-dom";
-import { useScrollToTop } from "../../hooks";
+import React from 'react';
+import { Carousel, ProductCardVertical } from '../../components';
+import { brandLogoData } from '../../utilis/utilis';
+import { Link } from 'react-router-dom';
+import { useScrollToTop, useStateContext } from '../../hooks';
 
 const Home = () => {
+  const { state } = useStateContext();
+
+  const bestSellingProducts = () => {
+    return state.productData.filter(
+      (item) => item.inStock && Number(item.ratings) > 4,
+    );
+  };
+
   useScrollToTop();
   return (
     <main className="main">
@@ -49,7 +56,14 @@ const Home = () => {
             </div>
           </section>
         </div>
-        <div className="product-feature"></div>
+        <section className="best-seller">
+          <h1 className="best-seller__title">Best Selling Products</h1>
+          <div className="best-sellter__products">
+            {bestSellingProducts().map((item) => {
+              return <ProductCardVertical key={item._id} product={item} />;
+            })}
+          </div>
+        </section>
         <div className="brand-idea flex">
           <div className="brand-idea__message">
             <h2 className="brand-idea__title">

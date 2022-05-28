@@ -12,44 +12,56 @@
   inline-size: 100%;
   margin-inline: auto;
   position: relative;
-  overflow: hidden;
 }
 
 .carousel {
   inline-size: 100%;
-  block-size: calc(100vh - 10rem);
   display: flex;
-  transform: translateX(0%);
-  transition: transform 300ms ease-in-out;
+  position: relative;
+  overflow: hidden;
+  overflow-x: scroll;
+  gap: 10px;
+  scroll-snap-type: x mandatory;
+  padding-block-end: 1rem;
+  scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .carousel__item {
   inline-size: inherit;
   block-size: inherit;
   background-color: var(--surface3);
+  color: var(--text2);
+  min-inline-size: 100%;
+  scroll-snap-align: center;
+  background-image: url('https://res.cloudinary.com/dcugqfvvg/image/upload/v1651332596/9fd23788-8de0-4e8a-9569-9e14b5277ad91634722282892GreenColorNetFabricLehengaCholiwithDupattainSwarovskiSequenc1-removebg-preview_pmafaz.png');
+  background-repeat: no-repeat;
 }
 
 .carousel-slide {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding-block: 5rem;
 }
 
 .carousel-slide__info {
-  max-inline-size: 30ch;
   margin-inline: auto;
-  justify-items: center;
-  gap: 1rem;
   text-align: center;
-  padding-block: 0.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 0;
 }
 
 .carousel-slide__description {
   max-inline-size: 28ch;
+  margin-block-start: 0.3rem;
+  margin-inline: auto;
 }
 
 .carousel-slide__name {
-  font-size: calc(var(--fs-800) + 0.2rem);
+  font-size: var(--fs-800);
   line-height: 1.1;
 }
 
@@ -79,6 +91,10 @@
   inset-inline-end: 0;
 }
 
+.carousel-slide__btn {
+  margin-block-start: 1rem;
+}
+
 /* ------------- */
 /* Media Queries */
 /* ------------- */
@@ -95,14 +111,8 @@
 }
 
 @media (min-width: 1000px) {
-  .carousel {
-    block-size: calc(100vh - 10rem);
-  }
-
   .carousel-slide__info {
-    max-inline-size: 35ch;
-    justify-items: start;
-    gap: 1rem;
+    max-inline-size: 60ch;
     text-align: left;
   }
 
@@ -112,5 +122,13 @@
 
   .carousel-slide__description {
     max-inline-size: unset;
+  }
+
+  .carousel-slide {
+    padding-block: 7rem;
+  }
+
+  .carousel-slide__info {
+    justify-items: start;
   }
 }

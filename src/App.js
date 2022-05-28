@@ -13,6 +13,15 @@ import {
   Signup,
   NotFound,
   SingleProduct,
+  UserProfile,
+  AddressPage,
+  Settings,
+  CouponsPage,
+  OrdersPage,
+  Overview,
+  ProfilePage,
+  Checkout,
+  OrdersResult,
 } from "./pages";
 
 import {
@@ -60,6 +69,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/cart/checkout" element={<Checkout />} />
         <Route
           path="/wishlist"
           element={
@@ -68,6 +78,22 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/myorders/:orderID" element={<OrdersResult />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Overview />} />
+          <Route path="address" element={<AddressPage />} />
+          <Route path="orders" element={<OrdersPage />} />
+          <Route path="coupons" element={<CouponsPage />} />
+          <Route path="edit" element={<ProfilePage />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
 
         <Route path="*" element={<NotFound />} />
       </Routes>

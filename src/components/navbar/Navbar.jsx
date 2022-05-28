@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { Link, useNavigate } from "react-router-dom";
-import { ProfileDropdown } from "../profile-dropdown/Profile.dropdown";
-import { useStateContext } from "../../hooks";
+import { Link, useNavigate } from 'react-router-dom';
+import { ProfileDropdown } from '../profile-dropdown/Profile.dropdown';
+import { useStateContext } from '../../hooks';
 
 const Navbar = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
-  const { state } = useStateContext();
+  const { state, stateDispatch } = useStateContext();
+
+  const handleSearchProducts = (e) => {
+    e.preventDefault();
+    if (searchQuery === '') return;
+    stateDispatch({
+      type: 'FILTER_BY_SEARCH_QUERY',
+      payload: { searchFor: searchQuery },
+    });
+    setSearchQuery('');
+    navigate('/products');
+  };
 
   return (
     <nav className="navbar">
@@ -29,7 +41,7 @@ const Navbar = () => {
           <li
             className="navbar__items"
             onClick={() => {
-              navigate("/products", { state: { idealFor: "Men" } });
+              navigate('/products', { state: { idealFor: 'Men' } });
             }}
           >
             Men
@@ -37,7 +49,7 @@ const Navbar = () => {
           <li
             className="navbar__items"
             onClick={() => {
-              navigate("/products", { state: { idealFor: "Women" } });
+              navigate('/products', { state: { idealFor: 'Women' } });
             }}
           >
             Women
@@ -45,14 +57,21 @@ const Navbar = () => {
         </ul>
         <ul className="navbar__list flex navbar__list--search">
           <li className="navbar__items navbar--hide navbar__items--search-bar">
-            <div className="search-bar">
+            <form className="search-bar" onSubmit={handleSearchProducts}>
               <span className="material-icons search-icon">search</span>
               <input
                 type="text"
                 className="input-field"
                 placeholder="search laptops, phones and tablets"
+                id="search-products"
+                name="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
-            </div>
+              <label htmlFor="search-products" className="sr-only">
+                Serach-Products
+              </label>
+            </form>
           </li>
           <li className="navbar__items navbar__items--icons navbar__items--search">
             <span className="material-icons">search</span>
@@ -75,10 +94,10 @@ const Navbar = () => {
           </li>
           <li className="navbar__items navbar__items--icons">
             <Link to="/cart" className="navbar__items--icons">
-              <section class="badge" style={{ marginBlockStart: "2px" }}>
+              <section className="badge" style={{ marginBlockStart: '2px' }}>
                 <span className="material-icons-outlined">shopping_bag</span>
                 {state.cartData?.length > 0 ? (
-                  <p class="badge__info badge__info--standard badge__info--primary">
+                  <p className="badge__info badge__info--standard badge__info--primary">
                     {state.cartData?.length}
                   </p>
                 ) : null}

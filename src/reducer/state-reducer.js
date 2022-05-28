@@ -9,6 +9,12 @@ const stateReducer = (state, action) => {
     case "GET_CART_DATA":
       return { ...state, cartData: action.payload };
 
+    case "GET_ADDRESS_DATA":
+      return { ...state, addressData: action.payload };
+
+    case "GET_ORDERS_DATA":
+      return { ...state, ordersData: action.payload };
+
     case "HIGH_TO_LOW":
       return { ...state, filters: { ...state.filters, sort: "HIGH_TO_LOW" } };
 
@@ -96,6 +102,12 @@ const stateReducer = (state, action) => {
         filters: { ...state.filters, idealFor: action.payload.filter },
       };
 
+    case "FILTER_BY_SEARCH_QUERY":
+      return {
+        ...state,
+        filters: { ...state.filters, searchQuery: action.payload.searchFor },
+      };
+
     case "CLEAR_ALL_FILTERS":
       return {
         ...state,
@@ -109,6 +121,7 @@ const stateReducer = (state, action) => {
           category: [],
           brand: [],
           idealFor: "",
+          searchQuery: "",
         },
       };
 
@@ -118,6 +131,8 @@ const stateReducer = (state, action) => {
         cartData: [],
         wishlistData: [],
         productData: [],
+        addressData: [],
+        ordersData: [],
         filters: {
           ...state.filters,
           sort: "",
@@ -127,6 +142,7 @@ const stateReducer = (state, action) => {
           price: [],
           category: [],
           brand: [],
+          searchQuery: "",
         },
       };
 

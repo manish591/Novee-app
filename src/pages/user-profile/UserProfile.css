@@ -1,0 +1,37 @@
+.user-profile {
+  margin-block-start: 8rem;
+}
+
+.user-profile__wrapper {
+  inline-size: min(95%, 1000px);
+  margin-inline: auto;
+  grid-template-columns: 1fr;
+  border-block: 1px solid var(--surface3);
+}
+
+.user-profile__navigation {
+  border-inline-end: 1px solid var(--surface3);
+  display: none;
+}
+
+.up-links__items {
+  cursor: pointer;
+  padding-block: 0.7rem;
+  padding-inline: 0.4rem;
+}
+
+.up-links__items:hover {
+  background-color: var(--surface3);
+}
+
+@media (min-width: 800px) {
+  .user-profile__wrapper {
+    inline-size: min(95%, 1000px);
+    margin-inline: auto;
+    grid-template-columns: 200px 1fr;
+  }
+
+  .user-profile__navigation {
+    display: block;
+  }
+}

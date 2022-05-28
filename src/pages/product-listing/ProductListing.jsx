@@ -10,8 +10,15 @@ import { useScrollToTop } from "../../hooks";
 const ProductListing = () => {
   const { state } = useStateContext();
   const { productData, filters } = state;
-  const { sort, rating, brand, fastDelivery, includeOutOfStock, idealFor } =
-    filters;
+  const {
+    sort,
+    rating,
+    brand,
+    fastDelivery,
+    includeOutOfStock,
+    idealFor,
+    searchQuery,
+  } = filters;
 
   const getUpdatedProductList = updatedProductList(
     productData,
@@ -19,6 +26,7 @@ const ProductListing = () => {
     idealFor,
     rating,
     brand,
+    searchQuery,
     fastDelivery,
     includeOutOfStock
   );

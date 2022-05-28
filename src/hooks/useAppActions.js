@@ -1,7 +1,7 @@
-import axios from "axios";
-import { useAuth } from "./useAuth";
-import { useStateContext } from "./useStateContext";
-import toast from "react-hot-toast";
+import axios from 'axios';
+import { useAuth } from './useAuth';
+import { useStateContext } from './useStateContext';
+import toast from 'react-hot-toast';
 
 const useAppActions = () => {
   const { myToken } = useAuth();
@@ -10,45 +10,70 @@ const useAppActions = () => {
   const isAlreadyInDatabase = (arr, _id) =>
     arr?.some((item) => item._id === _id);
 
-  const findDiscountedPrice = (originalPrice, discountRate) => {
-    return (
-      originalPrice -
-      (originalPrice * Number(discountRate)) / 100
-    ).toFixed(0);
+  const findTotalDiscountedPrice = (arr) => {
+    return arr.reduce(
+      (acc, curr) =>
+        acc + (curr.price - (curr.price * Number(curr.discount)) / 100),
+      0,
+    );
   };
 
   const findTotalPrice = (arr) => {
     return arr.reduce(
       (total, currentValue) =>
         (total = total + Number(currentValue.price) * Number(currentValue.qty)),
-      0
+      0,
     );
   };
 
-  const addItemToTheWishlist = async ({ e, product, stateDispatch }) => {
+  const findDiscountedPrice = (originalPrice, discountRate) => {
+    return originalPrice - (originalPrice * discountRate) / 100;
+  };
+
+  const getTotalCartPrice = (arr) => {
+    return findTotalDiscountedPrice(arr) - 45;
+  };
+
+  const addItemToTheWishlist = async ({
+    e,
+    product,
+    stateDispatch,
+    setDisableButton,
+  }) => {
     e.stopPropagation();
+    setDisableButton(true);
     try {
       let res = await axios.post(
-        "/api/user/wishlist",
+        '/api/user/wishlist',
         { product },
         {
           headers: { authorization: myToken },
-        }
+        },
       );
       if (res.status === 201 || res.status === 200) {
         stateDispatch({
-          type: "GET_WISHLIST_DATA",
+          type: 'GET_WISHLIST_DATA',
           payload: res.data.wishlist,
         });
-        toast("Product added to the wishlist");
+        toast('Product added to the wishlist');
+        setDisableButton(false);
       }
     } catch (err) {
       console.error(err);
-      toast.error("Unable to add product to the wishlist! Try again later");
+      toast.error('Unable to add product to the wishlist! Try again later');
+      setDisableButton(false);
+    } finally {
+      setDisableButton(false);
     }
   };
 
-  const removeItemFromWishlist = async ({ e, _id, stateDispatch }) => {
+  const removeItemFromWishlist = async ({
+    e,
+    _id,
+    stateDispatch,
+    setDisableButton,
+  }) => {
+    setDisableButton(true);
     e.stopPropagation();
     try {
       let res = await axios.delete(`/api/user/wishlist/${_id}`, {
@@ -58,54 +83,77 @@ const useAppActions = () => {
       });
       if (res.status === 201 || res.status === 200) {
         stateDispatch({
-          type: "GET_WISHLIST_DATA",
+          type: 'GET_WISHLIST_DATA',
           payload: res.data.wishlist,
         });
-        toast("Item removed from the wishlist");
+        toast('Item removed from the wishlist');
+        setDisableButton(false);
       }
     } catch (err) {
       console.error(err);
-      toast.error("Unable to remove item from the wishlist! Try Again later");
+      toast.error('Unable to remove item from the wishlist! Try Again later');
+      setDisableButton(false);
+    } finally {
+      setDisableButton(false);
     }
   };
 
-  const addProductsToCart = async ({ e, product, stateDispatch }) => {
+  const addProductsToCart = async ({
+    e,
+    product,
+    stateDispatch,
+    setDisableButton,
+  }) => {
     e.stopPropagation();
-
+    setDisableButton(true);
     try {
       const res = await axios.post(
-        "/api/user/cart",
+        '/api/user/cart',
         { product },
         {
           headers: { authorization: myToken },
-        }
+        },
       );
       if (res.status === 200 || res.status === 201) {
-        stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
-        toast("Item added to the cart");
+        stateDispatch({ type: 'GET_CART_DATA', payload: res.data.cart });
+        toast('Item added to the cart');
+        setDisableButton(false);
       }
     } catch (err) {
       console.error(err);
-      toast.error("Unable to add item to the cart! Try again later");
+      toast.error('Unable to add item to the cart! Try again later');
+      setDisableButton(false);
+    } finally {
+      setDisableButton(false);
     }
   };
 
-  const removeProductsFromCart = async ({ _id, stateDispatch }) => {
+  const removeProductsFromCart = async ({
+    _id,
+    stateDispatch,
+    setDisableButton,
+  }) => {
+    setDisableButton(true);
     try {
       const res = await axios.delete(`/api/user/cart/${_id}`, {
         headers: { authorization: myToken },
       });
       if (res.status === 200 || res.status === 201) {
-        stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
-        toast("Item removed from the cart");
+        stateDispatch({ type: 'GET_CART_DATA', payload: res.data.cart });
+        toast('Item removed from the cart');
+        setDisableButton(false);
       }
     } catch (err) {
       console.log(err);
-      toast.error("Unable to remove item from the cart! Try again later");
+      toast.error('Unable to remove item from the cart! Try again later');
+      setDisableButton(false);
+    } finally {
+      setDisableButton(false);
     }
   };
 
-  const updateCartQuantity = async (_id, type) => {
+  const updateCartQuantity = async (_id, type, setDisableButton) => {
+    setDisableButton(true);
     try {
       const res = await axios.post(
         `/api/user/cart/${_id}`,
@@ -116,19 +164,30 @@ const useAppActions = () => {
         },
         {
           headers: { authorization: myToken },
-        }
+        },
       );
       if (res.status === 200 || res.status === 201) {
-        stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
-        toast("Product quantity has been updated");
+        stateDispatch({ type: 'GET_CART_DATA', payload: res.data.cart });
+        toast('Product quantity has been updated');
+        setDisableButton(false);
       }
     } catch (err) {
       console.error(err);
-      toast.error("Unable to updated cart qunatity! Try again later");
+      toast.error('Unable to updated cart qunatity! Try again later');
+      setDisableButton(false);
+    } finally {
+      setDisableButton(false);
     }
   };
 
-  const moveItemToCart = async ({ e, _id, product, stateDispatch }) => {
+  const moveItemToCart = async ({
+    e,
+    _id,
+    product,
+    stateDispatch,
+    setDisableButton,
+  }) => {
+    setDisableButton(true);
     if (state.cartData.some((item) => item._id === product._id)) {
       removeItemFromWishlist({ e, _id, stateDispatch });
       const arr = state.cartData.map((item) => {
@@ -137,62 +196,73 @@ const useAppActions = () => {
         }
         return item;
       });
-      stateDispatch({ type: "GET_CART_DATA", payload: arr });
+      stateDispatch({ type: 'GET_CART_DATA', payload: arr });
     } else {
       removeItemFromWishlist({ e, _id, stateDispatch });
       addProductsToCart({ e, product, stateDispatch });
     }
-    toast("Item has been move to the cart");
+    toast('Item has been move to the cart');
+    setDisableButton(false);
   };
 
-  const moveToWishlist = async ({ _id, product, stateDispatch }) => {
+  const moveToWishlist = async ({
+    _id,
+    product,
+    stateDispatch,
+    setDisableButton,
+  }) => {
     if (state.wishlistData.some((item) => item._id === product._id)) {
       removeProductsFromCart({ _id, stateDispatch });
       return;
     }
+    setDisableButton(true);
     try {
       let res = await Promise.all([
         axios.delete(`/api/user/cart/${_id}`, {
           headers: { authorization: myToken },
         }),
         axios.post(
-          "/api/user/wishlist",
+          '/api/user/wishlist',
           { product },
           {
             headers: { authorization: myToken },
-          }
+          },
         ),
       ]);
       if (res[0].status === 200) {
-        stateDispatch({ type: "GET_CART_DATA", payload: res[0].data.cart });
+        stateDispatch({ type: 'GET_CART_DATA', payload: res[0].data.cart });
       }
       if (res[1].status === 201) {
         stateDispatch({
-          type: "GET_WISHLIST_DATA",
+          type: 'GET_WISHLIST_DATA',
           payload: res[1].data.wishlist,
         });
       }
-      toast("Item Has moved to the wishlist");
+      toast('Item Has moved to the wishlist');
+      setDisableButton(false);
     } catch (err) {
       console.error(err);
-      toast.error("Unable to move item to the wishlist");
+      toast.error('Unable to move item to the wishlist');
+      setDisableButton(false);
+    } finally {
+      setDisableButton(false);
     }
   };
 
   const removeAllItemsFromCart = async () => {
     try {
-      const res = await axios.delete("api/user/cart", {
+      const res = await axios.delete('/api/user/cart', {
         headers: {
           authorization: myToken,
         },
       });
       if (res.status === 200) {
-        stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
-        toast("Your cart is cleared");
+        stateDispatch({ type: 'GET_CART_DATA', payload: res.data.cart });
+        toast('Your cart is cleared');
       }
     } catch (err) {
       console.error(err);
-      toast.error("Unable to clear your cart! Try again later");
+      toast.error('Unable to clear your cart! Try again later');
     }
   };
 
@@ -200,7 +270,7 @@ const useAppActions = () => {
     isAlreadyInDatabase,
     addItemToTheWishlist,
     removeItemFromWishlist,
-    findDiscountedPrice,
+    findTotalDiscountedPrice,
     addProductsToCart,
     removeProductsFromCart,
     findTotalPrice,
@@ -208,6 +278,8 @@ const useAppActions = () => {
     moveItemToCart,
     moveToWishlist,
     removeAllItemsFromCart,
+    findDiscountedPrice,
+    getTotalCartPrice,
   };
 };
 
