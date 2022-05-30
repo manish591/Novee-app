@@ -54,34 +54,18 @@ const Carousel = () => {
             chevron_left
           </span>
           <section className="carousel" ref={carouselContainerRef}>
-            <article
-              className="carousel__item carousel-slide flex"
-              ref={slideRef}
-            >
-              <div className="carousel-slide__info grid">
-                <small className="carousel-slide__label">New Product</small>
-                <h2 className="carousel-slide__name">{product?.title}</h2>
-                <p className="carousel-slide__description">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Deleniti, esse debitis! Quidem cumque eum illum?
-                </p>
-                <button className="carousel-slide__btn btn btn--contained-warning">
-                  <Link to={`/products/${product?._id}`}>See Product</Link>
-                </button>
-              </div>
-            </article>
             {findNewProducts().map((item) => {
               return (
                 <article
                   key={item._id}
+                  ref={slideRef}
                   className="carousel__item carousel-slide flex"
                 >
                   <div className="carousel-slide__info">
                     <small className="carousel-slide__label">New Product</small>
                     <h2 className="carousel-slide__name">{item?.title}</h2>
                     <p className="carousel-slide__description">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Deleniti, esse debitis! Quidem cumque eum illum?
+                      {item.description}
                     </p>
                     <button className="carousel-slide__btn btn btn--contained-warning">
                       <Link to={`/products/${item?._id}`}>See Product</Link>
