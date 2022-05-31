@@ -1,8 +1,9 @@
 import React from 'react';
 import { ProductCardVertical } from 'components';
 import { useStateContext, useScrollToTop } from 'hooks';
+import { updatedProductList } from 'utilis';
 import { Filters } from './Filters';
-import { updatedProductList } from '../../utilis';
+import { ProductNotFound } from './ProductsNotFound';
 
 const ProductListing = () => {
   const { state } = useStateContext();
@@ -39,11 +40,15 @@ const ProductListing = () => {
       </div>
       <div className="listing__wrapper grid">
         <Filters />
-        <div className="listing__products grid">
-          {getUpdatedProductList.map((item) => {
-            return <ProductCardVertical product={item} key={item._id} />;
-          })}
-        </div>
+        {getUpdatedProductList.length > 0 ? (
+          <div className="listing__products grid">
+            {getUpdatedProductList.map((item) => {
+              return <ProductCardVertical product={item} key={item._id} />;
+            })}
+          </div>
+        ) : (
+          <ProductNotFound />
+        )}
       </div>
     </main>
   );
