@@ -1,5 +1,6 @@
-import React from "react";
-import { useUserAddress, useStateContext } from "../../../../hooks";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useUserAddress, useStateContext } from 'hooks';
 
 const AddressCardButton = ({
   _id,
@@ -14,6 +15,7 @@ const AddressCardButton = ({
   return (
     <div className="address-card__action">
       <button
+        type="button"
         className="address-card__edit"
         onClick={() => {
           setIsEditingAddress(true);
@@ -21,18 +23,24 @@ const AddressCardButton = ({
           setAddressFormData((afd) => {
             return { ...afd, ...addressToEdit };
           });
-        }}
-      >
+        }}>
         Edit
       </button>
       <button
+        type="button"
         className="address-card__delete"
-        onClick={() => deleteAddress({ _id })}
-      >
+        onClick={() => deleteAddress({ _id })}>
         Delete
       </button>
     </div>
   );
+};
+
+AddressCardButton.propTypes = {
+  _id: PropTypes.string.isRequired,
+  setIsAddressFormOpen: PropTypes.func.isRequired,
+  setAddressFormData: PropTypes.func.isRequired,
+  setIsEditingAddress: PropTypes.func.isRequired,
 };
 
 export { AddressCardButton };

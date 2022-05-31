@@ -1,8 +1,7 @@
-import React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { ProductCardHorizontal } from "../../components";
-import { useStateContext, useAppActions, useScrollToTop } from "../../hooks";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ProductCardHorizontal } from 'components';
+import { useStateContext, useAppActions, useScrollToTop } from 'hooks';
 
 const Cart = () => {
   const { state } = useStateContext();
@@ -13,12 +12,12 @@ const Cart = () => {
     removeAllItemsFromCart,
     getTotalCartPrice,
   } = useAppActions();
-  const [currentId, setCurrentId] = useState("");
+  const [currentId, setCurrentId] = useState('');
 
   useScrollToTop();
 
   return (
-    <main className={`cart`}>
+    <main className="cart">
       <div className="cart__wrapper grid">
         <section className="cart__products-list products-list">
           <div className="products-list__cards grid">
@@ -31,7 +30,9 @@ const Cart = () => {
                   </p>
                 </div>
                 <div className="address__action">
-                  <button className="address__btn btn btn--outlined-primary">
+                  <button
+                    type="button"
+                    className="address__btn btn btn--outlined-primary">
                     Add Address
                   </button>
                 </div>
@@ -48,12 +49,14 @@ const Cart = () => {
                   delete
                 </span>
                 <button
+                  type="button"
                   className="cart-action__btns btn btn--text"
-                  onClick={() => removeAllItemsFromCart()}
-                >
+                  onClick={() => removeAllItemsFromCart()}>
                   Remove
                 </button>
-                <button className="cart-action__btns btn btn--text">
+                <button
+                  type="button"
+                  className="cart-action__btns btn btn--text">
                   Move To Wishlist
                 </button>
               </div>
@@ -78,7 +81,7 @@ const Cart = () => {
               <h3>Coupons</h3>
             </div>
             <div className="coupons__action">
-              <button className="coupons__btn flex">
+              <button type="button" className="coupons__btn flex">
                 <span className="material-icons-round">label</span>
                 <p>Apply For Coupons</p>
               </button>
@@ -125,9 +128,8 @@ const Cart = () => {
             <Link
               to="/cart/checkout"
               className={`cart__place-order btn btn--contained-primary ${
-                cartData?.length === 0 ? "cart__place-order--disabled" : ""
-              }`}
-            >
+                cartData?.length === 0 ? 'cart__place-order--disabled' : ''
+              }`}>
               Place Order
             </Link>
           </div>

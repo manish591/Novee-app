@@ -1,5 +1,5 @@
-import React from "react";
-import "./Profile.css";
+import React from 'react';
+import './Profile.css';
 
 const ProfilePage = () => {
   return (
@@ -8,7 +8,9 @@ const ProfilePage = () => {
       <div className="profile-page__container grid">
         <p>Full Name: Manish Devrani</p>
         <p>Email: manishdevrani777@gmail.com</p>
-        <button className="btn btn--contained-primary">Edit Profile</button>
+        <button type="button" className="btn btn--contained-primary">
+          Edit Profile
+        </button>
       </div>
     </div>
   );

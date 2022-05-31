@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
-import { WishlistCard } from "./WishlistCard";
-import { useStateContext } from "../../hooks/useStateContext";
-import { Link } from "react-router-dom";
-import { useScrollToTop } from "../../hooks";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useScrollToTop } from 'hooks';
+import { WishlistCard } from './WishlistCard';
+import { useStateContext } from '../../hooks/useStateContext';
 
 const Wishlist = () => {
   const { state } = useStateContext();
@@ -11,7 +11,7 @@ const Wishlist = () => {
   useScrollToTop();
 
   return (
-    <main className={`wishlist`}>
+    <main className="wishlist">
       <div className="wishlist__wrapper">
         <div className="wishlist__info">
           <p>My wishlist {state.wishlistData.length} items</p>
@@ -30,7 +30,9 @@ const Wishlist = () => {
                 inventore perspiciatis doloribus beatae error voluptate! Libero
                 minus harum natus molestiae?
               </p>
-              <button className="btn btn--outlined-primary wishlist-empty__btn">
+              <button
+                type="button"
+                className="btn btn--outlined-primary wishlist-empty__btn">
                 <Link to="/products">Continue Shopping</Link>
               </button>
             </div>

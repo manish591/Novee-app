@@ -8,3 +8,4 @@ export { ProductCardHorizontal } from './product-card/ProductCardHorizontal';
 export { Loader } from './loader/Loader';
 export { ProfileDropdown } from './profile-dropdown/Profile.dropdown';
 export { ProtectedRoute } from './protected-route/ProtectedRoute';
+export { Image } from './image/Image';

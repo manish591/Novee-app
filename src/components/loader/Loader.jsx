@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Loader = () => {
   return (
@@ -7,8 +7,7 @@ const Loader = () => {
       height="450px"
       viewBox="0 0 156 156"
       xmlns="http://www.w3.org/2000/svg"
-      className="loader"
-    >
+      className="loader">
       <circle
         cx="78"
         cy="78"

@@ -38,21 +38,23 @@ const Navbar = () => {
           <li className="navbar__items">
             <Link to="/products">Shop</Link>
           </li>
-          <li
-            className="navbar__items"
-            onClick={() => {
-              navigate('/products', { state: { idealFor: 'Men' } });
-            }}
-          >
-            Men
+          <li className="navbar__items">
+            <button
+              type="button"
+              onClick={() => {
+                navigate('/products', { state: { idealFor: 'Men' } });
+              }}>
+              Men
+            </button>
           </li>
-          <li
-            className="navbar__items"
-            onClick={() => {
-              navigate('/products', { state: { idealFor: 'Women' } });
-            }}
-          >
-            Women
+          <li className="navbar__items">
+            <button
+              type="button"
+              onClick={() => {
+                navigate('/products', { state: { idealFor: 'Women' } });
+              }}>
+              Women
+            </button>
           </li>
         </ul>
         <ul className="navbar__list flex navbar__list--search">
@@ -78,13 +80,14 @@ const Navbar = () => {
           </li>
         </ul>
         <ul className="navbar__list flex">
-          <li
-            className="navbar__items navbar--hide navbar__items--icons navbar__items--profile profile"
-            onClick={() => {
-              setIsDropdownVisible((d) => !d);
-            }}
-          >
-            <span className="material-icons">person</span>
+          <li className="navbar__items navbar--hide navbar__items--icons navbar__items--profile profile">
+            <button
+              type="button"
+              onClick={() => {
+                setIsDropdownVisible((d) => !d);
+              }}>
+              <span className="material-icons">person</span>
+            </button>
             <ProfileDropdown isDropdownVisible={isDropdownVisible} />
           </li>
           <li className="navbar__items navbar--hide navbar__items--icons navbar__items--wishlist">

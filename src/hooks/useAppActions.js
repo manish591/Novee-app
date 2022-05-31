@@ -1,7 +1,7 @@
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import { useAuth } from './useAuth';
 import { useStateContext } from './useStateContext';
-import toast from 'react-hot-toast';
 
 const useAppActions = () => {
   const { myToken } = useAuth();
@@ -21,7 +21,7 @@ const useAppActions = () => {
   const findTotalPrice = (arr) => {
     return arr.reduce(
       (total, currentValue) =>
-        (total = total + Number(currentValue.price) * Number(currentValue.qty)),
+        total + Number(currentValue.price) * Number(currentValue.qty),
       0,
     );
   };
@@ -34,16 +34,11 @@ const useAppActions = () => {
     return findTotalDiscountedPrice(arr) - 45;
   };
 
-  const addItemToTheWishlist = async ({
-    e,
-    product,
-    stateDispatch,
-    setDisableButton,
-  }) => {
+  const addItemToTheWishlist = async ({ e, product, setDisableButton }) => {
     e.stopPropagation();
     setDisableButton(true);
     try {
-      let res = await axios.post(
+      const res = await axios.post(
         '/api/user/wishlist',
         { product },
         {
@@ -59,7 +54,6 @@ const useAppActions = () => {
         setDisableButton(false);
       }
     } catch (err) {
-      console.error(err);
       toast.error('Unable to add product to the wishlist! Try again later');
       setDisableButton(false);
     } finally {
@@ -67,16 +61,11 @@ const useAppActions = () => {
     }
   };
 
-  const removeItemFromWishlist = async ({
-    e,
-    _id,
-    stateDispatch,
-    setDisableButton,
-  }) => {
+  const removeItemFromWishlist = async ({ e, _id, setDisableButton }) => {
     setDisableButton(true);
     e.stopPropagation();
     try {
-      let res = await axios.delete(`/api/user/wishlist/${_id}`, {
+      const res = await axios.delete(`/api/user/wishlist/${_id}`, {
         headers: {
           authorization: myToken,
         },
@@ -90,7 +79,6 @@ const useAppActions = () => {
         setDisableButton(false);
       }
     } catch (err) {
-      console.error(err);
       toast.error('Unable to remove item from the wishlist! Try Again later');
       setDisableButton(false);
     } finally {
@@ -98,12 +86,7 @@ const useAppActions = () => {
     }
   };
 
-  const addProductsToCart = async ({
-    e,
-    product,
-    stateDispatch,
-    setDisableButton,
-  }) => {
+  const addProductsToCart = async ({ e, product, setDisableButton }) => {
     e.stopPropagation();
     setDisableButton(true);
     try {
@@ -120,7 +103,6 @@ const useAppActions = () => {
         setDisableButton(false);
       }
     } catch (err) {
-      console.error(err);
       toast.error('Unable to add item to the cart! Try again later');
       setDisableButton(false);
     } finally {
@@ -128,11 +110,7 @@ const useAppActions = () => {
     }
   };
 
-  const removeProductsFromCart = async ({
-    _id,
-    stateDispatch,
-    setDisableButton,
-  }) => {
+  const removeProductsFromCart = async ({ _id, setDisableButton }) => {
     setDisableButton(true);
     try {
       const res = await axios.delete(`/api/user/cart/${_id}`, {
@@ -144,7 +122,6 @@ const useAppActions = () => {
         setDisableButton(false);
       }
     } catch (err) {
-      console.log(err);
       toast.error('Unable to remove item from the cart! Try again later');
       setDisableButton(false);
     } finally {
@@ -172,7 +149,6 @@ const useAppActions = () => {
         setDisableButton(false);
       }
     } catch (err) {
-      console.error(err);
       toast.error('Unable to updated cart qunatity! Try again later');
       setDisableButton(false);
     } finally {
@@ -180,13 +156,7 @@ const useAppActions = () => {
     }
   };
 
-  const moveItemToCart = async ({
-    e,
-    _id,
-    product,
-    stateDispatch,
-    setDisableButton,
-  }) => {
+  const moveItemToCart = async ({ e, _id, product, setDisableButton }) => {
     setDisableButton(true);
     if (state.cartData.some((item) => item._id === product._id)) {
       removeItemFromWishlist({ e, _id, stateDispatch });
@@ -205,19 +175,14 @@ const useAppActions = () => {
     setDisableButton(false);
   };
 
-  const moveToWishlist = async ({
-    _id,
-    product,
-    stateDispatch,
-    setDisableButton,
-  }) => {
+  const moveToWishlist = async ({ _id, product, setDisableButton }) => {
     if (state.wishlistData.some((item) => item._id === product._id)) {
       removeProductsFromCart({ _id, stateDispatch });
       return;
     }
     setDisableButton(true);
     try {
-      let res = await Promise.all([
+      const res = await Promise.all([
         axios.delete(`/api/user/cart/${_id}`, {
           headers: { authorization: myToken },
         }),
@@ -241,7 +206,6 @@ const useAppActions = () => {
       toast('Item Has moved to the wishlist');
       setDisableButton(false);
     } catch (err) {
-      console.error(err);
       toast.error('Unable to move item to the wishlist');
       setDisableButton(false);
     } finally {
@@ -261,7 +225,6 @@ const useAppActions = () => {
         toast('Your cart is cleared');
       }
     } catch (err) {
-      console.error(err);
       toast.error('Unable to clear your cart! Try again later');
     }
   };

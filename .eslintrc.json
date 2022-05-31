@@ -54,14 +54,7 @@
                 }
             }
         ],
-        "no-console": [
-            "warn",
-            {
-                "allow": [
-                    "error"
-                ]
-            }
-        ],
+        "no-console": ["error"],
         "prettier/prettier": [
             "error",
             {

@@ -1,6 +1,6 @@
-import React from "react";
-import "./Coupons.css";
-import { coupons } from "../../../../utilis/utilis";
+import React from 'react';
+import './Coupons.css';
+import { coupons } from 'utilis';
 
 const CouponsPage = () => {
   return (

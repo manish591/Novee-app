@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-
-import { filterData, filterCategories } from "../../utilis/utilis";
-import { Checkbox } from "./Checkbox";
-import { useStateContext, useScrollToTop } from "../../hooks";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useStateContext } from 'hooks';
+import { filterData, filterCategories } from 'utilis';
+import { Checkbox } from './Checkbox';
 
 const Filters = () => {
   const { state, stateDispatch } = useStateContext();
@@ -14,7 +13,7 @@ const Filters = () => {
 
   useEffect(() => {
     stateDispatch({
-      type: "FILTER_BY_IDEAL_FOR",
+      type: 'FILTER_BY_IDEAL_FOR',
       payload: { filter: location?.state?.idealFor },
     });
   }, []);
@@ -23,31 +22,33 @@ const Filters = () => {
     <>
       <header className="listing__header listing-header grid">
         <div className="listing-header__right flex">
-          <h3 onClick={() => setShowFilters(!showFilters)}>Filters</h3>
+          <button type="button" onClick={() => setShowFilters(!showFilters)}>
+            Filters
+          </button>
           <button
+            type="button"
             onClick={() =>
-              stateDispatch({ type: "CLEAR_ALL_FILTERS", payload: {} })
+              stateDispatch({ type: 'CLEAR_ALL_FILTERS', payload: {} })
             }
-            style={{ cursor: "pointer" }}
-          >
+            style={{ cursor: 'pointer' }}>
             Clear All
           </button>
         </div>
         <div className="listing-header__left flex">
           {state?.filters?.searchQuery && (
             <>
-              {" "}
+              {' '}
               <h3 className="fw-100">
-                You Serached For "{state?.filters?.searchQuery}"
+                You Serached For &quot;{state?.filters?.searchQuery}&quot;
               </h3>
               <button
+                type="button"
                 onClick={() => {
                   stateDispatch({
-                    type: "FILTER_BY_SEARCH_QUERY",
-                    payload: { searchFor: "" },
+                    type: 'FILTER_BY_SEARCH_QUERY',
+                    payload: { searchFor: '' },
                   });
-                }}
-              >
+                }}>
                 Clear Search
               </button>
             </>
@@ -56,15 +57,20 @@ const Filters = () => {
       </header>
       <aside
         className={`listing__filters filter-list ${
-          showFilters ? `filter-list__open` : ""
-        }`}
-      >
+          showFilters ? `filter-list__open` : ''
+        }`}>
         <div className="filter-list__close flex">
-          <button className="filter-list__close-btn">Close</button>
+          <button type="button" className="filter-list__close-btn">
+            Close
+          </button>
         </div>
         <div className="filter-list__controls flex">
-          <button className="filter-list__cancel">Clear Filters</button>
-          <button className="filter-list__ok">Show Results</button>
+          <button type="button" className="filter-list__cancel">
+            Clear Filters
+          </button>
+          <button type="button" className="filter-list__ok">
+            Show Results
+          </button>
         </div>
         <form className="listing__form">
           <fieldset className="listing__filter-item filters">
@@ -75,9 +81,9 @@ const Filters = () => {
                 id="sort-one"
                 name="sort"
                 className="filters__checkbox"
-                checked={sort === "HIGH_TO_LOW"}
-                onChange={(e) => {
-                  stateDispatch({ type: "HIGH_TO_LOW", payload: {} });
+                checked={sort === 'HIGH_TO_LOW'}
+                onChange={() => {
+                  stateDispatch({ type: 'HIGH_TO_LOW', payload: {} });
                 }}
               />
               <label htmlFor="sort-one" className="filters__label">
@@ -90,9 +96,9 @@ const Filters = () => {
                 name="sort"
                 id="sort-two"
                 className="filters__checkbox"
-                checked={sort === "LOW_TO_HIGH"}
-                onChange={(e) => {
-                  stateDispatch({ type: "LOW_TO_HIGH", payload: {} });
+                checked={sort === 'LOW_TO_HIGH'}
+                onChange={() => {
+                  stateDispatch({ type: 'LOW_TO_HIGH', payload: {} });
                 }}
               />
               <label htmlFor="sort-two" className="filters__label">
@@ -108,11 +114,11 @@ const Filters = () => {
                 id="category-men"
                 name="category"
                 className="filters__checkbox"
-                checked={state.filters.idealFor === "Men"}
-                onChange={(e) => {
+                checked={state.filters.idealFor === 'Men'}
+                onChange={() => {
                   stateDispatch({
-                    type: "FILTER_BY_IDEAL_FOR",
-                    payload: { filter: "Men" },
+                    type: 'FILTER_BY_IDEAL_FOR',
+                    payload: { filter: 'Men' },
                   });
                 }}
               />
@@ -126,11 +132,11 @@ const Filters = () => {
                 id="category-women"
                 name="category"
                 className="filters__checkbox"
-                checked={state.filters.idealFor === "Women"}
-                onChange={(e) => {
+                checked={state.filters.idealFor === 'Women'}
+                onChange={() => {
                   stateDispatch({
-                    type: "FILTER_BY_IDEAL_FOR",
-                    payload: { filter: "Women" },
+                    type: 'FILTER_BY_IDEAL_FOR',
+                    payload: { filter: 'Women' },
                   });
                 }}
               />
@@ -146,8 +152,8 @@ const Filters = () => {
               label="availability-one"
               name="Include-out-of-stock"
               isChecked={includeOutOfStock}
-              callback={(e) => {
-                stateDispatch({ type: "INCLUDE_OUT_OF_STOCK", payload: {} });
+              callback={() => {
+                stateDispatch({ type: 'INCLUDE_OUT_OF_STOCK', payload: {} });
               }}
             />
             <Checkbox
@@ -155,8 +161,8 @@ const Filters = () => {
               label="availability-two"
               name="fast-delivery-only"
               isChecked={fastDelivery}
-              callback={(e) => {
-                stateDispatch({ type: "FAST_DELIVERY", payload: {} });
+              callback={() => {
+                stateDispatch({ type: 'FAST_DELIVERY', payload: {} });
               }}
             />
           </fieldset>
@@ -165,15 +171,17 @@ const Filters = () => {
             {filterData[filterCategories[0]].map((item) => {
               return (
                 <Checkbox
+                  // eslint-disable-next-line react/jsx-props-no-spreading
                   {...item}
                   key={item.id}
                   label={filterCategories[0]}
                   isChecked={brand.some(
-                    (brand) => brand.toLowerCase() === item.name.toLowerCase()
+                    (brandName) =>
+                      brandName.toLowerCase() === item.name.toLowerCase(),
                   )}
-                  callback={(e) => {
+                  callback={() => {
                     stateDispatch({
-                      type: "FILTER_BY_BRAND",
+                      type: 'FILTER_BY_BRAND',
                       payload: { value: item.name.toLowerCase() },
                     });
                   }}
@@ -186,15 +194,16 @@ const Filters = () => {
             {filterData[filterCategories[1]].map((item) => {
               return (
                 <Checkbox
+                  // eslint-disable-next-line react/jsx-props-no-spreading
                   {...item}
                   key={item.id}
                   label={filterCategories[1]}
                   isChecked={rating.some(
-                    (rating) => rating.toLowerCase() === item.name.toLowerCase()
+                    (rate) => rate.toLowerCase() === item.name.toLowerCase(),
                   )}
-                  callback={(e) => {
+                  callback={() => {
                     stateDispatch({
-                      type: "FILTER_BY_RATING",
+                      type: 'FILTER_BY_RATING',
                       payload: { value: item.name.toLowerCase() },
                     });
                   }}

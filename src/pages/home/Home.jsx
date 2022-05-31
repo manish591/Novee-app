@@ -1,8 +1,8 @@
 import React from 'react';
-import { Carousel, ProductCardVertical } from '../../components';
-import { brandLogoData } from '../../utilis/utilis';
 import { Link } from 'react-router-dom';
-import { useScrollToTop, useStateContext } from '../../hooks';
+import { Carousel, ProductCardVertical } from 'components';
+import { brandLogoData } from 'utilis';
+import { useScrollToTop, useStateContext } from 'hooks';
 
 const Home = () => {
   const { state } = useStateContext();

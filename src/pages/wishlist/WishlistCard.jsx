@@ -1,9 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useAuth } from '../../hooks';
-import { useStateContext } from '../../hooks';
-import { useAppActions } from '../../hooks';
+import PropTypes from 'prop-types';
+import { useAuth, useStateContext, useAppActions } from 'hooks';
 import { Image } from '../../components/image/Image';
 
 const WishlistCard = ({ product }) => {
@@ -18,6 +15,7 @@ const WishlistCard = ({ product }) => {
       <div className="card__image-container">
         <Image title={title} img={img} />
         <button
+          type="button"
           className="card__remove-wishlist"
           onClick={(e) =>
             removeItemFromWishlist({
@@ -28,8 +26,7 @@ const WishlistCard = ({ product }) => {
               setDisableButton,
             })
           }
-          disabled={disableButton}
-        >
+          disabled={disableButton}>
           <span className="material-icons">clear</span>
         </button>
       </div>
@@ -46,6 +43,7 @@ const WishlistCard = ({ product }) => {
         </div>
       </div>
       <button
+        type="button"
         className="card__moveToBagBtn"
         onClick={(e) =>
           moveItemToCart({
@@ -57,12 +55,15 @@ const WishlistCard = ({ product }) => {
             setDisableButton,
           })
         }
-        disabled={disableButton}
-      >
+        disabled={disableButton}>
         Move To Cart
       </button>
     </div>
   );
+};
+
+WishlistCard.propTypes = {
+  product: PropTypes.object.isRequired,
 };
 
 export { WishlistCard };

@@ -1,11 +1,8 @@
-import React from "react";
-
-import { Filters } from "./Filters";
-import { ProductCardVertical } from "../../components";
-import { useStateContext } from "../../hooks/useStateContext";
-import { Loader } from "../../components";
-import { updatedProductList } from "../../utilis";
-import { useScrollToTop } from "../../hooks";
+import React from 'react';
+import { ProductCardVertical } from 'components';
+import { useStateContext, useScrollToTop } from 'hooks';
+import { Filters } from './Filters';
+import { updatedProductList } from '../../utilis';
 
 const ProductListing = () => {
   const { state } = useStateContext();
@@ -28,7 +25,7 @@ const ProductListing = () => {
     brand,
     searchQuery,
     fastDelivery,
-    includeOutOfStock
+    includeOutOfStock,
   );
 
   useScrollToTop();

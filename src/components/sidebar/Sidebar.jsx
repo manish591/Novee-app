@@ -1,7 +1,6 @@
-import React from "react";
-
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from "../../hooks";
+import { useAuth } from 'hooks';
 
 const Sidebar = () => {
   const { logoutUser } = useAuth();
@@ -15,7 +14,7 @@ const Sidebar = () => {
               <h3>novee</h3>
             </li>
             <li className="sidebar__list-item sidebar--clear">
-              <a href="#">
+              <a href="#clear">
                 <span className="material-icons clear-icon">clear</span>
               </a>
             </li>
@@ -41,23 +40,24 @@ const Sidebar = () => {
           </ul>
           <ul className="sidebar__list flex">
             <li className="sidebar__list-item">
-              <a href="#">Account</a>
+              <a href="/profile">Account</a>
             </li>
-            <li 
-              className="sidebar__list-item"
-              onClick={logoutUser}
-              >
-              Logout
+            <li className="sidebar__list-item">
+              <button type="button" onClick={logoutUser}>
+                Logout
+              </button>
             </li>
           </ul>
         </div>
       </section>
       <a
-        href="#"
+        href="#close"
         id="sidenav-close"
         className="sidebar__close"
         title="Close Menu"
-      ></a>
+        style={{ visibility: 'hidden' }}>
+        close
+      </a>
     </aside>
   );
 };

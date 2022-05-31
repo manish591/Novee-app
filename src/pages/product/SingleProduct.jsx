@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-
-import { useParams, useNavigate } from "react-router-dom";
+import React from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import {
   useStateContext,
   useAppActions,
   useAuthContext,
   useScrollToTop,
-} from "../../hooks";
-import { Image } from "../../components/image/Image";
+} from 'hooks';
+import { Image } from 'components';
 
 const SingleProduct = () => {
   const { state, stateDispatch } = useStateContext();
@@ -18,13 +17,12 @@ const SingleProduct = () => {
     removeItemFromWishlist,
   } = useAppActions();
   const { isUserLogedIn, currentUser } = useAuthContext();
-
+  const location = useLocation();
   const { productId } = useParams();
-
   const navigate = useNavigate();
 
   const singleProduct = state.productData.find(
-    (item) => item._id === productId
+    (item) => item._id === productId,
   );
 
   useScrollToTop();
@@ -55,8 +53,8 @@ const SingleProduct = () => {
           <section className="sp-content__pricing flex">
             <p className="sp-content__discount-price">
               {(
-                singleProduct?.price -
-                singleProduct?.price * (singleProduct?.discount / 100)
+                singleProduct.price -
+                singleProduct.price * (singleProduct.discount / 100)
               ).toFixed(0)}
             </p>
             <p className="sp-content__discount-rate">
@@ -67,6 +65,7 @@ const SingleProduct = () => {
           <section className="sp-content__actions flex">
             {isAlreadyInDatabase(state.wishlistData, singleProduct?._id) ? (
               <button
+                type="button"
                 className="btn btn--outlined-secondary"
                 onClick={(e) =>
                   removeItemFromWishlist({
@@ -75,14 +74,14 @@ const SingleProduct = () => {
                     currentUser,
                     stateDispatch,
                   })
-                }
-              >
+                }>
                 Remove From Wishlist
               </button>
             ) : (
               <button
+                type="button"
                 className={`btn btn--outlined-secondary ${
-                  !singleProduct?.inStock && "btn--out-of-stock"
+                  !singleProduct?.inStock && 'btn--out-of-stock'
                 }`}
                 onClick={(e) =>
                   addItemToTheWishlist({
@@ -92,25 +91,25 @@ const SingleProduct = () => {
                     currentUser,
                     stateDispatch,
                   })
-                }
-              >
+                }>
                 Add To Wishlist
               </button>
             )}
             {isAlreadyInDatabase(state.cartData, singleProduct?._id) ? (
               <button
+                type="button"
                 className="btn btn--contained-primary"
                 onClick={(e) => {
                   e.stopPropagation();
-                  navigate("/cart");
-                }}
-              >
+                  navigate('/cart');
+                }}>
                 Go To Cart
               </button>
             ) : (
               <button
+                type="button"
                 className={`btn btn--contained-secondary ${
-                  !singleProduct?.inStock && "btn--out-of-stock"
+                  !singleProduct?.inStock && 'btn--out-of-stock'
                 }`}
                 onClick={(e) =>
                   isUserLogedIn
@@ -121,9 +120,8 @@ const SingleProduct = () => {
                         currentUser,
                         stateDispatch,
                       })
-                    : navigate("/login", { state: location.pathname })
-                }
-              >
+                    : navigate('/login', { state: location.pathname })
+                }>
                 Add To Cart
               </button>
             )}

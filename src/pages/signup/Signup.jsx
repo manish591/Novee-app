@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-
-import { Link } from "react-router-dom";
-import { useAuth, useScrollToTop } from "../../hooks";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth, useScrollToTop } from 'hooks';
 
 const Signup = () => {
   const [userDetails, setUserDetails] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
   const { signupUser } = useAuth();
 
@@ -102,7 +101,7 @@ const Signup = () => {
         </form>
         <div className="signup__footer">
           <p>Already have an account?</p>
-          <button className="signup__signup">
+          <button type="button" className="signup__signup">
             <Link to="/login">Log In</Link>
           </button>
         </div>
