@@ -90,6 +90,7 @@ const Navbar = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                cursor: 'pointer',
               }}>
               <span className="material-icons">person</span>
             </button>

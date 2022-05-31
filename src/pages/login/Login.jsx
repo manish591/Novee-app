@@ -8,6 +8,10 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const [loginErrorData, setLoginErrorData] = useState({
+    emailError: '',
+    passwordError: '',
+  });
   const { loginUser } = useAuth();
   const location = useLocation();
   const from = location?.state;
@@ -15,6 +19,23 @@ const Login = () => {
   const handleUserLogin = async (e) => {
     e.preventDefault();
     loginUser(loginData.email, loginData.password, from);
+  };
+
+  const handleValidateUser = (e) => {
+    const { name } = e.target;
+    const isValid = e.target.validity.valid;
+    const { validationMessage } = e.target;
+    if (isValid) {
+      setLoginErrorData({
+        ...loginErrorData,
+        [`${name}Error`]: '',
+      });
+    } else {
+      setLoginErrorData({
+        ...loginErrorData,
+        [`${name}Error`]: validationMessage,
+      });
+    }
   };
 
   useScrollToTop();
@@ -39,22 +60,27 @@ const Login = () => {
               onChange={(e) =>
                 setLoginData((ld) => ({ ...ld, email: e.target.value }))
               }
+              onBlur={handleValidateUser}
               required
             />
+            <p className="error-state">{loginErrorData.emailError}</p>
           </section>
           <section className="password-container">
             <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
-              name="current-password"
+              name="password"
               className="login__password"
+              minLength="8"
               value={loginData.password}
               onChange={(e) =>
                 setLoginData((ld) => ({ ...ld, password: e.target.value }))
               }
+              onBlur={handleValidateUser}
               required
             />
+            <p className="error-state">{loginErrorData.passwordError}</p>
           </section>
           <section className="additional-data">
             <section className="rememberMe-container">
