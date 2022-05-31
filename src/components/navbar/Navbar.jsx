@@ -106,7 +106,9 @@ const Navbar = () => {
               <section className="badge" style={{ marginBlockStart: '2px' }}>
                 <span className="material-icons-outlined">shopping_bag</span>
                 {state.cartData?.length > 0 ? (
-                  <p className="badge__info badge__info--standard badge__info--primary">
+                  <p
+                    className="badge__info badge__info--standard badge__info--primary"
+                    style={{ insetInlineEnd: '-5px' }}>
                     {state.cartData?.length}
                   </p>
                 ) : null}
