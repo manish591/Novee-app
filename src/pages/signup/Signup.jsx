@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth, useScrollToTop } from 'hooks';
+import toast from 'react-hot-toast';
 
 const Signup = () => {
   const [userDetails, setUserDetails] = useState({
@@ -9,12 +10,34 @@ const Signup = () => {
     password: '',
     confirmPassword: '',
   });
+  const [signupErrorData, setSignupErrorData] = useState({
+    nameError: '',
+    emailError: '',
+    passwordError: '',
+    'confirm-passwordError': '',
+  });
   const { signupUser } = useAuth();
 
   const handleUserSignup = (e) => {
     e.preventDefault();
-    if (userDetails.confirmPassword !== userDetails.password) return;
+    if (userDetails.confirmPassword !== userDetails.password) {
+      toast.error('Password and confirm password not matching');
+      return;
+    }
     signupUser(userDetails.name, userDetails.email, userDetails.password);
+  };
+
+  const handleValidateUser = (e) => {
+    const { name, validationMessage } = e.target;
+    const isValid = e.target.validity.valid;
+    if (isValid) {
+      setSignupErrorData({ ...signupErrorData, [`${name}Error`]: '' });
+    } else {
+      setSignupErrorData({
+        ...signupErrorData,
+        [`${name}Error`]: validationMessage,
+      });
+    }
   };
 
   useScrollToTop();
@@ -41,8 +64,10 @@ const Signup = () => {
                   return { ...ud, name: e.target.value };
                 });
               }}
+              onBlur={handleValidateUser}
               required
             />
+            <p className="error-state">{signupErrorData.nameError}</p>
           </section>
           <section className="email-container">
             <label htmlFor="email">Email</label>
@@ -58,40 +83,50 @@ const Signup = () => {
                   return { ...ud, email: e.target.value };
                 });
               }}
+              onBlur={handleValidateUser}
               required
             />
+            <p className="error-state">{signupErrorData.emailError}</p>
           </section>
           <section className="password-container">
             <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
-              name="new-password"
+              name="password"
               className="signup__password"
+              minLength="8"
               value={userDetails.password}
               onChange={(e) => {
                 setUserDetails((ud) => {
                   return { ...ud, password: e.target.value };
                 });
               }}
+              onBlur={handleValidateUser}
               required
             />
+            <p className="error-state">{signupErrorData.passwordError}</p>
           </section>
           <section className="password-container">
             <label htmlFor="confirm-password">Confirm Password</label>
             <input
               type="password"
               id="confirm-password"
-              name="new-password"
+              name="confirm-password"
               className="signup__password"
+              minLength="8"
               value={userDetails.confirmPassword}
               onChange={(e) => {
                 setUserDetails((ud) => {
                   return { ...ud, confirmPassword: e.target.value };
                 });
               }}
+              onBlur={handleValidateUser}
               required
             />
+            <p className="error-state">
+              {signupErrorData['confirm-passwordError']}
+            </p>
           </section>
           <section className="submit-btn">
             <button type="submit" className="signup__submit">
