@@ -32,6 +32,11 @@ const ProductListing = () => {
 
   return (
     <main className="listing">
+      <div className="listing-top">
+        <p className="listing__total-items">
+          Result - <span>{getUpdatedProductList.length} Items</span>
+        </p>
+      </div>
       <div className="listing__wrapper grid">
         <Filters />
         <div className="listing__products grid">

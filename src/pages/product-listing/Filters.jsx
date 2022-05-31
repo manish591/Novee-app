@@ -22,7 +22,10 @@ const Filters = () => {
     <>
       <header className="listing__header listing-header grid">
         <div className="listing-header__right flex">
-          <button type="button" onClick={() => setShowFilters(!showFilters)}>
+          <button
+            type="button"
+            className="listing-heading"
+            onClick={() => setShowFilters(!showFilters)}>
             Filters
           </button>
           <button
@@ -39,7 +42,7 @@ const Filters = () => {
             <>
               {' '}
               <h3 className="fw-100">
-                You Serached For &quot;{state?.filters?.searchQuery}&quot;
+                You Searched For &quot;{state?.filters?.searchQuery}&quot;
               </h3>
               <button
                 type="button"
