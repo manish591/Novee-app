@@ -90,7 +90,7 @@ input[type='checkbox'] {
 
 .signup__submit {
   inline-size: 100%;
-  padding-block: 1rem;
+  padding-block: 0.7rem;
   font-weight: 700;
   border: none;
   background: #d9843b;
