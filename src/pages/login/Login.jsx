@@ -12,6 +12,7 @@ const Login = () => {
     emailError: '',
     passwordError: '',
   });
+  const [showPassword, setShowPassword] = useState(false);
   const { loginUser } = useAuth();
   const location = useLocation();
   const from = location?.state;
@@ -67,19 +68,35 @@ const Login = () => {
           </section>
           <section className="password-container">
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="login__password"
-              minLength="8"
-              value={loginData.password}
-              onChange={(e) =>
-                setLoginData((ld) => ({ ...ld, password: e.target.value }))
-              }
-              onBlur={handleValidateUser}
-              required
-            />
+            <section className="password-toggle">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                className="login__password"
+                minLength="8"
+                value={loginData.password}
+                onChange={(e) =>
+                  setLoginData((ld) => ({ ...ld, password: e.target.value }))
+                }
+                onBlur={handleValidateUser}
+                required
+              />
+              <button
+                type="button"
+                className="password-toggle__icon"
+                onClick={() => {
+                  setShowPassword((sp) => !sp);
+                }}>
+                {showPassword ? (
+                  <span className="material-icons-outlined">
+                    visibility_off
+                  </span>
+                ) : (
+                  <span className="material-icons-outlined">visibility</span>
+                )}
+              </button>
+            </section>
             <p className="error-state">{loginErrorData.passwordError}</p>
           </section>
           <section className="additional-data">

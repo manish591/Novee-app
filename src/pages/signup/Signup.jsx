@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth, useScrollToTop } from 'hooks';
-import toast from 'react-hot-toast';
 
 const Signup = () => {
   const [userDetails, setUserDetails] = useState({
     name: '',
     email: '',
     password: '',
-    confirmPassword: '',
   });
   const [signupErrorData, setSignupErrorData] = useState({
     nameError: '',
     emailError: '',
     passwordError: '',
-    'confirm-passwordError': '',
   });
+  const [showPassword, setShowPassword] = useState(false);
   const { signupUser } = useAuth();
 
   const handleUserSignup = (e) => {
     e.preventDefault();
-    if (userDetails.confirmPassword !== userDetails.password) {
-      toast.error('Password and confirm password not matching');
-      return;
-    }
     signupUser(userDetails.name, userDetails.email, userDetails.password);
   };
 
@@ -90,43 +84,38 @@ const Signup = () => {
           </section>
           <section className="password-container">
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="signup__password"
-              minLength="8"
-              value={userDetails.password}
-              onChange={(e) => {
-                setUserDetails((ud) => {
-                  return { ...ud, password: e.target.value };
-                });
-              }}
-              onBlur={handleValidateUser}
-              required
-            />
+            <section className="password-toggle">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                className="signup__password"
+                minLength="8"
+                value={userDetails.password}
+                onChange={(e) => {
+                  setUserDetails((ud) => {
+                    return { ...ud, password: e.target.value };
+                  });
+                }}
+                onBlur={handleValidateUser}
+                required
+              />
+              <button
+                type="button"
+                className="password-toggle__icon"
+                onClick={() => {
+                  setShowPassword((sp) => !sp);
+                }}>
+                {showPassword ? (
+                  <span className="material-icons-outlined">
+                    visibility_off
+                  </span>
+                ) : (
+                  <span className="material-icons-outlined">visibility</span>
+                )}
+              </button>
+            </section>
             <p className="error-state">{signupErrorData.passwordError}</p>
-          </section>
-          <section className="password-container">
-            <label htmlFor="confirm-password">Confirm Password</label>
-            <input
-              type="password"
-              id="confirm-password"
-              name="confirm-password"
-              className="signup__password"
-              minLength="8"
-              value={userDetails.confirmPassword}
-              onChange={(e) => {
-                setUserDetails((ud) => {
-                  return { ...ud, confirmPassword: e.target.value };
-                });
-              }}
-              onBlur={handleValidateUser}
-              required
-            />
-            <p className="error-state">
-              {signupErrorData['confirm-passwordError']}
-            </p>
           </section>
           <section className="submit-btn">
             <button type="submit" className="signup__submit">
