@@ -85,6 +85,11 @@ const Navbar = () => {
               type="button"
               onClick={() => {
                 setIsDropdownVisible((d) => !d);
+              }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}>
               <span className="material-icons">person</span>
             </button>
