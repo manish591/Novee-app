@@ -1,22 +1,22 @@
 const findHighestLowestRating = (arr) => {
   let range = { highest: 0, lowest: 5 };
   arr.forEach((item) => {
-    if (parseInt(item) > range.highest) {
-      range = { ...range, highest: parseInt(item) };
+    if (parseInt(item, 10) > range.highest) {
+      range = { ...range, highest: parseInt(item, 10) };
     }
-    if (parseInt(item) < range.lowest) {
-      range = { ...range, lowest: parseInt(item) };
+    if (parseInt(item, 10) < range.lowest) {
+      range = { ...range, lowest: parseInt(item, 10) };
     }
   });
   return range;
 };
 
 const applyFilterBySort = (arr, type) => {
-  if (type === "HIGH_TO_LOW") {
+  if (type === 'HIGH_TO_LOW') {
     return [...arr].sort((a, b) => b.price - a.price);
   }
 
-  if (type === "LOW_TO_HIGH") {
+  if (type === 'LOW_TO_HIGH') {
     return [...arr].sort((a, b) => a.price - b.price);
   }
   return arr;
@@ -48,33 +48,32 @@ const applyFilterByRatings = (arr, type) => {
   if (type.length === 1) {
     return arr.filter(
       (item) =>
-        item.ratings >= parseInt(type[0]) &&
-        item.ratings < parseInt(type[0]) + 1
+        item.ratings >= parseInt(type[0], 10) &&
+        item.ratings < parseInt(type[0], 10) + 1,
     );
   }
   if (type.length > 1) {
     return arr.filter(
-      (item) => item.ratings >= lowest && item.ratings < highest + 1
+      (item) => item.ratings >= lowest && item.ratings < highest + 1,
     );
   }
   return arr;
 };
 
 const applyFilterByIdealFor = (arr, type) => {
-  if (type === "Men") {
-    return arr.filter((item) => item.idealFor === "Men");
+  if (type === 'Men') {
+    return arr.filter((item) => item.idealFor === 'Men');
   }
-  if (type === "Women") {
-    return arr.filter((item) => item.idealFor === "Women");
+  if (type === 'Women') {
+    return arr.filter((item) => item.idealFor === 'Women');
   }
   return arr;
 };
 
 const applyFilterBySearch = (arr, searchQuery) => {
-  if (searchQuery !== "") {
-    console.log(searchQuery);
+  if (searchQuery !== '') {
     return arr.filter((item) =>
-      item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   }
   return arr;
@@ -88,41 +87,41 @@ export const updatedProductList = (
   brandList,
   searchQuery,
   deliveryFilter,
-  stockFilter
+  stockFilter,
 ) => {
   const getFiltersByRatingProduct = applyFilterByRatings(
     originalProductData,
-    ratingsList
+    ratingsList,
   );
 
   const getFiltersByBrandsProduct = applyFilterByBrands(
     getFiltersByRatingProduct,
-    brandList
+    brandList,
   );
 
   const getFiltersByStockProduct = applyFilterByInStock(
     getFiltersByBrandsProduct,
-    stockFilter
+    stockFilter,
   );
 
   const getFiltersByDeliveryProduct = applyFilterByFastDelivery(
     getFiltersByStockProduct,
-    deliveryFilter
+    deliveryFilter,
   );
 
   const getFiltersBySortProduct = applyFilterBySort(
     getFiltersByDeliveryProduct,
-    sort
+    sort,
   );
 
   const getFiltersByIdealFor = applyFilterByIdealFor(
     getFiltersBySortProduct,
-    idealFor
+    idealFor,
   );
 
   const getFilterBySearchQuery = applyFilterBySearch(
     getFiltersByIdealFor,
-    searchQuery
+    searchQuery,
   );
 
   return getFilterBySearchQuery;

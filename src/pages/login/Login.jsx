@@ -1,13 +1,12 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useAuth, useScrollToTop } from "../../hooks";
+import { Link, useLocation } from 'react-router-dom';
+import { useAuth, useScrollToTop } from 'hooks';
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const { loginUser } = useAuth();
   const location = useLocation();
@@ -66,7 +65,9 @@ const Login = () => {
               />
               <label htmlFor="rememberMe">Remember Me</label>
             </section>
-            <button className="login__forgotPassword">Forgot password?</button>
+            <button type="button" className="login__forgotPassword">
+              Forgot password?
+            </button>
           </section>
           <section className="submit-btn">
             <button type="submit" className="login__submit">
@@ -75,8 +76,8 @@ const Login = () => {
           </section>
         </form>
         <div className="login__footer">
-          <p>Don't Have an account? </p>
-          <button className="login__signup">
+          <p>Don&apos;t Have an account? </p>
+          <button type="submit" className="login__signup">
             <Link to="/signup">Sign Up</Link>
           </button>
         </div>
