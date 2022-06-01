@@ -21,23 +21,6 @@ const Cart = () => {
       <div className="cart__wrapper grid">
         <section className="cart__products-list products-list">
           <div className="products-list__cards grid">
-            <section className="cart__addresses address flex">
-              <div className="address__wrapper flex">
-                <div className="address__info">
-                  <p>Deliver To: Person Name</p>
-                  <p className="address__description">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing.
-                  </p>
-                </div>
-                <div className="address__action">
-                  <button
-                    type="button"
-                    className="address__btn btn btn--outlined-primary">
-                    Add Address
-                  </button>
-                </div>
-              </div>
-            </section>
             <section className="cart__action-btn cart-action flex">
               <div className="cart-action__info">
                 <h3 className="fw-100">
@@ -53,11 +36,6 @@ const Cart = () => {
                   className="cart-action__btns btn btn--text"
                   onClick={() => removeAllItemsFromCart()}>
                   Remove
-                </button>
-                <button
-                  type="button"
-                  className="cart-action__btns btn btn--text">
-                  Move To Wishlist
                 </button>
               </div>
             </section>

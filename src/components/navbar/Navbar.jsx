@@ -92,7 +92,7 @@ const Navbar = () => {
                 justifyContent: 'center',
                 cursor: 'pointer',
               }}>
-              <span className="material-icons">person</span>
+              <span className="material-icons-outlined">person</span>
             </button>
             <ProfileDropdown isDropdownVisible={isDropdownVisible} />
           </li>

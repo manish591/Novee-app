@@ -9,11 +9,11 @@
 .navbar {
   background-color: var(--surface2);
   padding-block: 0.8rem;
-  border-block-end: 1px solid var(--surface4);
   position: fixed;
   inset-block-start: 0;
   z-index: 12;
   inline-size: 100%;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 8%);
 }
 
 .navbar__wrapper {
@@ -41,11 +41,16 @@
   cursor: pointer;
 }
 
+.navbar__items > button {
+  cursor: pointer;
+}
+
 .navbar__items--logo {
   font-size: var(--fs-600);
   font-weight: bold;
   font-family: var(--ff-sans-normal);
   margin-block-end: 4px;
+  color: var(--text1);
 }
 
 .navbar--hide {
@@ -59,8 +64,6 @@
   padding-inline: 0.7rem;
   padding-block: 0.6rem;
   border-radius: 3px;
-  border: 1px solid var(--surface4);
-  background-color: var(--surface4);
 }
 
 .search-bar:focus-within {

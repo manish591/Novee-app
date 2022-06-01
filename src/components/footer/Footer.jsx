@@ -21,9 +21,10 @@ const Footer = () => {
           </li>
         </ul>
         <p className="footer__description">
-          Novee provides you with the best electronics material. We&apos;ll
-          provide you laptops, tablets, phones of higher quality. Login to get
-          started.
+          Welcome to Novee. We offer a premium selection of clothing for men,
+          women and kids. Whether you&apos;re looking for a new pair of jeans or
+          a sweatshirt to replenish your closet, we have options from top
+          designers and major brands.
         </p>
         <p className="footer__copyright">Copyright 2022. All Rights Reserved</p>
         <ul className="footer__socials flex">

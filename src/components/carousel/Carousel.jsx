@@ -55,7 +55,11 @@ const Carousel = () => {
                 <article
                   key={item._id}
                   ref={slideRef}
-                  className="carousel__item carousel-slide flex">
+                  className="carousel__item carousel-slide flex"
+                  style={{
+                    backgroundImage: `url(${item.img.JPG})`,
+                    backgroundRepeat: 'no-repeat',
+                  }}>
                   <div className="carousel-slide__info">
                     <small className="carousel-slide__label">New Product</small>
                     <h2 className="carousel-slide__name">{item?.title}</h2>
@@ -64,7 +68,7 @@ const Carousel = () => {
                     </p>
                     <button
                       type="button"
-                      className="carousel-slide__btn btn btn--contained-warning">
+                      className="carousel-slide__btn btn btn--contained-primary">
                       <Link to={`/products/${item?._id}`}>See Product</Link>
                     </button>
                   </div>
