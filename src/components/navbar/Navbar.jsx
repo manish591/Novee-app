@@ -64,7 +64,7 @@ const Navbar = () => {
               <input
                 type="text"
                 className="input-field"
-                placeholder="search laptops, phones and tablets"
+                placeholder="search mens and womens clothes"
                 id="search-products"
                 name="search"
                 value={searchQuery}
