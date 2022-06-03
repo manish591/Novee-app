@@ -213,7 +213,7 @@ const AddressModal = ({
                 Update
               </button>
             ) : (
-              <button type="button" className="cta__submit">
+              <button type="submit" className="cta__submit">
                 Save
               </button>
             )}

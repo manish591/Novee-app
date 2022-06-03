@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAuth, useStateContext, useAppActions } from 'hooks';
-import { Image } from '../../components/image/Image';
+import { Image } from 'components';
 
 const WishlistCard = ({ product }) => {
   const { _id, img, title, price, discount } = product;
@@ -9,6 +9,9 @@ const WishlistCard = ({ product }) => {
   const { stateDispatch, disableButton, setDisableButton } = useStateContext();
   const { removeItemFromWishlist, findDiscountedPrice, moveItemToCart } =
     useAppActions();
+
+  // eslint-disable-next-line no-console
+  console.log('wishlist', setDisableButton);
 
   return (
     <div className="card">
@@ -21,8 +24,6 @@ const WishlistCard = ({ product }) => {
             removeItemFromWishlist({
               e,
               _id,
-              currentUser,
-              stateDispatch,
               setDisableButton,
             })
           }

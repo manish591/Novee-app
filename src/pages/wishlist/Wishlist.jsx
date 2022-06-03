@@ -26,9 +26,9 @@ const Wishlist = () => {
             <div className="wishlist-empty__wrapper flow-space-2">
               <h1 className="wishlist-empty__title">Your Wishlist Is Empty</h1>
               <p className="wishlist-empty__desc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-                inventore perspiciatis doloribus beatae error voluptate! Libero
-                minus harum natus molestiae?
+                You can add products to your wishlist by clicking on the Add to
+                Wishlist button on each product card. When you&apos;re finished
+                you can your products in the wishlist page.
               </p>
               <button
                 type="button"

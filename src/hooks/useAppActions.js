@@ -159,7 +159,7 @@ const useAppActions = () => {
   const moveItemToCart = async ({ e, _id, product, setDisableButton }) => {
     setDisableButton(true);
     if (state.cartData.some((item) => item._id === product._id)) {
-      removeItemFromWishlist({ e, _id, stateDispatch });
+      removeItemFromWishlist({ e, _id, setDisableButton });
       const arr = state.cartData.map((item) => {
         if (item._id === product._id) {
           return { ...item, qty: item.qty + 1 };
@@ -168,8 +168,8 @@ const useAppActions = () => {
       });
       stateDispatch({ type: 'GET_CART_DATA', payload: arr });
     } else {
-      removeItemFromWishlist({ e, _id, stateDispatch });
-      addProductsToCart({ e, product, stateDispatch });
+      removeItemFromWishlist({ e, _id, setDisableButton });
+      addProductsToCart({ e, product, setDisableButton });
     }
     toast('Item has been move to the cart');
     setDisableButton(false);
