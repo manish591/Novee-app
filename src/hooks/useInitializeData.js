@@ -1,24 +1,25 @@
-import { useEffect, useState } from "react";
-import { useStateContext } from "./useStateContext";
-import { useAuthContext } from "./useAuthContext";
-import axios from "axios";
+import { useEffect } from 'react';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useStateContext } from './useStateContext';
+import { useAuthContext } from './useAuthContext';
 
 const useInitializeData = () => {
-  const { state, stateDispatch } = useStateContext();
+  const { stateDispatch } = useStateContext();
   const { myToken, isUserLogedIn } = useAuthContext();
 
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get("/api/products");
+        const res = await axios.get('/api/products');
         if (res.status === 200) {
           stateDispatch({
-            type: "GET_PRODUCT_DATA",
+            type: 'GET_PRODUCT_DATA',
             payload: res.data.products,
           });
         }
       } catch (err) {
-        console.error(err);
+        toast.error('Unable to fetch data');
       }
     })();
   }, [isUserLogedIn]);
@@ -27,17 +28,17 @@ const useInitializeData = () => {
     if (myToken) {
       (async () => {
         try {
-          const res = await axios.get("api/user/wishlist", {
+          const res = await axios.get('api/user/wishlist', {
             headers: { authorization: myToken },
           });
           if (res.status === 200) {
             stateDispatch({
-              type: "GET_WISHLIST_DATA",
+              type: 'GET_WISHLIST_DATA',
               payload: res.data.wishlist,
             });
           }
         } catch (err) {
-          console.error(err);
+          toast.error('Unable to fetch data');
         }
       })();
     }
@@ -47,14 +48,14 @@ const useInitializeData = () => {
     if (myToken) {
       (async () => {
         try {
-          const res = await axios.get("/api/user/cart", {
+          const res = await axios.get('/api/user/cart', {
             headers: { authorization: myToken },
           });
           if (res.status === 200) {
-            stateDispatch({ type: "GET_CART_DATA", payload: res.data.cart });
+            stateDispatch({ type: 'GET_CART_DATA', payload: res.data.cart });
           }
         } catch (err) {
-          console.error(err);
+          toast.error('Unable to fetch data');
         }
       })();
     }

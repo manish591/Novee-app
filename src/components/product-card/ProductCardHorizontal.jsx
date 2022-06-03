@@ -1,24 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useAppActions } from '../../hooks';
-import { useAuth } from '../../hooks';
-import { useStateContext } from '../../hooks';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useAppActions, useStateContext } from 'hooks';
 import { Modal } from './Modal';
 import { Image } from '../image/Image';
 
 const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
-  const {
-    _id,
-    img,
-    quantity,
-    itemInStock,
-    title,
-    description,
-    price,
-    discount,
-    qty = 1,
-  } = product;
+  const { _id, img, title, description, qty = 1 } = product;
   const { removeProductsFromCart, updateCartQuantity } = useAppActions();
-  const { currentUser } = useAuth();
   const { stateDispatch, disableButton, setDisableButton } = useStateContext();
 
   return (
@@ -30,27 +18,26 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
         <div className="card__content">
           <h3 className="card__title">{title}</h3>
           <p className="card__author">{description}</p>
-          <p className="card__price">Lorem, ipsum dolor.</p>
           <div className="card__update-quantity flex">
             <button
+              type="button"
               className="card__update-quantity--remove"
               onClick={() =>
                 updateCartQuantity(_id, 'decrement', setDisableButton)
               }
-              disabled={qty === 1 || disableButton}
-            >
+              disabled={qty === 1 || disableButton}>
               <span className="material-icons-round cart-icon-quantity">
                 remove
               </span>
             </button>
             <p className="quantity-value">{qty}</p>
             <button
+              type="button"
               className="card__update-quantity--add"
               onClick={() =>
                 updateCartQuantity(_id, 'increment', setDisableButton)
               }
-              disabled={disableButton}
-            >
+              disabled={disableButton}>
               <span className="material-icons-round cart-icon-quantity">
                 add
               </span>
@@ -58,12 +45,12 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
           </div>
         </div>
         <button
+          type="button"
           className="card__remove-btn"
           onClick={() => {
             setCurrentId(_id);
           }}
-          disabled={disableButton}
-        >
+          disabled={disableButton}>
           <span className="material-icons-round">clear</span>
         </button>
       </section>
@@ -80,6 +67,12 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
       ) : null}
     </section>
   );
+};
+
+ProductCardHorizontal.propTypes = {
+  product: PropTypes.object.isRequired,
+  currentId: PropTypes.string.isRequired,
+  setCurrentId: PropTypes.func.isRequired,
 };
 
 export { ProductCardHorizontal };

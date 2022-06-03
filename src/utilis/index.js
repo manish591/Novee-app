@@ -1,2 +1,8 @@
-export { updatedProductList } from "./filters";
-export { countries, coupons } from "./utilis";
+export { updatedProductList } from './filters';
+export {
+  countries,
+  coupons,
+  filterData,
+  filterCategories,
+  brandLogoData,
+} from './utilis';

@@ -7,8 +7,8 @@ import { useStateContext } from '../../hooks';
 const Navbar = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const navigate = useNavigate();
   const { state, stateDispatch } = useStateContext();
+  const navigate = useNavigate();
 
   const handleSearchProducts = (e) => {
     e.preventDefault();
@@ -38,21 +38,23 @@ const Navbar = () => {
           <li className="navbar__items">
             <Link to="/products">Shop</Link>
           </li>
-          <li
-            className="navbar__items"
-            onClick={() => {
-              navigate('/products', { state: { idealFor: 'Men' } });
-            }}
-          >
-            Men
+          <li className="navbar__items">
+            <button
+              type="button"
+              onClick={() => {
+                navigate('/products', { state: { idealFor: 'Men' } });
+              }}>
+              Men
+            </button>
           </li>
-          <li
-            className="navbar__items"
-            onClick={() => {
-              navigate('/products', { state: { idealFor: 'Women' } });
-            }}
-          >
-            Women
+          <li className="navbar__items">
+            <button
+              type="button"
+              onClick={() => {
+                navigate('/products', { state: { idealFor: 'Women' } });
+              }}>
+              Women
+            </button>
           </li>
         </ul>
         <ul className="navbar__list flex navbar__list--search">
@@ -62,7 +64,7 @@ const Navbar = () => {
               <input
                 type="text"
                 className="input-field"
-                placeholder="search laptops, phones and tablets"
+                placeholder="search mens and womens clothes"
                 id="search-products"
                 name="search"
                 value={searchQuery}
@@ -78,13 +80,20 @@ const Navbar = () => {
           </li>
         </ul>
         <ul className="navbar__list flex">
-          <li
-            className="navbar__items navbar--hide navbar__items--icons navbar__items--profile profile"
-            onClick={() => {
-              setIsDropdownVisible((d) => !d);
-            }}
-          >
-            <span className="material-icons">person</span>
+          <li className="navbar__items navbar--hide navbar__items--icons navbar__items--profile profile">
+            <button
+              type="button"
+              onClick={() => {
+                setIsDropdownVisible((d) => !d);
+              }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+              }}>
+              <span className="material-icons-outlined">person</span>
+            </button>
             <ProfileDropdown isDropdownVisible={isDropdownVisible} />
           </li>
           <li className="navbar__items navbar--hide navbar__items--icons navbar__items--wishlist">
@@ -97,7 +106,9 @@ const Navbar = () => {
               <section className="badge" style={{ marginBlockStart: '2px' }}>
                 <span className="material-icons-outlined">shopping_bag</span>
                 {state.cartData?.length > 0 ? (
-                  <p className="badge__info badge__info--standard badge__info--primary">
+                  <p
+                    className="badge__info badge__info--standard badge__info--primary"
+                    style={{ insetInlineEnd: '-5px' }}>
                     {state.cartData?.length}
                   </p>
                 ) : null}

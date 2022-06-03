@@ -5,27 +5,23 @@ import { useStateContext } from '../../hooks';
 const Carousel = () => {
   const [slideWidth, setSlideWidth] = useState(undefined);
   const { state } = useStateContext();
-  const product = state?.productData[4];
   const carouselContainerRef = useRef();
   const slideRef = useRef();
 
   const findNewProducts = () => {
-    return state.productData.filter((item, index) => {
-      if (index < 3) {
-        return item;
-      }
-    });
+    return state.productData.filter((_, index) => index < 3);
   };
 
   const handleNavigateCarousel = (type) => {
     const maxScrollWidth = carouselContainerRef?.current?.scrollWidth;
     const gap = 10;
     if (type === 'forword') {
-      let scrollBy = carouselContainerRef.current.scrollLeft + slideWidth + gap;
+      const scrollBy =
+        carouselContainerRef.current.scrollLeft + slideWidth + gap;
       carouselContainerRef.current.scrollLeft =
         scrollBy >= maxScrollWidth ? 0 : scrollBy;
     } else if (type === 'backword') {
-      let scrollBy = carouselContainerRef.current.scrollLeft - slideWidth;
+      const scrollBy = carouselContainerRef.current.scrollLeft - slideWidth;
       carouselContainerRef.current.scrollLeft =
         scrollBy <= 0 ? maxScrollWidth : scrollBy;
     }
@@ -47,12 +43,12 @@ const Carousel = () => {
     <section className="hero">
       <div className="hero__wrapper">
         <div className="hero__slider">
-          <span
+          <button
+            type="button"
             className="material-icons move-left"
-            onClick={() => handleNavigateCarousel('backword')}
-          >
+            onClick={() => handleNavigateCarousel('backword')}>
             chevron_left
-          </span>
+          </button>
           <section className="carousel" ref={carouselContainerRef}>
             {findNewProducts().map((item) => {
               return (
@@ -60,14 +56,19 @@ const Carousel = () => {
                   key={item._id}
                   ref={slideRef}
                   className="carousel__item carousel-slide flex"
-                >
+                  style={{
+                    backgroundImage: `url(${item.img.JPG})`,
+                    backgroundRepeat: 'no-repeat',
+                  }}>
                   <div className="carousel-slide__info">
                     <small className="carousel-slide__label">New Product</small>
                     <h2 className="carousel-slide__name">{item?.title}</h2>
                     <p className="carousel-slide__description">
                       {item.description}
                     </p>
-                    <button className="carousel-slide__btn btn btn--contained-warning">
+                    <button
+                      type="button"
+                      className="carousel-slide__btn btn btn--contained-primary">
                       <Link to={`/products/${item?._id}`}>See Product</Link>
                     </button>
                   </div>
@@ -75,12 +76,12 @@ const Carousel = () => {
               );
             })}
           </section>
-          <span
+          <button
+            type="button"
             className="material-icons move-right"
-            onClick={() => handleNavigateCarousel('forword')}
-          >
+            onClick={() => handleNavigateCarousel('forword')}>
             chevron_right
-          </span>
+          </button>
         </div>
       </div>
     </section>

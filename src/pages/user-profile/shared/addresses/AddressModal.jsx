@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useUserAddress } from "../../../../hooks";
-import { countries } from "../../../../utilis";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useUserAddress } from 'hooks';
+import { countries } from 'utilis';
 
 const AddressModal = ({
   setIsAddressFormOpen,
@@ -11,40 +12,42 @@ const AddressModal = ({
   currentId,
 }) => {
   const [errors, setErrors] = useState({
-    nameError: "",
-    addressError: "",
-    codeError: "",
-    countryError: "",
-    telError: "",
+    nameError: '',
+    addressError: '',
+    codeError: '',
+    countryError: '',
+    telError: '',
   });
 
   const { addAddress, updateAddress } = useUserAddress();
 
   const handleFormValidation = (e) => {
     const isValid = e.target.validity.valid;
-    let field = e.target.name;
-    const validationMessage = e.target.validationMessage;
-    !isValid
-      ? setErrors({
-          ...errors,
-          [field === "postal-code" ? "codeError" : field + "Error"]:
-            validationMessage,
-        })
-      : setErrors({
-          ...errors,
-          [field === "postal-code" ? "codeError" : field + "Error"]: "",
-        });
+    const field = e.target.name;
+    const { validationMessage } = e.target;
+    if (!isValid) {
+      setErrors({
+        ...errors,
+        [field === 'postal-code' ? 'codeError' : `${field}Error`]:
+          validationMessage,
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [field === 'postal-code' ? 'codeError' : `${field}Error`]: '',
+      });
+    }
   };
 
   const handleAddUserAddress = (e) => {
     e.preventDefault();
     addAddress({ address: addressFormData });
     setAddressFormData({
-      name: "",
-      address: "",
-      tel: "",
-      country: "",
-      postalCode: "",
+      name: '',
+      address: '',
+      tel: '',
+      country: '',
+      postalCode: '',
     });
     setIsAddressFormOpen(false);
   };
@@ -55,8 +58,7 @@ const AddressModal = ({
         <h3 className="address-form__title">Add New Address</h3>
         <form
           className="address-form__container"
-          onSubmit={handleAddUserAddress}
-        >
+          onSubmit={handleAddUserAddress}>
           <section className="address-form__group">
             <label htmlFor="name">Name</label>
             <input
@@ -75,8 +77,7 @@ const AddressModal = ({
             <p
               id="name-validation"
               aria-live="assertive"
-              className="validation-message"
-            >
+              className="validation-message">
               {errors.nameError}
             </p>
           </section>
@@ -99,12 +100,11 @@ const AddressModal = ({
               }}
               onBlur={handleFormValidation}
               required
-            ></textarea>
+            />
             <p
               id="address-validation"
               aria-live="assertive"
-              className="validation-message"
-            >
+              className="validation-message">
               {errors.addressError}
             </p>
           </section>
@@ -130,8 +130,7 @@ const AddressModal = ({
             <p
               id="postal-code-validation"
               aria-live="assertive"
-              className="validation-message"
-            >
+              className="validation-message">
               {errors.codeError}
             </p>
           </section>
@@ -151,9 +150,8 @@ const AddressModal = ({
                 }));
               }}
               onBlur={handleFormValidation}
-              required
-            >
-              <option></option>
+              required>
+              <option value="">&nbsp;</option>
               {countries.map((item) => {
                 return (
                   <option key={item} value={item}>
@@ -165,8 +163,7 @@ const AddressModal = ({
             <p
               id="country-validation"
               aria-live="assertive"
-              className="validation-message"
-            >
+              className="validation-message">
               {errors.countryError}
             </p>
           </section>
@@ -191,8 +188,7 @@ const AddressModal = ({
             <p
               id="tel-validation"
               aria-live="assertive"
-              className="validation-message"
-            >
+              className="validation-message">
               {errors.telError}
             </p>
           </section>
@@ -207,26 +203,26 @@ const AddressModal = ({
                   updateAddress({ address: addressFormData, _id: currentId });
                   setIsAddressFormOpen(false);
                   setAddressFormData({
-                    ame: "",
-                    address: "",
-                    tel: "",
-                    country: "",
-                    postalCode: "",
+                    ame: '',
+                    address: '',
+                    tel: '',
+                    country: '',
+                    postalCode: '',
                   });
-                }}
-              >
+                }}>
                 Update
               </button>
             ) : (
-              <button className="cta__submit">Save</button>
+              <button type="submit" className="cta__submit">
+                Save
+              </button>
             )}
             <button
               className="cta__cancel"
               type="button"
               onClick={() => {
                 setIsAddressFormOpen(false);
-              }}
-            >
+              }}>
               Cancel
             </button>
           </section>
@@ -234,6 +230,15 @@ const AddressModal = ({
       </div>
     </div>
   );
+};
+
+AddressModal.propTypes = {
+  currentId: PropTypes.string.isRequired,
+  isEditingAddress: PropTypes.bool.isRequired,
+  addressFormData: PropTypes.object.isRequired,
+  setIsAddressFormOpen: PropTypes.func.isRequired,
+  setIsEditingAddress: PropTypes.func.isRequired,
+  setAddressFormData: PropTypes.func.isRequired,
 };
 
 export { AddressModal };

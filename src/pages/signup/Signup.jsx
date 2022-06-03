@@ -1,21 +1,37 @@
-import React, { useState } from "react";
-
-import { Link } from "react-router-dom";
-import { useAuth, useScrollToTop } from "../../hooks";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth, useScrollToTop } from 'hooks';
 
 const Signup = () => {
   const [userDetails, setUserDetails] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: '',
+    email: '',
+    password: '',
   });
+  const [signupErrorData, setSignupErrorData] = useState({
+    nameError: '',
+    emailError: '',
+    passwordError: '',
+  });
+  const [showPassword, setShowPassword] = useState(false);
   const { signupUser } = useAuth();
 
   const handleUserSignup = (e) => {
     e.preventDefault();
-    if (userDetails.confirmPassword !== userDetails.password) return;
     signupUser(userDetails.name, userDetails.email, userDetails.password);
+  };
+
+  const handleValidateUser = (e) => {
+    const { name, validationMessage } = e.target;
+    const isValid = e.target.validity.valid;
+    if (isValid) {
+      setSignupErrorData({ ...signupErrorData, [`${name}Error`]: '' });
+    } else {
+      setSignupErrorData({
+        ...signupErrorData,
+        [`${name}Error`]: validationMessage,
+      });
+    }
   };
 
   useScrollToTop();
@@ -42,8 +58,10 @@ const Signup = () => {
                   return { ...ud, name: e.target.value };
                 });
               }}
+              onBlur={handleValidateUser}
               required
             />
+            <p className="error-state">{signupErrorData.nameError}</p>
           </section>
           <section className="email-container">
             <label htmlFor="email">Email</label>
@@ -59,40 +77,45 @@ const Signup = () => {
                   return { ...ud, email: e.target.value };
                 });
               }}
+              onBlur={handleValidateUser}
               required
             />
+            <p className="error-state">{signupErrorData.emailError}</p>
           </section>
           <section className="password-container">
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="new-password"
-              className="signup__password"
-              value={userDetails.password}
-              onChange={(e) => {
-                setUserDetails((ud) => {
-                  return { ...ud, password: e.target.value };
-                });
-              }}
-              required
-            />
-          </section>
-          <section className="password-container">
-            <label htmlFor="confirm-password">Confirm Password</label>
-            <input
-              type="password"
-              id="confirm-password"
-              name="new-password"
-              className="signup__password"
-              value={userDetails.confirmPassword}
-              onChange={(e) => {
-                setUserDetails((ud) => {
-                  return { ...ud, confirmPassword: e.target.value };
-                });
-              }}
-              required
-            />
+            <section className="password-toggle">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                className="signup__password"
+                minLength="8"
+                value={userDetails.password}
+                onChange={(e) => {
+                  setUserDetails((ud) => {
+                    return { ...ud, password: e.target.value };
+                  });
+                }}
+                onBlur={handleValidateUser}
+                required
+              />
+              <button
+                type="button"
+                className="password-toggle__icon"
+                onClick={() => {
+                  setShowPassword((sp) => !sp);
+                }}>
+                {showPassword ? (
+                  <span className="material-icons-outlined">
+                    visibility_off
+                  </span>
+                ) : (
+                  <span className="material-icons-outlined">visibility</span>
+                )}
+              </button>
+            </section>
+            <p className="error-state">{signupErrorData.passwordError}</p>
           </section>
           <section className="submit-btn">
             <button type="submit" className="signup__submit">
@@ -102,8 +125,10 @@ const Signup = () => {
         </form>
         <div className="signup__footer">
           <p>Already have an account?</p>
-          <button className="signup__signup">
-            <Link to="/login">Log In</Link>
+          <button type="button" className="signup__signup">
+            <Link to="/login" replace>
+              Log In
+            </Link>
           </button>
         </div>
       </div>

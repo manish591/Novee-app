@@ -1,5 +1,5 @@
-import React from "react";
-import "./Settings.css";
+import React from 'react';
+import './Settings.css';
 
 const Settings = () => {
   return (
@@ -29,7 +29,9 @@ const Settings = () => {
         </div>
         <div className="settings-page__account">
           <p className="setting-page__heading">Account Setting</p>
-          <button className="btn btn--contained-primary">Logout</button>
+          <button type="button" className="btn btn--contained-primary">
+            Logout
+          </button>
         </div>
       </div>
     </div>

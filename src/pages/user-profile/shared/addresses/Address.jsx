@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
-import "./Address.css";
-import { AddressCard } from "./AddressCard";
-import { AddressModal } from "./AddressModal";
-import {
-  useStateContext,
-  useAuthContext,
-  useUserAddress,
-} from "../../../../hooks";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import './Address.css';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useStateContext, useAuthContext, useUserAddress } from 'hooks';
+import { AddressCard } from './AddressCard';
+import { AddressModal } from './AddressModal';
 
 const AddressPage = () => {
   const [myAddressData, setMyAddressData] = useState([]);
@@ -28,7 +25,7 @@ const AddressPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get("/api/user/address", {
+        const res = await axios.get('/api/user/address', {
           headers: {
             authorization: myToken,
           },
@@ -37,7 +34,7 @@ const AddressPage = () => {
           setMyAddressData(res.data.address);
         }
       } catch (err) {
-        console.error("Error Getting address data", err);
+        toast.error('Error ocuured try again later');
       }
     })();
   }, [addressData]);
@@ -47,9 +44,9 @@ const AddressPage = () => {
       <div className="address-page__top flex">
         <h1>Saved Address</h1>
         <button
+          type="button"
           className="btn btn--outlined-primary address-page__add"
-          onClick={() => setIsAddressFormOpen(!isAddressFormOpen)}
-        >
+          onClick={() => setIsAddressFormOpen(!isAddressFormOpen)}>
           + Add New Address
         </button>
       </div>
@@ -58,6 +55,7 @@ const AddressPage = () => {
           return (
             <AddressCard
               key={item._id}
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...item}
               setCurrentId={setCurrentId}
               currentId={currentId}

@@ -1,4 +1,5 @@
 import React, { createContext, useReducer, useState } from 'react';
+import PropTypes from 'prop-types';
 import { stateReducer } from '../reducer/state-reducer';
 
 const StateContext = createContext();
@@ -25,16 +26,20 @@ const StateContextProvider = ({ children }) => {
   });
   return (
     <StateContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         state,
         disableButton,
         stateDispatch,
         setDisableButton,
-      }}
-    >
+      }}>
       {children}
     </StateContext.Provider>
   );
+};
+
+StateContextProvider.propTypes = {
+  children: PropTypes.element.isRequired,
 };
 
 export { StateContextProvider, StateContext };

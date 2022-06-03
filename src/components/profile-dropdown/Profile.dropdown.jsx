@@ -1,7 +1,7 @@
-import React from "react";
-
-import { Link, Navigate, useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "../../hooks";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from 'hooks';
 
 const ProfileDropdown = ({ isDropdownVisible }) => {
   const { isUserLogedIn, currentUser, logoutUser } = useAuth();
@@ -11,23 +11,22 @@ const ProfileDropdown = ({ isDropdownVisible }) => {
   return (
     <div
       className={`profile__dropdown ${
-        isDropdownVisible ? "profile__dropdown--show" : ""
-      }`}
-    >
+        isDropdownVisible ? 'profile__dropdown--show' : ''
+      }`}>
       <ul className="profile__list grid">
         <li className="profile__greeting">
           <h3>
             {isUserLogedIn
               ? `Hello ${currentUser?.firstName}`
-              : "Please login!"}
+              : 'Please login!'}
           </h3>
         </li>
         <li className="profile__greeting">
           {!isUserLogedIn ? (
             <button
-              className="btn btn--contained-primary profile__btn"
-              onClick={() => navigate("/login", { state: location.pathname })}
-            >
+              type="button"
+              className="btn btn--outlined-primary profile__btn"
+              onClick={() => navigate('/login', { state: location.pathname })}>
               Login/Signup
             </button>
           ) : null}
@@ -56,12 +55,20 @@ const ProfileDropdown = ({ isDropdownVisible }) => {
         <li className="profile__item">
           <Link to="/profile">Edit Profile</Link>
         </li>
-        <li className="profile__item" onClick={logoutUser}>
-          LogOut
-        </li>
+        {isUserLogedIn ? (
+          <li className="profile__item">
+            <button type="button" onClick={logoutUser}>
+              LogOut
+            </button>
+          </li>
+        ) : null}
       </ul>
     </div>
   );
+};
+
+ProfileDropdown.propTypes = {
+  isDropdownVisible: PropTypes.bool.isRequired,
 };
 
 export { ProfileDropdown };

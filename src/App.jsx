@@ -1,9 +1,8 @@
-import "./App.css";
-
-import { Routes, Route } from "react-router-dom";
-
-import { Header, Navbar, Sidebar, Footer, ProtectedRoute } from "./components";
-
+import React from 'react';
+import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import { useKeepAuthData, useInitializeData, useScrollToTop } from 'hooks';
 import {
   Home,
   ProductListing,
@@ -22,16 +21,8 @@ import {
   ProfilePage,
   Checkout,
   OrdersResult,
-} from "./pages";
-
-import {
-  useKeepAuthData,
-  useInitializeData,
-  useStateContext,
-  useScrollToTop,
-} from "./hooks";
-
-import { Toaster } from "react-hot-toast";
+} from 'pages';
+import { Header, Navbar, Sidebar, Footer, ProtectedRoute } from 'components';
 
 const App = () => {
   useKeepAuthData();
@@ -43,10 +34,10 @@ const App = () => {
       <Toaster
         position="bottom-left"
         toastOptions={{
-          duration: 5000,
+          duration: 4000,
           style: {
-            background: "var(--text2)",
-            color: "var(--surface2)",
+            background: 'var(--text2)',
+            color: 'var(--surface2)',
           },
         }}
       />
@@ -85,8 +76,7 @@ const App = () => {
             <ProtectedRoute>
               <UserProfile />
             </ProtectedRoute>
-          }
-        >
+          }>
           <Route index element={<Overview />} />
           <Route path="address" element={<AddressPage />} />
           <Route path="orders" element={<OrdersPage />} />

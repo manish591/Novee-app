@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Image = ({ img, title }) => {
   return (
@@ -7,6 +8,11 @@ const Image = ({ img, title }) => {
       <img src={img?.JPG} alt={title} className="card__img" />
     </picture>
   );
+};
+
+Image.propTypes = {
+  img: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export { Image };

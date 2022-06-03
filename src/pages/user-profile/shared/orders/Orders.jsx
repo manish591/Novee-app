@@ -1,8 +1,8 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './Orders.css';
-
-import { useAuthContext, useStateContext } from '../../../../hooks';
+import axios from 'axios';
+import { useAuthContext, useStateContext } from 'hooks';
+import toast from 'react-hot-toast';
 
 const OrdersPage = () => {
   const { myToken } = useAuthContext();
@@ -18,13 +18,11 @@ const OrdersPage = () => {
             authorization: myToken,
           },
         });
-        console.log(res);
         if (res.status === 200) {
           setMyOrders(res.data.orders);
-          console.log(res.data);
         }
       } catch (err) {
-        console.error('Error getting orders data from the server', err);
+        toast.error('Error getting orders data from the server');
       }
     })();
   }, [ordersData]);

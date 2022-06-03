@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Checkbox = ({ label, name, id, isChecked, callback }) => {
   return (
@@ -16,6 +17,14 @@ const Checkbox = ({ label, name, id, isChecked, callback }) => {
       </label>
     </div>
   );
+};
+
+Checkbox.propTypes = {
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  isChecked: PropTypes.bool.isRequired,
+  callback: PropTypes.func.isRequired,
 };
 
 export { Checkbox };

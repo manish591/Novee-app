@@ -1,8 +1,8 @@
 import React from 'react';
-import { Carousel, ProductCardVertical } from '../../components';
-import { brandLogoData } from '../../utilis/utilis';
 import { Link } from 'react-router-dom';
-import { useScrollToTop, useStateContext } from '../../hooks';
+import { Carousel, ProductCardVertical } from 'components';
+import { brandLogoData } from 'utilis';
+import { useScrollToTop, useStateContext } from 'hooks';
 
 const Home = () => {
   const { state } = useStateContext();
@@ -70,18 +70,18 @@ const Home = () => {
               Providing you the most fashionable and affordable Clothing
             </h2>
             <p className="brand-idea__desc">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Recusandae suscipit molestias perspiciatis inventore? Quidem
-              repellat odio suscipit, culpa harum, placeat laudantium in, quo
-              rerum nesciunt aperiam. Voluptatum, dolorum qui enim amet sit ipsa
-              ab et accusantium autem sint nihil, facere mollitia repudiandae ex
-              neque, blanditiis laboriosam ut tenetur eius inventore.
+              Novee is one of the best online shopping sites in India. This
+              e-commerce site has ample amount of products from different brands
+              such as Levi&apos;s, Gant and Wrogn to name a few. You can easily
+              browse through their products, filter by category or brand and
+              make your purchase through credit/debit card or bank transfer
+              payment options.
             </p>
           </div>
           <div className="brand-idea__picture">
             <img
               src="https://res.cloudinary.com/dcugqfvvg/image/upload/v1649328191/image_34_onsc8f.webp"
-              alt=""
+              alt="brand-idea"
             />
           </div>
         </div>

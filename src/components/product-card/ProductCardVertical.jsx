@@ -1,9 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
-import { useAppActions } from '../../hooks';
-import { useStateContext } from '../../hooks';
-import { useAuth } from '../../hooks';
-import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useAppActions, useStateContext, useAuth } from 'hooks';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Image } from '../image/Image';
 
 const ProductCardVertical = ({ product }) => {
@@ -20,18 +18,24 @@ const ProductCardVertical = ({ product }) => {
   const { _id, img, title, description, price, discount, ratings, inStock } =
     product;
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <section
+      role="button"
+      tabIndex={0}
       className="card"
       onClick={() => {
         navigate(`/products/${_id}`);
       }}
-    >
+      onKeyUp={() => {
+        navigate(`/products/${_id}`);
+      }}>
       <div className="card__image-container">
         <Image title={title} img={img} />
         {isAlreadyInDatabase(state.wishlistData, _id) ? (
           <button
+            type="button"
             className={`card__remove-wishlist ${
               disableButton && 'btn--disabled'
             }`}
@@ -44,62 +48,68 @@ const ProductCardVertical = ({ product }) => {
                 setDisableButton,
               })
             }
-            disabled={disableButton}
-          >
+            disabled={disableButton}>
             <span className="material-icons">favorite</span>
           </button>
         ) : (
           <button
+            type="button"
             className={`card__remove-wishlist ${
               !inStock ? 'wishlist--out-of-stck' : ''
             } `}
-            onClick={(e) =>
-              addItemToTheWishlist({
-                e,
-                _id,
-                product,
-                currentUser,
-                stateDispatch,
-                setDisableButton,
-              })
-            }
-            disabled={disableButton}
-          >
+            onClick={(e) => {
+              e.stopPropagation();
+              if (isUserLogedIn) {
+                addItemToTheWishlist({
+                  e,
+                  _id,
+                  product,
+                  currentUser,
+                  stateDispatch,
+                  setDisableButton,
+                });
+              } else {
+                navigate('/login', { state: location.pathname });
+              }
+            }}
+            disabled={disableButton}>
             <span className="material-icons">favorite_border</span>
           </button>
         )}
         <div
           className={`card__add-to-cart ${
             !inStock && 'card__add-to-cart--out-of-stock'
-          }`}
-        >
+          }`}>
           {isAlreadyInDatabase(state.cartData, _id) ? (
             <button
-              className={`card__add-cart-btn card__add-cart-btn--in-cart`}
+              type="button"
+              className="card__add-cart-btn card__add-cart-btn--in-cart"
               onClick={(e) => {
                 e.stopPropagation();
                 navigate('/cart');
-              }}
-            >
+              }}>
               Go To Cart
             </button>
           ) : (
             <button
-              className={`card__add-cart-btn`}
-              onClick={(e) =>
-                isUserLogedIn
-                  ? addProductsToCart({
-                      e,
-                      _id,
-                      product,
-                      currentUser,
-                      stateDispatch,
-                      setDisableButton,
-                    })
-                  : navigate('/login', { state: location.pathname })
-              }
-              disabled={disableButton}
-            >
+              type="button"
+              className="card__add-cart-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (isUserLogedIn) {
+                  addProductsToCart({
+                    e,
+                    _id,
+                    product,
+                    currentUser,
+                    stateDispatch,
+                    setDisableButton,
+                  });
+                } else {
+                  navigate('/login', { state: location.pathname });
+                }
+              }}
+              disabled={disableButton}>
               Add To Cart
             </button>
           )}
@@ -125,6 +135,10 @@ const ProductCardVertical = ({ product }) => {
       </div>
     </section>
   );
+};
+
+ProductCardVertical.propTypes = {
+  product: PropTypes.object.isRequired,
 };
 
 export { ProductCardVertical };

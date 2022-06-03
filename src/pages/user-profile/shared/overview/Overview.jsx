@@ -1,7 +1,6 @@
-import React from "react";
-import "./Overview.css";
-
-import { Link } from "react-router-dom";
+import React from 'react';
+import './Overview.css';
+import { Link } from 'react-router-dom';
 
 const Overview = () => {
   return (
@@ -10,7 +9,9 @@ const Overview = () => {
         <div className="profile-overview__icon">
           <span className="material-icons-round">account_box</span>
         </div>
-        <button className="profile-overview__edit-profile btn btn--outlined-secondary">
+        <button
+          type="button"
+          className="profile-overview__edit-profile btn btn--outlined-secondary">
           Edit Profile
         </button>
       </section>
@@ -41,7 +42,9 @@ const Overview = () => {
         </Link>
       </section>
       <section className="profile-overview__logout">
-        <button className="btn btn--contained-primary">Logout</button>
+        <button type="button" className="btn btn--contained-primary">
+          Logout
+        </button>
       </section>
     </div>
   );

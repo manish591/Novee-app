@@ -34,12 +34,10 @@
 .carousel__item {
   inline-size: inherit;
   block-size: inherit;
-  background-color: var(--surface3);
-  color: var(--text2);
+  background-color: #f4f9f9;
+  color: var(--text1);
   min-inline-size: 100%;
   scroll-snap-align: center;
-  background-image: url('https://res.cloudinary.com/dcugqfvvg/image/upload/v1651332596/9fd23788-8de0-4e8a-9569-9e14b5277ad91634722282892GreenColorNetFabricLehengaCholiwithDupattainSwarovskiSequenc1-removebg-preview_pmafaz.png');
-  background-repeat: no-repeat;
 }
 
 .carousel-slide {
@@ -48,6 +46,7 @@
 
 .carousel-slide__info {
   margin-inline: auto;
+  margin-inline-start: auto;
   text-align: center;
   grid-template-columns: minmax(0, 1fr);
   justify-items: center;
@@ -93,6 +92,7 @@
 
 .carousel-slide__btn {
   margin-block-start: 1rem;
+  background-color: var(--brand);
 }
 
 /* ------------- */
@@ -107,6 +107,15 @@
 
   .carousel-slide__btn {
     block-size: 40px;
+  }
+}
+
+@media (min-width: 600px) {
+  .carousel-slide__info {
+    margin-inline: unset;
+    margin-inline-end: 3rem;
+    transform: translateY(2rem);
+    margin-inline-start: auto;
   }
 }
 

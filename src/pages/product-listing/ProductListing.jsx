@@ -1,11 +1,9 @@
-import React from "react";
-
-import { Filters } from "./Filters";
-import { ProductCardVertical } from "../../components";
-import { useStateContext } from "../../hooks/useStateContext";
-import { Loader } from "../../components";
-import { updatedProductList } from "../../utilis";
-import { useScrollToTop } from "../../hooks";
+import React from 'react';
+import { ProductCardVertical } from 'components';
+import { useStateContext, useScrollToTop } from 'hooks';
+import { updatedProductList } from 'utilis';
+import { Filters } from './Filters';
+import { ProductNotFound } from './ProductsNotFound';
 
 const ProductListing = () => {
   const { state } = useStateContext();
@@ -28,20 +26,29 @@ const ProductListing = () => {
     brand,
     searchQuery,
     fastDelivery,
-    includeOutOfStock
+    includeOutOfStock,
   );
 
   useScrollToTop();
 
   return (
     <main className="listing">
+      <div className="listing-top">
+        <p className="listing__total-items">
+          Result - <span>{getUpdatedProductList.length} Items</span>
+        </p>
+      </div>
       <div className="listing__wrapper grid">
         <Filters />
-        <div className="listing__products grid">
-          {getUpdatedProductList.map((item) => {
-            return <ProductCardVertical product={item} key={item._id} />;
-          })}
-        </div>
+        {getUpdatedProductList.length > 0 ? (
+          <div className="listing__products grid">
+            {getUpdatedProductList.map((item) => {
+              return <ProductCardVertical product={item} key={item._id} />;
+            })}
+          </div>
+        ) : (
+          <ProductNotFound />
+        )}
       </div>
     </main>
   );

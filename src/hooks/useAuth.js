@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "./useAuthContext";
-import { useStateContext } from "./useStateContext";
-import axios from "axios";
-import toast from "react-hot-toast";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useAuthContext } from './useAuthContext';
+import { useStateContext } from './useStateContext';
 
 const useAuth = () => {
   const {
@@ -20,7 +20,7 @@ const useAuth = () => {
 
   const loginUser = async (email, password, from) => {
     try {
-      const res = await axios.post("/api/auth/login", {
+      const res = await axios.post('/api/auth/login', {
         email,
         password,
       });
@@ -29,31 +29,30 @@ const useAuth = () => {
         setIsUserLogedIn(true);
         setMyToken(res.data.encodedToken);
         stateDispatch({
-          type: "GET_CART_DATA",
+          type: 'GET_CART_DATA',
           payload: res.data.foundUser.cart,
         });
         stateDispatch({
-          type: "GET_WISHLIST_DATA",
+          type: 'GET_WISHLIST_DATA',
           payload: res.data.foundUser.wishlist,
         });
-        toast.success("Loged In Successfully");
+        toast.success('Loged In Successfully');
       }
       if (from) {
         navigate(from);
       } else {
-        navigate("/");
+        navigate('/');
       }
     } catch (err) {
-      console.error(err);
-      toast.error("Unable To Login! Try Later");
+      toast.error('Unable To Login! Try Later');
     }
   };
 
-  const signupUser = async (name, email, password, from) => {
+  const signupUser = async (name, email, password) => {
     try {
-      const res = await axios.post("/api/auth/signup", {
+      const res = await axios.post('/api/auth/signup', {
         firstName: name,
-        lastName: "some",
+        lastName: 'some',
         email,
         password,
       });
@@ -62,29 +61,28 @@ const useAuth = () => {
         setIsUserLogedIn(true);
         setMyToken(res.data.encodedToken);
         stateDispatch({
-          type: "GET_CART_DATA",
+          type: 'GET_CART_DATA',
           payload: res.data.createdUser.cart,
         });
         stateDispatch({
-          type: "GET_WISHLIST_DATA",
+          type: 'GET_WISHLIST_DATA',
           payload: res.data.createdUser.wishlist,
         });
-        toast.success("Account Has Been Created");
+        toast.success('Account Has Been Created');
       }
-      navigate("/");
+      navigate('/');
     } catch (err) {
-      console.error(err);
-      toast.error("Unable To Create Your Account! Try Again Later");
+      toast.error('Unable To Create Your Account! Try Again Later');
     }
   };
 
   const logoutUser = () => {
     setIsUserLogedIn(false);
     setCurrentUser({});
-    setMyToken("");
-    stateDispatch({ type: "CLEAR_USER_DATA" });
-    navigate("/");
-    toast("Logout Successfully");
+    setMyToken('');
+    stateDispatch({ type: 'CLEAR_USER_DATA' });
+    navigate('/');
+    toast('Logout Successfully');
   };
 
   return {

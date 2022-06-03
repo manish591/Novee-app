@@ -1,10 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useAuth } from '../../hooks';
-import { useStateContext } from '../../hooks';
-import { useAppActions } from '../../hooks';
-import { Image } from '../../components/image/Image';
+import PropTypes from 'prop-types';
+import { useAuth, useStateContext, useAppActions } from 'hooks';
+import { Image } from 'components';
 
 const WishlistCard = ({ product }) => {
   const { _id, img, title, price, discount } = product;
@@ -13,23 +10,24 @@ const WishlistCard = ({ product }) => {
   const { removeItemFromWishlist, findDiscountedPrice, moveItemToCart } =
     useAppActions();
 
+  // eslint-disable-next-line no-console
+  console.log('wishlist', setDisableButton);
+
   return (
     <div className="card">
       <div className="card__image-container">
         <Image title={title} img={img} />
         <button
+          type="button"
           className="card__remove-wishlist"
           onClick={(e) =>
             removeItemFromWishlist({
               e,
               _id,
-              currentUser,
-              stateDispatch,
               setDisableButton,
             })
           }
-          disabled={disableButton}
-        >
+          disabled={disableButton}>
           <span className="material-icons">clear</span>
         </button>
       </div>
@@ -46,6 +44,7 @@ const WishlistCard = ({ product }) => {
         </div>
       </div>
       <button
+        type="button"
         className="card__moveToBagBtn"
         onClick={(e) =>
           moveItemToCart({
@@ -57,12 +56,15 @@ const WishlistCard = ({ product }) => {
             setDisableButton,
           })
         }
-        disabled={disableButton}
-      >
+        disabled={disableButton}>
         Move To Cart
       </button>
     </div>
   );
+};
+
+WishlistCard.propTypes = {
+  product: PropTypes.object.isRequired,
 };
 
 export { WishlistCard };

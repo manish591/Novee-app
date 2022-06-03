@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import "./Checkout.css";
-import { AddressCard } from "../user-profile/shared/addresses/AddressCard";
-import { AddressModal } from "../user-profile/shared/addresses/AddressModal";
+import React from 'react';
+import './Checkout.css';
+import toast from 'react-hot-toast';
 import {
   useStateContext,
   useUserAddress,
   usePaymentIntegration,
   useAppActions,
-} from "../../hooks";
-import toast from "react-hot-toast";
+} from 'hooks';
+import { AddressCard } from '../user-profile/shared/addresses/AddressCard';
+import { AddressModal } from '../user-profile/shared/addresses/AddressModal';
 
 const Checkout = () => {
   const { state } = useStateContext();
@@ -25,21 +25,20 @@ const Checkout = () => {
     setSelectedAddress,
   } = useUserAddress();
 
-  const { loadScript, paymentSuccessful, displayRazorpay } =
-    usePaymentIntegration();
+  const { displayRazorpay } = usePaymentIntegration();
 
   const { findTotalPrice, findTotalDiscountedPrice, getTotalCartPrice } =
     useAppActions();
 
   const handleUserPayment = () => {
     if (!selectedAddress?._id) {
-      return toast.error("Please select a address to continue!");
+      return toast.error('Please select a address to continue!');
     }
-    displayRazorpay();
+    return displayRazorpay();
   };
 
   return (
-    <main className={`cart`}>
+    <main className="cart">
       <div className="cart__wrapper grid">
         <section className="cart__products-list products-list">
           {state?.addressData?.length < 1 ? (
@@ -62,11 +61,11 @@ const Checkout = () => {
                   </div>
                   <div className="address__action">
                     <button
+                      type="button"
                       className="address__btn btn btn--outlined-primary"
                       onClick={() => {
                         setIsAddressFormOpen(true);
-                      }}
-                    >
+                      }}>
                       Add Address
                     </button>
                   </div>
@@ -77,8 +76,7 @@ const Checkout = () => {
                   return (
                     <section
                       key={item._id}
-                      className="flex checkout__address-group"
-                    >
+                      className="flex checkout__address-group">
                       <input
                         type="radio"
                         name="address"
@@ -90,6 +88,7 @@ const Checkout = () => {
                       />
                       <label htmlFor={item._id}>
                         <AddressCard
+                          // eslint-disable-next-line react/jsx-props-no-spreading
                           {...item}
                           setCurrentId={setCurrentId}
                           currentId={currentId}
@@ -114,10 +113,10 @@ const Checkout = () => {
               return (
                 <div key={item._id} className="summary__item summary-item flex">
                   <div className="summary-item__card grid">
-                    <div className="summary-item__picture"></div>
+                    <div className="summary-item__picture" />
                     <div className="summary-item__info">
                       <p className="summary-item__name">{item?.title}</p>
-                      <p className="summary-item__price">${item?.price}</p>
+                      <p className="summary-item__price">₹{item?.price}</p>
                     </div>
                   </div>
                   <div className="summary-item__quantity">
@@ -132,18 +131,18 @@ const Checkout = () => {
               <li className="price-detail__list-item flex">
                 <p>Total MRP</p>
                 <p className="price-detail__price">
-                  ${findTotalPrice(state.cartData)}
+                  ₹{findTotalPrice(state.cartData)}
                 </p>
               </li>
               <li className="price-detail__list-item flex">
                 <p>Discount MRP</p>
                 <p className="price-detail__price">
-                  ${findTotalDiscountedPrice(state.cartData)}
+                  ₹{findTotalDiscountedPrice(state.cartData)}
                 </p>
               </li>
               <li className="price-detail__list-item flex">
                 <p>Coupon Discount</p>
-                <p className="price-detail__price">$45</p>
+                <p className="price-detail__price">₹45</p>
               </li>
               <li className="price-detail__list-item flex">
                 <p>Delivery Charges</p>
@@ -154,16 +153,16 @@ const Checkout = () => {
               <li className="price-detail__list-total flex">
                 <p>Grand Total</p>
                 <p className="price-detail__price">
-                  ${getTotalCartPrice(state.cartData)}
+                  ₹{getTotalCartPrice(state.cartData)}
                 </p>
               </li>
             </ul>
           </div>
           <div className="summary__cta">
             <button
+              type="button"
               className="cart__place-order btn btn--contained-primary"
-              onClick={handleUserPayment}
-            >
+              onClick={handleUserPayment}>
               Continue And Pay
             </button>
           </div>
