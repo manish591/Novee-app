@@ -93,18 +93,18 @@ const Cart = () => {
                 <li className="price-detail__list-item flex">
                   <p>Total MRP</p>
                   <p className="price-detail__price">
-                    ${findTotalPrice(state.cartData)}
+                    ₹{findTotalPrice(state.cartData)}
                   </p>
                 </li>
                 <li className="price-detail__list-item flex">
                   <p>Discount MRP</p>
                   <p className="price-detail__price">
-                    ${findTotalDiscountedPrice(state.cartData)}
+                    ₹{findTotalDiscountedPrice(state.cartData)}
                   </p>
                 </li>
                 <li className="price-detail__list-item flex">
                   <p>Coupon Discount</p>
-                  <p className="price-detail__price">$45</p>
+                  <p className="price-detail__price">₹45</p>
                 </li>
                 <li className="price-detail__list-item flex">
                   <p>Delivery Charges</p>
@@ -115,7 +115,7 @@ const Cart = () => {
                 <li className="price-detail__list-total flex">
                   <p>Grand Total</p>
                   <p className="price-detail__price">
-                    ${getTotalCartPrice(state.cartData)}
+                    ₹{getTotalCartPrice(state.cartData)}
                   </p>
                 </li>
               </ul>

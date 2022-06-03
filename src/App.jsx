@@ -34,7 +34,7 @@ const App = () => {
       <Toaster
         position="bottom-left"
         toastOptions={{
-          duration: 5000,
+          duration: 4000,
           style: {
             background: 'var(--text2)',
             color: 'var(--surface2)',

@@ -57,16 +57,21 @@ const ProductCardVertical = ({ product }) => {
             className={`card__remove-wishlist ${
               !inStock ? 'wishlist--out-of-stck' : ''
             } `}
-            onClick={(e) =>
-              addItemToTheWishlist({
-                e,
-                _id,
-                product,
-                currentUser,
-                stateDispatch,
-                setDisableButton,
-              })
-            }
+            onClick={(e) => {
+              e.stopPropagation();
+              if (isUserLogedIn) {
+                addItemToTheWishlist({
+                  e,
+                  _id,
+                  product,
+                  currentUser,
+                  stateDispatch,
+                  setDisableButton,
+                });
+              } else {
+                navigate('/login', { state: location.pathname });
+              }
+            }}
             disabled={disableButton}>
             <span className="material-icons">favorite_border</span>
           </button>
