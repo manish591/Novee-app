@@ -89,18 +89,21 @@ const ProductCardVertical = ({ product }) => {
             <button
               type="button"
               className="card__add-cart-btn"
-              onClick={(e) =>
-                isUserLogedIn
-                  ? addProductsToCart({
-                      e,
-                      _id,
-                      product,
-                      currentUser,
-                      stateDispatch,
-                      setDisableButton,
-                    })
-                  : navigate('/login', { state: location.pathname })
-              }
+              onClick={(e) => {
+                e.stopPropagation();
+                if (isUserLogedIn) {
+                  addProductsToCart({
+                    e,
+                    _id,
+                    product,
+                    currentUser,
+                    stateDispatch,
+                    setDisableButton,
+                  });
+                } else {
+                  navigate('/login', { state: location.pathname });
+                }
+              }}
               disabled={disableButton}>
               Add To Cart
             </button>

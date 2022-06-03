@@ -39,19 +39,14 @@ const SingleProduct = () => {
             <h1 className="sp-content__title">{singleProduct?.title}</h1>
           </section>
           <section className="sp-content__desc">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum
-              animi voluptatum fugiat nulla earum doloremque, natus aperiam
-              perferendis. Quo tenetur aperiam vero qui expedita nisi ipsam
-              necessitatibus sequi sint ipsa!
-              {singleProduct?.description}
-            </p>
+            <p>{singleProduct?.description}</p>
             {!singleProduct?.inStock && (
               <p className="card__out-of-stock">Product Out Of Stock</p>
             )}
           </section>
           <section className="sp-content__pricing flex">
             <p className="sp-content__discount-price">
+              ₹
               {(
                 singleProduct.price -
                 singleProduct.price * (singleProduct.discount / 100)
@@ -60,7 +55,7 @@ const SingleProduct = () => {
             <p className="sp-content__discount-rate">
               {singleProduct?.discount}%
             </p>
-            <p className="sp-content__actual-price">{singleProduct?.price}</p>
+            <p className="sp-content__actual-price">₹{singleProduct?.price}</p>
           </section>
           <section className="sp-content__actions flex">
             {isAlreadyInDatabase(state.wishlistData, singleProduct?._id) ? (

@@ -18,7 +18,6 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
         <div className="card__content">
           <h3 className="card__title">{title}</h3>
           <p className="card__author">{description}</p>
-          <p className="card__price">Lorem, ipsum dolor.</p>
           <div className="card__update-quantity flex">
             <button
               type="button"
