@@ -25,7 +25,7 @@ const ProfileDropdown = ({ isDropdownVisible }) => {
           {!isUserLogedIn ? (
             <button
               type="button"
-              className="btn btn--contained-primary profile__btn"
+              className="btn btn--outlined-primary profile__btn"
               onClick={() => navigate('/login', { state: location.pathname })}>
               Login/Signup
             </button>
@@ -55,11 +55,13 @@ const ProfileDropdown = ({ isDropdownVisible }) => {
         <li className="profile__item">
           <Link to="/profile">Edit Profile</Link>
         </li>
-        <li className="profile__item">
-          <button type="button" onClick={logoutUser}>
-            LogOut
-          </button>
-        </li>
+        {isUserLogedIn ? (
+          <li className="profile__item">
+            <button type="button" onClick={logoutUser}>
+              LogOut
+            </button>
+          </li>
+        ) : null}
       </ul>
     </div>
   );

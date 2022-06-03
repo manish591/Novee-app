@@ -7,8 +7,8 @@ import { useStateContext } from '../../hooks';
 const Navbar = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const navigate = useNavigate();
   const { state, stateDispatch } = useStateContext();
+  const navigate = useNavigate();
 
   const handleSearchProducts = (e) => {
     e.preventDefault();
