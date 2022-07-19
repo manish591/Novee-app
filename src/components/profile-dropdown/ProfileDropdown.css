@@ -46,5 +46,8 @@
 .profile__btn {
   block-size: 40px;
   margin-block-start: 0.6rem;
-  /* display: none; */
+}
+
+.profile__item > button {
+  color: var(--text1);
 }

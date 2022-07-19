@@ -20,9 +20,9 @@
 /* --------------- */
 
 .address-card {
-  border: 1px solid rgba(39, 39, 39, 0.329);
+  border: 1px solid var(--surface3);
   padding-block: 0.7rem;
-  padding-inline: 0.3rem;
+  padding-inline: 1rem;
   display: grid;
   gap: 0.5rem;
 }
@@ -52,7 +52,8 @@
 
 .address-card__delete {
   background: none;
-  border: 1px solid rgba(34, 33, 33, 0.397);
+  border: 1px solid var(--surface2);
+  color: var(--text1);
 }
 
 /* ------------ */
@@ -72,7 +73,7 @@
 }
 
 .address-form__wrapper {
-  background: white;
+  background-color: var(--surface2);
   box-shadow: 0 0 10px rgba(0, 0, 0, 20%);
   inline-size: min(90%, 500px);
   margin-inline: auto;
@@ -88,6 +89,7 @@
 .address-form__group > select {
   display: block;
   inline-size: 100%;
+  color: var(--text1);
 }
 
 .address-form__container {
@@ -102,7 +104,7 @@
   padding-block: 0.7rem;
   padding-inline: 0.7rem;
   font-size: 1rem;
-  background-color: rgba(253, 245, 245, 0.945);
+  background-color: var(--surface3);
   border: 1px solid rgba(0, 0, 0, 0.349);
   border-radius: 5px;
   margin-block-start: 0.3rem;
@@ -125,12 +127,13 @@ textarea {
 }
 
 .address-form__cta > .cta__submit {
-  background-color: teal;
-  color: white;
+  background-color: var(--brand);
+  color: var(--light-clr);
 }
 
 .address-form__cta > .cta__cancel {
-  border: 1px solid rgba(37, 37, 37, 0.466);
+  border: 1px solid var(--surface3);
+  color: var(--text1);
 }
 
 .validation-message {

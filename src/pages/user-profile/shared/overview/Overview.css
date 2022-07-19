@@ -23,6 +23,7 @@
 
 .profile-overview__logout > button {
   padding-inline: 50px;
+  background-color: var(--brand);
 }
 
 .profile-overview__icon > span {

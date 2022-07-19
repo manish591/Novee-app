@@ -53,7 +53,7 @@ const OrdersPage = () => {
                     Payment Id:
                     <strong>&nbsp;{item.order.paymentID}</strong>
                   </p>
-                  <p>Total Price: ${item.order.totalPrice}</p>
+                  <p>Total Price: ₹{item.order.totalPrice}</p>
                 </details>
               </section>
               <section className="single-order__products grid">
@@ -71,7 +71,7 @@ const OrdersPage = () => {
                         <section className="single-order-products__info">
                           <p>{product.title}</p>
                           <p>
-                            Price: ${product.price}, Quantity: {product.qty}
+                            Price: ₹{product.price}, Quantity: {product.qty}
                           </p>
                         </section>
                       </div>

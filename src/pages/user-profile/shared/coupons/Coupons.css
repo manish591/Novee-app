@@ -8,12 +8,13 @@
 
 .coupons-page__container {
   margin-block-start: 2rem;
+  gap: 2rem;
 }
 
 .coupons__item {
   background-color: var(--surface2);
   padding-inline: 1rem;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 10%);
+  box-shadow: 3px 4px 8px rgba(0, 0, 0, 20%);
 }
 
 .single-coupon__content {

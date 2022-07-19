@@ -46,6 +46,7 @@ const Filters = () => {
               </h3>
               <button
                 type="button"
+                className="clear_search_btn"
                 onClick={() => {
                   stateDispatch({
                     type: 'FILTER_BY_SEARCH_QUERY',

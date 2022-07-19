@@ -126,7 +126,7 @@ const ProductCardVertical = ({ product }) => {
         </div>
         <div className="card__priceDetails d-flex">
           <p className="card__discountedPrice">
-            Rs.{findDiscountedPrice(price, discount)}
+            Rs.{findDiscountedPrice(price, discount).toFixed(0)}
           </p>
           <p className="card__realPrice">Rs.{price}</p>
           <p className="card__discount">({discount}% OFF)</p>

@@ -28,7 +28,7 @@ const Home = () => {
           })}
         </div>
         <div className="products flex">
-          <section className="products__name flex product--phone">
+          <section className="products__name flex product--men">
             <div className="product__wrapper flex">
               <h3 className="product__category">Mens Products</h3>
               <Link to="/products" className="product__link flex">
@@ -37,7 +37,7 @@ const Home = () => {
               </Link>
             </div>
           </section>
-          <section className="products__name flex product--tablet">
+          <section className="products__name flex product--women">
             <div className="product__wrapper flex">
               <h3 className="product__category">Women Products</h3>
               <Link to="/products" className="product__link flex">
@@ -46,7 +46,7 @@ const Home = () => {
               </Link>
             </div>
           </section>
-          <section className="products__name flex product--laptop">
+          <section className="products__name flex product--kids">
             <div className="product__wrapper flex">
               <h3 className="product__category">Kids Products</h3>
               <Link to="/products" className="product__link flex">
