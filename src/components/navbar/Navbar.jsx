@@ -108,7 +108,10 @@ const Navbar = () => {
                 {state.cartData?.length > 0 ? (
                   <p
                     className="badge__info badge__info--standard badge__info--primary"
-                    style={{ insetInlineEnd: '-5px' }}>
+                    style={{
+                      insetInlineEnd: '-5px',
+                      backgroundColor: 'var(--brand)',
+                    }}>
                     {state.cartData?.length}
                   </p>
                 ) : null}

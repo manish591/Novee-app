@@ -49,10 +49,6 @@
   border: 1px solid transparent;
 }
 
-.listing__filter-item:focus-within {
-  border: 1px solid rgba(32, 32, 32, 0.295);
-}
-
 /* Input group styling */
 
 .filters__group + .filters__group {
@@ -225,11 +221,11 @@ img {
 }
 
 .card__add-cart-btn {
-  border: 1px solid rgba(31, 31, 31, 0.192);
+  background-color: var(--brand);
   inline-size: 100%;
   padding-block: 0.3rem;
   cursor: pointer;
-  color: var(--brand);
+  color: var(--text1);
 }
 
 .card:hover .card__add-to-cart {
@@ -269,6 +265,11 @@ img {
   align-items: center;
   display: none;
   padding-inline: 1rem;
+}
+
+.clear_search_btn {
+  cursor: pointer;
+  color: var(--text2);
 }
 
 /* filters select */

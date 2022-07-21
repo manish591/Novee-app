@@ -71,6 +71,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--brand);
 }
 
 .cart__place-order--disabled {
@@ -94,7 +95,7 @@
 
 .price-detail__list-total > p {
   font-weight: bold;
-  color: var(--clr-primary);
+  color: var(--text1);
 }
 
 .price-detail__price {
@@ -103,7 +104,6 @@
 
 .products-list {
   padding-inline: 1rem;
-  background-color: var(--surface2);
 }
 
 .products-list__cards {
@@ -135,6 +135,7 @@
   padding-block: 0.5rem;
   border-radius: 5px;
   gap: 0.5rem;
+  color: var(--text1);
 }
 
 .coupons__btn > span {
@@ -269,6 +270,7 @@
 
 .card__remove-btn > span {
   font-size: 16px;
+  color: var(--text1);
 }
 
 .card__author {
@@ -314,6 +316,7 @@
 
 .cart-icon-quantity {
   font-size: 0.8rem !important;
+  color: var(--text1);
 }
 
 /* -------------- */
