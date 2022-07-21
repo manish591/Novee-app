@@ -94,7 +94,10 @@ const Navbar = () => {
               }}>
               <span className="material-icons-outlined">person</span>
             </button>
-            <ProfileDropdown isDropdownVisible={isDropdownVisible} />
+            <ProfileDropdown
+              isDropdownVisible={isDropdownVisible}
+              setIsDropdownVisible={setIsDropdownVisible}
+            />
           </li>
           <li className="navbar__items navbar--hide navbar__items--icons navbar__items--wishlist">
             <Link to="/wishlist" className="navbar__items--icons">

@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from 'hooks';
 
-const ProfileDropdown = ({ isDropdownVisible }) => {
+const ProfileDropdown = ({ isDropdownVisible, setIsDropdownVisible }) => {
   const { isUserLogedIn, currentUser, logoutUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const compRef = useRef(null);
+
+  useEffect(() => {
+    const isClickedOutside = (e) => {
+      if (compRef && !compRef.current.contains(e.target)) {
+        setIsDropdownVisible(false);
+      }
+    };
+
+    document.addEventListener('mousedown', isClickedOutside);
+
+    return () => document.removeEventListener('mousedown', isClickedOutside);
+  }, [compRef]);
 
   return (
     <div
+      ref={compRef}
       className={`profile__dropdown ${
         isDropdownVisible ? 'profile__dropdown--show' : ''
       }`}>
@@ -57,7 +71,12 @@ const ProfileDropdown = ({ isDropdownVisible }) => {
         </li>
         {isUserLogedIn ? (
           <li className="profile__item">
-            <button type="button" onClick={logoutUser}>
+            <button
+              type="button"
+              onClick={() => {
+                logoutUser();
+                setIsDropdownVisible(false);
+              }}>
               LogOut
             </button>
           </li>
@@ -69,6 +88,7 @@ const ProfileDropdown = ({ isDropdownVisible }) => {
 
 ProfileDropdown.propTypes = {
   isDropdownVisible: PropTypes.bool.isRequired,
+  setIsDropdownVisible: PropTypes.func.isRequired,
 };
 
 export { ProfileDropdown };

@@ -1,14 +1,14 @@
-/* :root {
-  --brand: var(--brand-dark);
-  --text1: var(--text1-dark);
-  --text2: var(--text2-dark);
-  --surface1: var(--surface1-dark);
-  --surface2: var(--surface2-dark);
-  --surface3: var(--surface3-dark);
-  --surface4: var(--surface4-dark);
-  --surface-shadow: var(--surface-shadow-dark);
-  --shadow-strength: var(--shadow-strength-dark);
-} */
+:root {
+  --brand: var(--brand-light);
+  --text1: var(--text1-light);
+  --text2: var(--text2-light);
+  --surface1: var(--surface1-light);
+  --surface2: var(--surface2-light);
+  --surface3: var(--surface3-light);
+  --surface4: var(--surface4-light);
+  --surface-shadow: var(--surface-shadow-light);
+  --shadow-strength: var(--shadow-strength-light);
+}
 
 body {
   background-color: var(--surface2);
