@@ -1,14 +1,11 @@
-const findHighestLowestRating = (arr) => {
-  let range = { highest: 0, lowest: 5 };
+const findLowestRating = (arr) => {
+  let lowest = 4;
   arr.forEach((item) => {
-    if (parseInt(item, 10) > range.highest) {
-      range = { ...range, highest: parseInt(item, 10) };
-    }
-    if (parseInt(item, 10) < range.lowest) {
-      range = { ...range, lowest: parseInt(item, 10) };
+    if (parseInt(item, 10) < lowest) {
+      lowest = parseInt(item, 10);
     }
   });
-  return range;
+  return lowest;
 };
 
 const applyFilterBySort = (arr, type) => {
@@ -44,18 +41,9 @@ const applyFilterByBrands = (arr, type) => {
 };
 
 const applyFilterByRatings = (arr, type) => {
-  const { highest, lowest } = findHighestLowestRating(type);
-  if (type.length === 1) {
-    return arr.filter(
-      (item) =>
-        item.ratings >= parseInt(type[0], 10) &&
-        item.ratings < parseInt(type[0], 10) + 1,
-    );
-  }
-  if (type.length > 1) {
-    return arr.filter(
-      (item) => item.ratings >= lowest && item.ratings < highest + 1,
-    );
+  const lowestRating = findLowestRating(type);
+  if (type.length >= 1) {
+    return arr.filter((item) => item.ratings >= lowestRating);
   }
   return arr;
 };
