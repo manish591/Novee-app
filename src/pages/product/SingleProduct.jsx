@@ -9,7 +9,8 @@ import {
 import { Image } from 'components';
 
 const SingleProduct = () => {
-  const { state, stateDispatch } = useStateContext();
+  const { state, stateDispatch, disableButton, setDisableButton } =
+    useStateContext();
   const {
     isAlreadyInDatabase,
     addProductsToCart,
@@ -85,8 +86,10 @@ const SingleProduct = () => {
                     product: singleProduct,
                     currentUser,
                     stateDispatch,
+                    setDisableButton,
                   })
-                }>
+                }
+                disabled={disableButton}>
                 Add To Wishlist
               </button>
             )}
@@ -114,9 +117,11 @@ const SingleProduct = () => {
                         product: singleProduct,
                         currentUser,
                         stateDispatch,
+                        setDisableButton,
                       })
                     : navigate('/login', { state: location.pathname })
-                }>
+                }
+                disabled={disableButton}>
                 Add To Cart
               </button>
             )}
