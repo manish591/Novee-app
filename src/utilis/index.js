@@ -6,3 +6,4 @@ export {
   filterCategories,
   brandLogoData,
 } from './utilis';
+export { isFilterApplied } from './isFilterApplied';

@@ -7,7 +7,7 @@
   inset-block-start: calc(100% + 1rem);
   inset-inline-start: 0;
   background-color: var(--surface3);
-  box-shadow: 2px 5px 6px rgba(0, 0, 0, 10%);
+  box-shadow: 2px 5px 6px rgba(0, 0, 0, 20%);
   inline-size: 200px;
   transform: translateX(-50%);
   padding-block: 0.8rem;
@@ -50,4 +50,5 @@
 
 .profile__item > button {
   color: var(--text1);
+  cursor: pointer;
 }

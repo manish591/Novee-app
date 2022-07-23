@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useStateContext } from 'hooks';
-import { filterData, filterCategories } from 'utilis';
+import { filterData, filterCategories, isFilterApplied } from 'utilis';
 import { Checkbox } from './Checkbox';
 
 const Filters = () => {
@@ -28,14 +28,16 @@ const Filters = () => {
             onClick={() => setShowFilters(!showFilters)}>
             Filters
           </button>
-          <button
-            type="button"
-            onClick={() =>
-              stateDispatch({ type: 'CLEAR_ALL_FILTERS', payload: {} })
-            }
-            style={{ cursor: 'pointer' }}>
-            Clear All
-          </button>
+          {isFilterApplied(filters) && (
+            <button
+              type="button"
+              onClick={() =>
+                stateDispatch({ type: 'CLEAR_ALL_FILTERS', payload: {} })
+              }
+              style={{ cursor: 'pointer' }}>
+              Clear All
+            </button>
+          )}
         </div>
         <div className="listing-header__left flex">
           {state?.filters?.searchQuery && (
