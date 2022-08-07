@@ -34,11 +34,12 @@
 .carousel__item {
   inline-size: inherit;
   block-size: inherit;
-  background-color: var(--surface3);
+  background-color: var(--surface2);
   color: var(--text1);
   min-inline-size: 100%;
   scroll-snap-align: center;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 10%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 10%);
+  border: 1px solid rgba(121, 121, 121, 0.034);
 }
 
 .carousel-slide {

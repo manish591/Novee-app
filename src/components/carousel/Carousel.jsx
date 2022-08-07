@@ -50,6 +50,37 @@ const Carousel = () => {
             chevron_left
           </button>
           <section className="carousel" ref={carouselContainerRef}>
+            <article
+              ref={slideRef}
+              className="carousel__item carousel-slide flex"
+              style={{
+                backgroundImage: `url(https://res.cloudinary.com/dcugqfvvg/image/upload/v1659875177/www.novee-app.com_aock9o.png)`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+              }}>
+              <div
+                className="carousel-slide__info"
+                style={{
+                  marginInlineEnd: 'auto',
+                  marginInlineStart: 'unset',
+                  paddingInlineStart: '4rem',
+                }}>
+                <h2
+                  className="carousel-slide__name"
+                  style={{ fontSize: '4rem' }}>
+                  New Fashion Collection
+                </h2>
+                <p className="carousel-slide__description">
+                  Find out new fahionable products for men&apos;s, women&apos;s
+                  and kids.
+                </p>
+                <button
+                  type="button"
+                  className="carousel-slide__btn btn btn--contained-primary">
+                  <Link to="/products">Shop Now</Link>
+                </button>
+              </div>
+            </article>
             {findNewProducts().map((item) => {
               return (
                 <article
