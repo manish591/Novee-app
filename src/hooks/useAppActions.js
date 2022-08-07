@@ -160,13 +160,7 @@ const useAppActions = () => {
     setDisableButton(true);
     if (state.cartData.some((item) => item._id === product._id)) {
       removeItemFromWishlist({ e, _id, setDisableButton });
-      const arr = state.cartData.map((item) => {
-        if (item._id === product._id) {
-          return { ...item, qty: item.qty + 1 };
-        }
-        return item;
-      });
-      stateDispatch({ type: 'GET_CART_DATA', payload: arr });
+      updateCartQuantity(_id, 'increment', setDisableButton);
     } else {
       removeItemFromWishlist({ e, _id, setDisableButton });
       addProductsToCart({ e, product, setDisableButton });
