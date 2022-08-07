@@ -97,14 +97,16 @@ const Cart = () => {
                   </p>
                 </li>
                 <li className="price-detail__list-item flex">
-                  <p>Discount MRP</p>
+                  <p>Discount On MRP</p>
                   <p className="price-detail__price">
-                    ₹{findTotalDiscountedPrice(state.cartData)}
+                    -₹
+                    {findTotalPrice(state.cartData) -
+                      findTotalDiscountedPrice(state.cartData)}
                   </p>
                 </li>
                 <li className="price-detail__list-item flex">
                   <p>Coupon Discount</p>
-                  <p className="price-detail__price">₹45</p>
+                  <p className="price-detail__price">-₹45</p>
                 </li>
                 <li className="price-detail__list-item flex">
                   <p>Delivery Charges</p>

@@ -42,7 +42,10 @@
 .summary-item__picture {
   inline-size: 50px;
   aspect-ratio: 1;
-  background-color: var(--surface4);
+}
+
+.summary-item__picture > img {
+  object-fit: cover;
 }
 
 .price-detail {

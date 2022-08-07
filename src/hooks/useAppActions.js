@@ -13,7 +13,10 @@ const useAppActions = () => {
   const findTotalDiscountedPrice = (arr) => {
     return arr.reduce(
       (acc, curr) =>
-        acc + (curr.price - (curr.price * Number(curr.discount)) / 100),
+        acc +
+        (Number(curr.price) -
+          (Number(curr.price) * Number(curr.discount)) / 100) *
+          Number(curr.qty),
       0,
     );
   };
