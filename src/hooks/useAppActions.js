@@ -1,11 +1,12 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { coupons } from 'utilis';
 import { useAuth } from './useAuth';
 import { useStateContext } from './useStateContext';
 
 const useAppActions = () => {
   const { myToken } = useAuth();
-  const { state, stateDispatch } = useStateContext();
+  const { state, stateDispatch, couponCode } = useStateContext();
 
   const isAlreadyInDatabase = (arr, _id) =>
     arr?.some((item) => item._id === _id);
@@ -33,8 +34,13 @@ const useAppActions = () => {
     return originalPrice - (originalPrice * discountRate) / 100;
   };
 
+  const findCouponDiscount = () => {
+    const amount = coupons.find((item) => item.code === couponCode);
+    return amount ? Number(amount.offer.split(' ')[0]) : 0;
+  };
+
   const getTotalCartPrice = (arr) => {
-    return findTotalDiscountedPrice(arr) - 45;
+    return findTotalDiscountedPrice(arr) - findCouponDiscount();
   };
 
   const addItemToTheWishlist = async ({ e, product, setDisableButton }) => {
@@ -240,6 +246,7 @@ const useAppActions = () => {
     removeAllItemsFromCart,
     findDiscountedPrice,
     getTotalCartPrice,
+    findCouponDiscount,
   };
 };
 

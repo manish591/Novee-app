@@ -1,0 +1,76 @@
+.coupons-modal {
+  position: fixed;
+  inset: 0;
+}
+
+.coupons-modal__overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(45, 45, 45, 0.105);
+}
+
+.coupons-modal__content {
+  inline-size: 300px;
+  position: fixed;
+  background-color: var(--surface4);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 10%);
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.5rem 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+  z-index: 21;
+}
+
+.coupons-modal__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.coupons-modal__top > button {
+  border: 1px solid var(--surface4);
+  padding-inline: 0.2rem;
+  border-radius: 3px;
+  background-color: var(--surface4);
+  cursor: pointer;
+}
+
+.coupons-modal__form > input {
+  inline-size: 100%;
+  outline: none;
+  border: none;
+  background: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.53);
+  padding-block: 0.3rem;
+}
+
+.coupons-modal__result {
+  margin-block-start: 1rem;
+}
+
+.coupons-modal__apply {
+  border: 1px solid var(--text2);
+  padding-block: 0.2rem;
+  padding-inline: 1.5rem;
+  margin-block-start: 1rem;
+}
+
+.coupons-modal__select {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.coupons-modal__form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+}
+
+.coupons-modal__select > label {
+  font-size: 0.9rem;
+  font-weight: bold;
+}

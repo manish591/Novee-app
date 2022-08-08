@@ -28,8 +28,12 @@ const Checkout = () => {
 
   const { displayRazorpay } = usePaymentIntegration();
 
-  const { findTotalPrice, findTotalDiscountedPrice, getTotalCartPrice } =
-    useAppActions();
+  const {
+    findTotalPrice,
+    findTotalDiscountedPrice,
+    getTotalCartPrice,
+    findCouponDiscount,
+  } = useAppActions();
   const navigate = useNavigate();
 
   const handleUserPayment = () => {
@@ -154,7 +158,7 @@ const Checkout = () => {
               </li>
               <li className="price-detail__list-item flex">
                 <p>Coupon Discount</p>
-                <p className="price-detail__price">-₹45</p>
+                <p className="price-detail__price">-₹{findCouponDiscount()}</p>
               </li>
               <li className="price-detail__list-item flex">
                 <p>Delivery Charges</p>

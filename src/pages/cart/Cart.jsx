@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ProductCardHorizontal } from 'components';
 import { useStateContext, useAppActions, useScrollToTop } from 'hooks';
+import { Coupon } from './Coupon';
 
 const Cart = () => {
   const { state } = useStateContext();
@@ -11,8 +12,10 @@ const Cart = () => {
     findTotalDiscountedPrice,
     removeAllItemsFromCart,
     getTotalCartPrice,
+    findCouponDiscount,
   } = useAppActions();
   const [currentId, setCurrentId] = useState('');
+  const [selectCoupon, setSelectCoupon] = useState(false);
 
   useScrollToTop();
 
@@ -77,7 +80,10 @@ const Cart = () => {
                 <h3>Coupons</h3>
               </div>
               <div className="coupons__action">
-                <button type="button" className="coupons__btn flex">
+                <button
+                  type="button"
+                  className="coupons__btn flex"
+                  onClick={() => setSelectCoupon((c) => !c)}>
                   <span className="material-icons-round">label</span>
                   <p>Apply For Coupons</p>
                 </button>
@@ -106,7 +112,9 @@ const Cart = () => {
                 </li>
                 <li className="price-detail__list-item flex">
                   <p>Coupon Discount</p>
-                  <p className="price-detail__price">-₹45</p>
+                  <p className="price-detail__price">
+                    -₹{findCouponDiscount()}
+                  </p>
                 </li>
                 <li className="price-detail__list-item flex">
                   <p>Delivery Charges</p>
@@ -134,6 +142,7 @@ const Cart = () => {
           </section>
         </div>
       )}
+      {selectCoupon && <Coupon setSelectCoupon={setSelectCoupon} />}
     </main>
   );
 };

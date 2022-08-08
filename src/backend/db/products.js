@@ -28,6 +28,7 @@ export const products = [
     color: 'White',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'SAGg1df0XWLm',
     offer: ['Save 50', '70% bonanza'],
   },
   {
@@ -52,6 +53,7 @@ export const products = [
     color: 'Pink',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'pXrsic1EryK5',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -76,6 +78,7 @@ export const products = [
     color: 'Yellow',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'eLuRKU1WdSkJ',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -100,6 +103,7 @@ export const products = [
     color: 'Blue',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'mbEXypLh8vOX',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -124,6 +128,7 @@ export const products = [
     color: 'White',
     idealFor: 'Women',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'SAGg1df0XWLm',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -148,6 +153,7 @@ export const products = [
     color: 'Blue',
     idealFor: 'Women',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'xklwSJb4j7LF',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -172,6 +178,7 @@ export const products = [
     color: 'Sky Blue',
     idealFor: 'Women',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'SAGg1df0XWLm',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -196,6 +203,7 @@ export const products = [
     color: 'Blue',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'zyQzpzi8YrWE',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -220,6 +228,7 @@ export const products = [
     color: 'Faded Blue',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'hQEJ3yL7hOqB',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -244,6 +253,7 @@ export const products = [
     color: 'Black',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'zyQzpzi8YrWE',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -268,6 +278,7 @@ export const products = [
     color: 'Yellow',
     idealFor: 'Women',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'kDTt7wzT049b',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -292,6 +303,7 @@ export const products = [
     color: 'Green',
     idealFor: 'Women',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'q1l6pZLQ6Ael',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -316,6 +328,7 @@ export const products = [
     color: 'Green',
     idealFor: 'Women',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'TMzf476ltygJ',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -340,6 +353,7 @@ export const products = [
     color: 'Blue',
     idealFor: 'Women',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'SAGg1df0XWLm',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -364,6 +378,7 @@ export const products = [
     color: 'Faded Blue',
     idealFor: 'Women',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'kDTt7wzT049b',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -389,6 +404,7 @@ export const products = [
     color: 'Grey Blue',
     idealFor: 'Women',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'xklwSJb4j7LF',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -413,6 +429,7 @@ export const products = [
     color: 'Black',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'xklwSJb4j7LF',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -437,6 +454,7 @@ export const products = [
     color: 'Blue',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'xklwSJb4j7LF',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -461,6 +479,7 @@ export const products = [
     color: 'Blue',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'kDTt7wzT049b',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -485,6 +504,7 @@ export const products = [
     color: 'Green black',
     idealFor: 'Womens',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'mbEXypLh8vOX',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -509,6 +529,7 @@ export const products = [
     color: 'Red',
     idealFor: 'Women',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'SAGg1df0XWLm',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -533,6 +554,7 @@ export const products = [
     color: 'Navy Blue',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'SAGg1df0XWLm',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -557,6 +579,7 @@ export const products = [
     color: 'Grey',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'zyQzpzi8YrWE',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -581,6 +604,7 @@ export const products = [
     color: 'Green',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'zyQzpzi8YrWE',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -605,6 +629,7 @@ export const products = [
     color: 'White',
     idealFor: 'Women',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'hQEJ3yL7hOqB',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -629,6 +654,7 @@ export const products = [
     color: 'Pink',
     idealFor: 'Women',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'hQEJ3yL7hOqB',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -653,6 +679,7 @@ export const products = [
     color: 'black',
     idealFor: 'Women',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'xklwSJb4j7LF',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -677,6 +704,7 @@ export const products = [
     color: 'Grey',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'q1l6pZLQ6Ael',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -701,6 +729,7 @@ export const products = [
     color: 'Brown',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'q1l6pZLQ6Ael',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
   {
@@ -725,6 +754,7 @@ export const products = [
     color: 'Black',
     idealFor: 'Men',
     level: ['beginner', 'amateur', 'intermediate', 'advanced', 'professional'],
+    offerCode: 'q1l6pZLQ6Ael',
     offer: ['Save 50', '70% bonanza', 'Republic Day Sale'],
   },
 ];
