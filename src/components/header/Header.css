@@ -76,7 +76,7 @@
   border: none;
   outline: none;
   margin-inline-start: 0.8rem;
-  inline-size: 280px;
+  inline-size: 150px;
   font-size: 0.9rem;
   color: var(--text1);
 }
@@ -93,6 +93,26 @@
 /* Media Queries */
 /* ------------- */
 
+@media (max-width: 400px) {
+  .search-bar > input {
+    inline-size: 100px;
+  }
+}
+
+@media (min-width: 600px) {
+  .navbar__items--search-bar {
+    display: block;
+  }
+
+  .navbar__items--search {
+    display: none;
+  }
+
+  .search-bar > input {
+    inline-size: 280px;
+  }
+}
+
 @media (min-width: 1000px) {
   .navbar__items--profile,
   .navbar__items--wishlist,
@@ -102,10 +122,6 @@
 
   .navbar__items--search-bar {
     display: block;
-  }
-
-  .navbar__items--search {
-    display: none;
   }
 
   .navbar__items--menu {

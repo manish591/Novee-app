@@ -6,6 +6,7 @@ const StateContext = createContext();
 
 const StateContextProvider = ({ children }) => {
   const [disableButton, setDisableButton] = useState(false);
+  const [couponCode, setCouponCode] = useState('');
   const [state, stateDispatch] = useReducer(stateReducer, {
     wishlistData: [],
     cartData: [],
@@ -30,8 +31,10 @@ const StateContextProvider = ({ children }) => {
       value={{
         state,
         disableButton,
+        couponCode,
         stateDispatch,
         setDisableButton,
+        setCouponCode,
       }}>
       {children}
     </StateContext.Provider>

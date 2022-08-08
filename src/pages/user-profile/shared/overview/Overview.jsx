@@ -1,19 +1,16 @@
 import React from 'react';
 import './Overview.css';
 import { Link } from 'react-router-dom';
+import { useAuth } from 'hooks';
 
 const Overview = () => {
+  const { logoutUser } = useAuth();
   return (
     <div className="profile-overview grid">
       <section className="profile-overview__header flex">
         <div className="profile-overview__icon">
           <span className="material-icons-round">account_box</span>
         </div>
-        <button
-          type="button"
-          className="profile-overview__edit-profile btn btn--outlined-secondary">
-          Edit Profile
-        </button>
       </section>
       <section className="profile-overview__links overview-link grid">
         <Link to="/profile/orders" className="overview-link__item flex">
@@ -42,7 +39,10 @@ const Overview = () => {
         </Link>
       </section>
       <section className="profile-overview__logout">
-        <button type="button" className="btn btn--contained-primary">
+        <button
+          type="button"
+          className="btn btn--contained-primary"
+          onClick={() => logoutUser()}>
           Logout
         </button>
       </section>

@@ -39,3 +39,9 @@
   font-weight: bold;
   margin-block-end: 0.5rem;
 }
+
+.settings-page__logout {
+  margin-block-start: 0.5rem;
+  block-size: 40px;
+  background-color: var(--brand);
+}

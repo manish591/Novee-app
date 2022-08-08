@@ -5,7 +5,7 @@
 .signup {
   width: 90%;
   max-width: 400px;
-  background-color: rgba(226, 225, 225, 0.938);
+  background-color: var(--surface3);
   margin-block: 7rem;
   margin-inline: auto;
   padding-block: 1.5rem;
@@ -96,6 +96,8 @@ input[type='checkbox'] {
   background: #d9843b;
   border-radius: 3px;
   color: white;
+  cursor: pointer;
+  background-color: var(--brand);
 }
 
 .signup__footer {

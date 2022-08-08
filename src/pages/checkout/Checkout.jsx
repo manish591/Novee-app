@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Checkout.css';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import {
   useStateContext,
   useUserAddress,
@@ -27,8 +28,14 @@ const Checkout = () => {
 
   const { displayRazorpay } = usePaymentIntegration();
 
-  const { findTotalPrice, findTotalDiscountedPrice, getTotalCartPrice } =
-    useAppActions();
+  const {
+    findTotalPrice,
+    findTotalDiscountedPrice,
+    getTotalCartPrice,
+    findCouponDiscount,
+    findDiscountedPrice,
+  } = useAppActions();
+  const navigate = useNavigate();
 
   const handleUserPayment = () => {
     if (!selectedAddress?._id) {
@@ -36,6 +43,12 @@ const Checkout = () => {
     }
     return displayRazorpay();
   };
+
+  useEffect(() => {
+    if (state.cartData.length <= 0) {
+      navigate('/cart');
+    }
+  }, []);
 
   return (
     <main className="cart">
@@ -113,10 +126,17 @@ const Checkout = () => {
               return (
                 <div key={item._id} className="summary__item summary-item flex">
                   <div className="summary-item__card grid">
-                    <div className="summary-item__picture" />
+                    <div className="summary-item__picture">
+                      <img src={item.img.JPG} alt="" />
+                    </div>
                     <div className="summary-item__info">
                       <p className="summary-item__name">{item?.title}</p>
-                      <p className="summary-item__price">₹{item?.price}</p>
+                      <p className="summary-item__price">
+                        ₹
+                        {findDiscountedPrice(item.price, item.discount).toFixed(
+                          0,
+                        )}
+                      </p>
                     </div>
                   </div>
                   <div className="summary-item__quantity">
@@ -135,14 +155,16 @@ const Checkout = () => {
                 </p>
               </li>
               <li className="price-detail__list-item flex">
-                <p>Discount MRP</p>
+                <p>Discount On MRP</p>
                 <p className="price-detail__price">
-                  ₹{findTotalDiscountedPrice(state.cartData)}
+                  -₹
+                  {findTotalPrice(state.cartData) -
+                    findTotalDiscountedPrice(state.cartData)}
                 </p>
               </li>
               <li className="price-detail__list-item flex">
                 <p>Coupon Discount</p>
-                <p className="price-detail__price">₹45</p>
+                <p className="price-detail__price">-₹{findCouponDiscount()}</p>
               </li>
               <li className="price-detail__list-item flex">
                 <p>Delivery Charges</p>

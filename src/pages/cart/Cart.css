@@ -42,7 +42,10 @@
 .summary-item__picture {
   inline-size: 50px;
   aspect-ratio: 1;
-  background-color: var(--surface4);
+}
+
+.summary-item__picture > img {
+  object-fit: cover;
 }
 
 .price-detail {
@@ -136,6 +139,8 @@
   border-radius: 5px;
   gap: 0.5rem;
   color: var(--text1);
+  cursor: pointer;
+  user-select: none;
 }
 
 .coupons__btn > span {

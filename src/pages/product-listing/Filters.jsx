@@ -22,12 +22,15 @@ const Filters = () => {
     <>
       <header className="listing__header listing-header grid">
         <div className="listing-header__right flex">
-          <button
-            type="button"
-            className="listing-heading"
-            onClick={() => setShowFilters(!showFilters)}>
-            Filters
-          </button>
+          <div className="listing-heading flex">
+            <p>Filters</p>
+            <button
+              type="button"
+              className="listing-heading__open-filter"
+              onClick={() => setShowFilters(!showFilters)}>
+              <span className="material-icons-outlined">filter_alt</span>
+            </button>
+          </div>
           {isFilterApplied(filters) && (
             <button
               type="button"
@@ -66,16 +69,11 @@ const Filters = () => {
           showFilters ? `filter-list__open` : ''
         }`}>
         <div className="filter-list__close flex">
-          <button type="button" className="filter-list__close-btn">
+          <button
+            type="button"
+            className="filter-list__close-btn"
+            onClick={() => setShowFilters(!showFilters)}>
             Close
-          </button>
-        </div>
-        <div className="filter-list__controls flex">
-          <button type="button" className="filter-list__cancel">
-            Clear Filters
-          </button>
-          <button type="button" className="filter-list__ok">
-            Show Results
           </button>
         </div>
         <form className="listing__form">

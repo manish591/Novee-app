@@ -203,7 +203,7 @@ const AddressModal = ({
                   updateAddress({ address: addressFormData, _id: currentId });
                   setIsAddressFormOpen(false);
                   setAddressFormData({
-                    ame: '',
+                    name: '',
                     address: '',
                     tel: '',
                     country: '',
@@ -222,6 +222,14 @@ const AddressModal = ({
               type="button"
               onClick={() => {
                 setIsAddressFormOpen(false);
+                setIsEditingAddress(false);
+                setAddressFormData({
+                  name: '',
+                  address: '',
+                  tel: '',
+                  country: '',
+                  postalCode: '',
+                });
               }}>
               Cancel
             </button>

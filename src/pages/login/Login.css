@@ -5,12 +5,12 @@
 .login {
   inline-size: 90%;
   max-inline-size: 400px;
-  background-color: #f2ede4;
+  background-color: var(--surface3);
   margin-block: 7rem;
   margin-inline: auto;
   padding-block: 1.5rem;
   padding-inline: 0;
-  box-shadow: 3px 5px 8px 1px rgba(192, 192, 192, 0.787);
+  box-shadow: 3px 5px 8px rgba(192, 192, 192, 0.787);
 }
 
 .wrapper {
@@ -87,9 +87,10 @@ label {
   padding-block: 0.7rem;
   font-weight: 700;
   border: none;
-  background: #d9843b;
+  background: var(--brand);
   border-radius: 3px;
   color: white;
+  cursor: pointer;
 }
 
 .login__footer {

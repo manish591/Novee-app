@@ -1,11 +1,12 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { coupons } from 'utilis';
 import { useAuth } from './useAuth';
 import { useStateContext } from './useStateContext';
 
 const useAppActions = () => {
   const { myToken } = useAuth();
-  const { state, stateDispatch } = useStateContext();
+  const { state, stateDispatch, couponCode } = useStateContext();
 
   const isAlreadyInDatabase = (arr, _id) =>
     arr?.some((item) => item._id === _id);
@@ -13,7 +14,10 @@ const useAppActions = () => {
   const findTotalDiscountedPrice = (arr) => {
     return arr.reduce(
       (acc, curr) =>
-        acc + (curr.price - (curr.price * Number(curr.discount)) / 100),
+        acc +
+        (Number(curr.price) -
+          (Number(curr.price) * Number(curr.discount)) / 100) *
+          Number(curr.qty),
       0,
     );
   };
@@ -30,8 +34,13 @@ const useAppActions = () => {
     return originalPrice - (originalPrice * discountRate) / 100;
   };
 
+  const findCouponDiscount = () => {
+    const amount = coupons.find((item) => item.code === couponCode);
+    return amount ? Number(amount.offer.split(' ')[0]) : 0;
+  };
+
   const getTotalCartPrice = (arr) => {
-    return findTotalDiscountedPrice(arr) - 45;
+    return findTotalDiscountedPrice(arr) - findCouponDiscount();
   };
 
   const addItemToTheWishlist = async ({ e, product, setDisableButton }) => {
@@ -160,13 +169,7 @@ const useAppActions = () => {
     setDisableButton(true);
     if (state.cartData.some((item) => item._id === product._id)) {
       removeItemFromWishlist({ e, _id, setDisableButton });
-      const arr = state.cartData.map((item) => {
-        if (item._id === product._id) {
-          return { ...item, qty: item.qty + 1 };
-        }
-        return item;
-      });
-      stateDispatch({ type: 'GET_CART_DATA', payload: arr });
+      updateCartQuantity(_id, 'increment', setDisableButton);
     } else {
       removeItemFromWishlist({ e, _id, setDisableButton });
       addProductsToCart({ e, product, setDisableButton });
@@ -243,6 +246,7 @@ const useAppActions = () => {
     removeAllItemsFromCart,
     findDiscountedPrice,
     getTotalCartPrice,
+    findCouponDiscount,
   };
 };
 

@@ -391,57 +391,15 @@ const coupons = [
   },
   {
     code: 'pXrsic1EryK5',
-    offer: '20% Off',
+    offer: '200 Off',
     minimumPurchase: 1990,
     expiry: 'April 25, 2022',
   },
   {
-    code: 'eLuRKU1WdSkJ',
-    offer: '10% Off',
-    minimumPurchase: 0,
-    expiry: 'May 2, 2022',
-  },
-  {
-    code: 'mbEXypLh8vOX',
-    offer: '20% Off',
-    minimumPurchase: 0,
-    expiry: 'April 28, 2022',
-  },
-  {
-    code: 'zyQzpzi8YrWE',
-    offer: '300 Off',
-    minimumPurchase: 1000,
-    expiry: 'April 30, 2022',
-  },
-  {
     code: 'kDTt7wzT049b',
-    offer: '400 Off',
+    offer: '300 Off',
     minimumPurchase: 2000,
     expiry: 'May 5, 2022',
-  },
-  {
-    code: 'hQEJ3yL7hOqB',
-    offer: '5% Off',
-    minimumPurchase: 0,
-    expiry: 'May 7, 2022',
-  },
-  {
-    code: 'TMzf476ltygJ',
-    offer: '10% Off',
-    minimumPurchase: 1350,
-    expiry: 'May 1, 2022',
-  },
-  {
-    code: 'q1l6pZLQ6Ael',
-    offer: '5% Off',
-    minimumPurchase: 1000,
-    expiry: 'April 30, 2022',
-  },
-  {
-    code: 'xklwSJb4j7LF',
-    offer: '500 Off',
-    minimumPurchase: 3000,
-    expiry: 'May 10, 2022',
   },
 ];
 
