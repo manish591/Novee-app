@@ -385,6 +385,17 @@ img {
   font-weight: 100;
 }
 
+.listing-heading {
+  align-items: center;
+  justify-content: center;
+}
+
+.listing-heading__open-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ------------- */
 /* Media Queries */
 /* ------------- */
@@ -393,6 +404,10 @@ img {
   .listing__products {
     gap: 3rem 1rem;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .listing-heading__open-filter {
+    display: none;
   }
 }
 
