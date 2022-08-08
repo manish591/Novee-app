@@ -33,6 +33,7 @@ const Checkout = () => {
     findTotalDiscountedPrice,
     getTotalCartPrice,
     findCouponDiscount,
+    findDiscountedPrice,
   } = useAppActions();
   const navigate = useNavigate();
 
@@ -130,7 +131,12 @@ const Checkout = () => {
                     </div>
                     <div className="summary-item__info">
                       <p className="summary-item__name">{item?.title}</p>
-                      <p className="summary-item__price">₹{item?.price}</p>
+                      <p className="summary-item__price">
+                        ₹
+                        {findDiscountedPrice(item.price, item.discount).toFixed(
+                          0,
+                        )}
+                      </p>
                     </div>
                   </div>
                   <div className="summary-item__quantity">

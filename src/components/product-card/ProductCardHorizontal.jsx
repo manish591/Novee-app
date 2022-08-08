@@ -5,8 +5,9 @@ import { Modal } from './Modal';
 import { Image } from '../image/Image';
 
 const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
-  const { _id, img, title, description, qty = 1 } = product;
-  const { removeProductsFromCart, updateCartQuantity } = useAppActions();
+  const { _id, img, title, description, qty = 1, price, discount } = product;
+  const { removeProductsFromCart, updateCartQuantity, findDiscountedPrice } =
+    useAppActions();
   const { stateDispatch, disableButton, setDisableButton } = useStateContext();
 
   return (
@@ -18,6 +19,15 @@ const ProductCardHorizontal = ({ product, currentId, setCurrentId }) => {
         <div className="card__content">
           <h3 className="card__title">{title}</h3>
           <p className="card__author">{description}</p>
+          <div
+            className="card__priceDetails d-flex"
+            style={{ marginBlockStart: '0.5rem' }}>
+            <p className="card__discountedPrice">
+              Rs.{findDiscountedPrice(price, discount).toFixed(0)}
+            </p>
+            <p className="card__realPrice">Rs.{price}</p>
+            <p className="card__discount">({discount}% OFF)</p>
+          </div>
           <div className="card__update-quantity flex">
             <button
               type="button"

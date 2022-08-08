@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './Orders.css';
 import axios from 'axios';
-import { useAuthContext, useStateContext } from 'hooks';
+import { useAuthContext, useStateContext, useAppActions } from 'hooks';
 import toast from 'react-hot-toast';
 
 const OrdersPage = () => {
-  const { myToken } = useAuthContext();
   const [myOrders, setMyOrders] = useState([]);
+  const { myToken } = useAuthContext();
   const { state } = useStateContext();
+  const { findDiscountedPrice } = useAppActions();
   const { ordersData } = state;
 
   useEffect(() => {
@@ -30,10 +31,11 @@ const OrdersPage = () => {
   const getDeliveryDate = (str) => {
     const currentDate = new Date(str);
     const month = currentDate.getMonth();
-    const day = currentDate.getDay();
     const year = currentDate.getFullYear();
     const date = currentDate.getDate();
-    return `${day}, ${date}/${month}/${year}`;
+    return `${date < 10 ? `0${date}` : date}-${
+      month + 1 < 10 ? `0${month + 1}` : month + 1
+    }-${year}`;
   };
 
   return (
@@ -71,7 +73,12 @@ const OrdersPage = () => {
                         <section className="single-order-products__info">
                           <p>{product.title}</p>
                           <p>
-                            Price: ₹{product.price}, Quantity: {product.qty}
+                            Price: ₹
+                            {findDiscountedPrice(
+                              product.price,
+                              product.discount,
+                            ).toFixed(0)}
+                            , Quantity: {product.qty}
                           </p>
                         </section>
                       </div>
