@@ -24,13 +24,13 @@ const AddressCardButton = ({
             return { ...afd, ...addressToEdit };
           });
         }}>
-        Edit
+        <span className="material-icons-outlined">edit</span>
       </button>
       <button
         type="button"
         className="address-card__delete"
         onClick={() => deleteAddress({ _id })}>
-        Delete
+        <span className="material-icons-outlined">delete</span>
       </button>
     </div>
   );
