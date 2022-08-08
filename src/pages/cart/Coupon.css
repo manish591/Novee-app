@@ -1,18 +1,19 @@
 .coupons-modal {
   position: fixed;
   inset: 0;
+  z-index: 30;
 }
 
 .coupons-modal__overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(45, 45, 45, 0.105);
+  background-color: rgba(81, 77, 77, 0.615);
 }
 
 .coupons-modal__content {
   inline-size: 300px;
   position: fixed;
-  background-color: var(--surface4);
+  background-color: var(--surface3);
   box-shadow: 0 0 6px rgba(0, 0, 0, 10%);
   inset-inline-start: 50%;
   inset-block-start: 50%;
