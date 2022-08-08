@@ -58,13 +58,13 @@ const Navbar = () => {
           </li>
         </ul>
         <ul className="navbar__list flex navbar__list--search">
-          <li className="navbar__items navbar--hide navbar__items--search-bar">
+          <li className="navbar__items navbar__items--search-bar">
             <form className="search-bar" onSubmit={handleSearchProducts}>
               <span className="material-icons search-icon">search</span>
               <input
                 type="text"
                 className="input-field"
-                placeholder="search mens and womens clothes"
+                placeholder="search.."
                 id="search-products"
                 name="search"
                 value={searchQuery}
@@ -74,9 +74,6 @@ const Navbar = () => {
                 Serach-Products
               </label>
             </form>
-          </li>
-          <li className="navbar__items navbar__items--icons navbar__items--search">
-            <span className="material-icons">search</span>
           </li>
         </ul>
         <ul className="navbar__list flex">

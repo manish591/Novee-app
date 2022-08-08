@@ -26,13 +26,7 @@ const Sidebar = () => {
               <Link to="/">Home</Link>
             </li>
             <li className="sidebar__list-item">
-              <Link to="/products">Tablets</Link>
-            </li>
-            <li className="sidebar__list-item">
-              <Link to="/products">Mobiles</Link>
-            </li>
-            <li className="sidebar__list-item">
-              <Link to="/products">Laptops</Link>
+              <Link to="/products">Shop Now</Link>
             </li>
             <li className="sidebar__list-item">
               <Link to="/wishlist">Wishlist</Link>
