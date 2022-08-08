@@ -60,7 +60,14 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="/cart/checkout" element={<Checkout />} />
+        <Route
+          path="/cart/checkout"
+          element={
+            <ProtectedRoute>
+              <Checkout />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/wishlist"
           element={
@@ -69,7 +76,14 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="/myorders/:orderID" element={<OrdersResult />} />
+        <Route
+          path="/myorders/:orderID"
+          element={
+            <ProtectedRoute>
+              <OrdersResult />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/profile"
           element={
