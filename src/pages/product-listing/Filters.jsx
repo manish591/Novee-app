@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './ProductListing.css';
 import { useLocation } from 'react-router-dom';
 import { useStateContext } from 'hooks';
 import { filterData, filterCategories, isFilterApplied } from 'utilis';
