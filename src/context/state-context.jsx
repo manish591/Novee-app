@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useState } from 'react';
 import PropTypes from 'prop-types';
-import { stateReducer } from '../reducer/state-reducer';
+import { stateReducer, initialDataState, initialFilterState } from 'reducer';
 
 const StateContext = createContext();
 
@@ -8,28 +8,18 @@ const StateContextProvider = ({ children }) => {
   const [disableButton, setDisableButton] = useState(false);
   const [couponCode, setCouponCode] = useState('');
   const [state, stateDispatch] = useReducer(stateReducer, {
-    wishlistData: [],
-    cartData: [],
-    productData: [],
-    addressData: [],
-    ordersData: [],
+    data: {
+      ...initialDataState,
+    },
     filters: {
-      sort: '',
-      fastDelivery: '',
-      includeOutOfStock: '',
-      rating: [],
-      price: [],
-      category: [],
-      brand: [],
-      idealFor: '',
-      searchQuery: '',
+      ...initialFilterState,
     },
   });
   return (
     <StateContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
-        state,
+        state: { ...state, ...state.data },
         disableButton,
         couponCode,
         stateDispatch,
