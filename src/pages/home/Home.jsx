@@ -67,14 +67,14 @@ const Home = () => {
         <div className="brand-idea flex">
           <div className="brand-idea__message">
             <h2 className="brand-idea__title">
-              Providing you the most fashionable and affordable Clothing
+              Providing you with the most fashionable and affordable Clothing
             </h2>
             <p className="brand-idea__desc">
               Novee is one of the best online shopping sites in India. This
-              e-commerce site has ample amount of products from different brands
+              e-commerce site has an ample amount of products from different brands
               such as Levi&apos;s, Gant and Wrogn to name a few. You can easily
               browse through their products, filter by category or brand and
-              make your purchase through credit/debit card or bank transfer
+              make your purchase through a credit/debit card or bank transfer
               payment options.
             </p>
           </div>
